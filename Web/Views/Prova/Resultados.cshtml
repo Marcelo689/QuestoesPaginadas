@@ -1,0 +1,14 @@
+﻿@using DTO.ProvaModels;
+@model ProvaResultado
+
+@foreach (var questao in Model.Questoes)
+{
+
+    if (questao.QuestaoPreenchida())
+    {
+        <div class="container">
+            <p>@questao.Name</p>
+            <li>@questao.SelectedOption</li>
+        </div>
+    }
+}

@@ -1,0 +1,17 @@
+﻿@using DTO;
+@model QuestaoTO
+@{
+    var index = 0;
+}
+
+<div class="container-opcoes d-flex flex-column w-auto">
+    
+    @foreach (KeyValuePair<Options, string> opcao in Model.OptionDescriptions)
+    {
+        <div class="w-25 d-flex justify-content-between">
+            <label for="@index.ToString()_@Model.Id.ToString()opcao">@opcao.Value</label>
+            <input type="radio" name="@Model.Id.ToString()opcao" id="@index.ToString()_@Model.Id.ToString()opcao" value="@opcao.Key" />
+        </div>
+        index++;
+    }
+</div>

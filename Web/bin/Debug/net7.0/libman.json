@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "typescript@5.3.3",
+      "destination": "wwwroot/lib/typescript/"
+    }
+  ,
+{
+  "provider": "unpkg",
+  "library": "@types/jquery@3.5.29",
+  "destination": "wwwroot/lib/types/jquery/"
+}
+]
+}

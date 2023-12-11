@@ -1,0 +1,10 @@
+﻿@page
+@model DTO.ProvaTO
+@{
+    ViewData["Title"] = "Prova";
+}
+
+@foreach(var questao in Model.Questoes){
+    <li>@questao.Name</li>
+    await Html.PartialAsync("_Options", questao);
+}

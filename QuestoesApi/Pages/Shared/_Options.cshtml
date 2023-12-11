@@ -1,0 +1,12 @@
+﻿@page
+@using DTO;
+@model QuestaoTO
+@{
+    var incrementator = 0;
+}
+
+@foreach (var options in Model.OptionDescriptions)
+{
+    <label>@options.Value</label>
+    <input type="radio" name="@Model.Id.ToString()questionOption" value="@options.Key" />
+}

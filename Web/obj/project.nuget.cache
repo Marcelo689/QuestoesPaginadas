@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "kitVWMEJc2KJVyjNVhNcDkimTK8O7j0g66HHqWE6XAxHOPxyZj7rq38CtVVOb3OWupqlHFxGcG1wK9YA2d5UBA==",
+  "success": true,
+  "projectFilePath": "D:\\QuestoesApi\\Web\\Web.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\marce\\.nuget\\packages\\microsoft.typescript.msbuild\\5.3.3\\microsoft.typescript.msbuild.5.3.3.nupkg.sha512",
+    "C:\\Users\\marce\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
+    "C:\\Users\\marce\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
