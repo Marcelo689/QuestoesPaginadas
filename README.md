@@ -1,2 +1,2 @@
 # QuestoesPaginadas
-<img src="imagemEstadoV1.pnh"/>
+<img src="imagemEstadoV1.png"/>
