@@ -110,13 +110,15 @@ class IndexController {
         var isso = this;
 
         Instancia.getBtnPrev().click(function () {
-            Instancia.preeencherListaPaginada();
             isso.prevPagina();
+            Instancia.preeencherListaPaginada();
+            Instancia.paginaExibida();
         });
 
         Instancia.getBtnNext().click(function () {
-            Instancia.preeencherListaPaginada();
             isso.nextPagina();
+            Instancia.preeencherListaPaginada();
+            Instancia.paginaExibida();
         });
 
         Instancia.getSelectNumeroPaginaElemento().change(function (e) {
@@ -131,8 +133,8 @@ class IndexController {
         const possivelPaginar = numeroPaginaAtual < Instancia.listaPaginadaElement.length;
 
         if (possivelPaginar) {
-            var indiceNextPagina = numeroPaginaAtual;
-            Instancia.paginaExibidaElemento = Instancia.listaPaginadaElement[indiceNextPagina];
+            var proximaPagina = numeroPaginaAtual + 1;
+            Instancia.elementoNumeroPaginaAtual.val(proximaPagina);
         }
 
         Instancia.atualizarPaginaExibida();
@@ -143,9 +145,8 @@ class IndexController {
         const possivelPaginar = numeroPaginaAtual > 1;
 
         if (possivelPaginar) {
-            var indicePagina = numeroPaginaAtual - 1;
-            var indicePrevPagina = indicePagina - 1;
-            Instancia.paginaExibidaElemento = Instancia.listaPaginadaElement[indicePrevPagina];
+            var prevPagina = numeroPaginaAtual -1;
+            Instancia.elementoNumeroPaginaAtual.val(prevPagina);
         }
 
         Instancia.atualizarPaginaExibida();
