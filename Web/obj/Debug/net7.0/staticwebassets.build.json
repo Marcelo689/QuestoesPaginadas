@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "D0ybPBw+XyDlFc3HLT5ZL5bL+lFQIDHEqzWmqttWVyY=",
+  "Hash": "xuFzXhzVO9+pltqeiW4hoj7LKr2TH/rn7Md6geyvxvE=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -1307,6 +1307,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Scripts\\Prova\\IndexController.js.map"
+    },
+    {
+      "Identity": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Prova\\Instancia.js",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuestoesApi\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Scripts/Prova/Instancia.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Scripts\\Prova\\Instancia.js"
+    },
+    {
+      "Identity": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Prova\\Instancia.js.map",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuestoesApi\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Scripts/Prova/Instancia.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Scripts\\Prova\\Instancia.js.map"
     }
   ]
 }

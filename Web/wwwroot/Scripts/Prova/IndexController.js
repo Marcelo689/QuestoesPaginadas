@@ -1,20 +1,16 @@
 var SelectPagina = /** @class */ (function () {
     function SelectPagina() {
     }
-    SelectPagina.um = 0;
-    SelectPagina.dois = 1;
-    SelectPagina.quatro = 2;
-    SelectPagina.seis = 3;
-    SelectPagina.oito = 4;
-    SelectPagina.dez = 5;
-    SelectPagina.opcoes = new SelectPagina();
+    SelectPagina.opcoes = [
+        1, 2, 4, 6, 8, 10
+    ];
     return SelectPagina;
 }());
 var Instancia = /** @class */ (function () {
     function Instancia() {
     }
-    Instancia.listaPaginada = function () {
-        this.paginar();
+    Instancia.listaPaginadaElemento = function () {
+        this.preeencherListaPaginada();
     };
     Instancia.selectNumeroPaginaElemento = function () {
         this.elementoSelectNumeroPaginaAtual = $("#numeroQuestaoPorPagina");
@@ -51,15 +47,16 @@ var Instancia = /** @class */ (function () {
         this.mostrarPaginaExibida();
     };
     Instancia.mostrarPaginaExibida = function () {
-        Instancia.paginaExibidaElemento.map(function (e) { return $(e).hide(); });
+        Instancia.paginaExibidaElemento.map(function (e) { return $(e).show(); });
     };
     Instancia.ocultarTodasQuestoes = function () {
         Instancia.listaPaginadaElement.map(function (e) { return $(e).hide(); });
     };
-    Instancia.paginar = function () {
-        var elementoNumeroQuestoesPorPagina = Instancia.getNumeroPaginaElemento();
+    Instancia.preeencherListaPaginada = function () {
+        var elementoNumeroQuestoesPorPagina = Instancia.getSelectNumeroPaginaElemento();
         var elementoQuestoes = Instancia.getQuestoesElemento();
-        var numeroPorPagina = Number(elementoNumeroQuestoesPorPagina.val());
+        var indiceSelectNumeroPaginaValor = Number(elementoNumeroQuestoesPorPagina.val());
+        var numeroPorPagina = SelectPagina.opcoes[indiceSelectNumeroPaginaValor];
         Instancia.listaPaginadaElement = Instancia.fatiarListaEmPedacos(elementoQuestoes, numeroPorPagina);
     };
     Instancia.fatiarListaEmPedacos = function (lista, tamanhoPorPedaco) {
@@ -70,12 +67,14 @@ var Instancia = /** @class */ (function () {
             listaFatiada.push(fatia);
             listaContemElementos = lista.length != 0;
         }
+        Instancia.questoesElemento();
         return listaFatiada;
     };
-    Instancia.instanciaPaginaExibida = function () {
+    Instancia.paginaExibida = function () {
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
         var indiceNextPagina = numeroPaginaAtual - 1;
         Instancia.paginaExibidaElemento = Instancia.listaPaginadaElement[indiceNextPagina];
+        Instancia.atualizarPaginaExibida();
     };
     return Instancia;
 }());
@@ -89,15 +88,16 @@ var IndexController = /** @class */ (function () {
     IndexController.prototype.adicionarEventosObjetosPagina = function () {
         var isso = this;
         Instancia.getBtnPrev().click(function () {
-            Instancia.paginar();
+            Instancia.preeencherListaPaginada();
             isso.prevPagina();
         });
         Instancia.getBtnNext().click(function () {
-            Instancia.paginar();
+            Instancia.preeencherListaPaginada();
             isso.nextPagina();
         });
         Instancia.getSelectNumeroPaginaElemento().change(function (e) {
-            Instancia.instanciaPaginaExibida();
+            Instancia.preeencherListaPaginada();
+            Instancia.paginaExibida();
         });
     };
     IndexController.prototype.nextPagina = function () {
@@ -123,7 +123,8 @@ var IndexController = /** @class */ (function () {
         Instancia.questoesElemento();
         Instancia.selectNumeroPaginaElemento();
         Instancia.numeroPaginaElemento();
-        Instancia.listaPaginadaElement();
+        Instancia.listaPaginadaElemento();
+        Instancia.paginaExibida();
         Instancia.atualizarPaginaExibida();
         Instancia.BtnPrev();
         Instancia.BtnNext();
