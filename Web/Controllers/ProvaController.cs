@@ -27,20 +27,16 @@ namespace Web.Controllers
             ProvaEmProgresso = provaModel;
             return View(provaModel);
         }
-        public ActionResult SalvarQuestoes()
+        [HttpPost]
+        public ActionResult SalvarQuestoes(ProvaOpcoesMarcadasViewModel provaViewModel)
         {
-            return View();
+            ProvaEmProgresso.PreencherRespostas(provaViewModel);
+            return View("Index", ProvaEmProgresso);
         }
         public ActionResult Resultados()
         {
             ProvaResultado resultado = ProvaEmProgresso.GetResultados();
             return View(resultado);
         }
-        //public IActionResult Example() {
-        //    var jsonString = new HttpClient().GetStringAsync("https://localhost:7059/api/Prova/Example").Result;
-
-        //    ExampleTO? provaModel = System.Text.Json.JsonSerializer.Deserialize<ExampleTO>(jsonString);
-        //    return View(provaModel);
-        //}
     }
 }

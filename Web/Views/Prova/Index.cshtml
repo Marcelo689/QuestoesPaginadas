@@ -7,7 +7,8 @@
         width:fit-content;
     }
 </style>
-<form action="Prova/Resultados" method="post">
+@using (Html.BeginForm(actionName: "SalvarQuestoes", controllerName:"Prova" , FormMethod.Post))
+{
 
     <div id="container-questoes" class="container">
         @foreach(QuestaoTO questao in Model.Questoes){
@@ -27,7 +28,7 @@
                     <option value="4">8</option>
                     <option value="5">10</option>
                 </select>
-                <input class="m-2" style="width:60px" type="number" disabled id="pagina-atual" />
+                <input class="m-2" style="width:60px" type="number" disabled id="pagina-atual" value="1" />
             </div>
             <div class="container d-flex justify-content-center">
                 <button class="btn btn-info m-1" id="btn-prev"> Anterior </button> 
@@ -40,5 +41,6 @@
             </button>
         </div>
     </div>
-</form>
-<script src="Scripts/Prova/IndexController.js"></script>
+}
+
+<script src="~/Scripts/Prova/IndexController.js"></script>

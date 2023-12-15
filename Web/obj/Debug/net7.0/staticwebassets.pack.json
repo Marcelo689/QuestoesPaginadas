@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\Web.bundle.scp.css"
     },
     {
+      "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Enviroment.js",
+      "PackagePath": "staticwebassets\\Scripts\\Enviroment.js"
+    },
+    {
+      "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Enviroment.js.map",
+      "PackagePath": "staticwebassets\\Scripts\\Enviroment.js.map"
+    },
+    {
       "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Prova\\IndexController.js",
       "PackagePath": "staticwebassets\\Scripts\\Prova\\IndexController.js"
     },

@@ -75,9 +75,11 @@
     <Compile Include="Estudante.cs" />
     <Compile Include="ExampleTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvaModels\ProvaOpcoesMarcadasViewModel.cs" />
     <Compile Include="ProvaModels\ProvaResultado.cs" />
     <Compile Include="ProvaModels\ProvaTO.cs" />
     <Compile Include="ProvaModels\QuestaoTO.cs" />
+    <Compile Include="Utilitario\ExtesionHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

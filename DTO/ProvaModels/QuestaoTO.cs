@@ -12,6 +12,7 @@ namespace DTO
         D = 3,
         E = 4,
     }
+
     public class QuestaoTO
     {
         public QuestaoTO()

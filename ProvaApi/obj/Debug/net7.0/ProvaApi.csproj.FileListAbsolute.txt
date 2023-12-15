@@ -37,3 +37,4 @@ D:\QuestoesApi\ProvaApi\bin\Debug\net7.0\DTO.dll.config
 D:\QuestoesApi\ProvaApi\bin\Debug\net7.0\System.Text.Encodings.Web.dll
 D:\QuestoesApi\ProvaApi\bin\Debug\net7.0\System.Text.Json.dll
 D:\QuestoesApi\ProvaApi\bin\Debug\net7.0\runtimes\browser\lib\net7.0\System.Text.Encodings.Web.dll
+D:\QuestoesApi\ProvaApi\obj\Debug\net7.0\ProvaApi.sourcelink.json

@@ -1,4 +1,6 @@
 ﻿@using DTO;
+@using DTO.Utilitario;
+
 @model QuestaoTO
 @{
     var index = 0;
@@ -8,9 +10,20 @@
     
     @foreach (KeyValuePair<Options, string> opcao in Model.OptionDescriptions)
     {
+        bool opcaoJaMarcada = Model.SelectedOption == opcao.Key;
+        
+
         <div class="w-25 d-flex justify-content-between">
             <label for="@index.ToString()_@Model.Id.ToString()opcao">@opcao.Value</label>
-            <input type="radio" name="@Model.Id.ToString()opcao" id="@index.ToString()_@Model.Id.ToString()opcao" value="@opcao.Key" />
+
+            @if(opcaoJaMarcada)
+            {
+                <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao" value="@opcao.Key.ToInt()" checked />
+            }else{
+                <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao" value="@opcao.Key.ToInt()" />
+            }
+
+
         </div>
         index++;
     }
