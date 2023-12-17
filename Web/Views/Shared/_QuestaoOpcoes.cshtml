@@ -6,15 +6,22 @@
     var index = 0;
 }
 
-<div class="container-opcoes d-flex flex-column w-auto">
+
+<style>
+    .label-opcao{
+        margin-left:10px;
+        width:100%;
+    }
+</style>
+
+<div class="container-opcoes d-flex flex-column w-75">
     
     @foreach (KeyValuePair<Options, string> opcao in Model.OptionDescriptions)
     {
         bool opcaoJaMarcada = Model.SelectedOption == opcao.Key;
         
 
-        <div class="w-25 d-flex justify-content-between">
-            <label for="@index.ToString()_@Model.Id.ToString()opcao">@opcao.Value</label>
+        <div class="w-75 d-flex justify-content-between text-lg-start">
 
             @if(opcaoJaMarcada)
             {
@@ -22,6 +29,8 @@
             }else{
                 <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao" value="@opcao.Key.ToInt()" />
             }
+
+            <label for="@index.ToString()_@Model.Id.ToString()opcao" class="label-opcao">@opcao.Value</label>
 
 
         </div>

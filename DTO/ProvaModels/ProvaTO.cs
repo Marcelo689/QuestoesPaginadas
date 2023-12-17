@@ -50,6 +50,10 @@ namespace DTO
                 {
                     PreencherOpcaoDaQuestao(opcaoPreenchida, questaoSelecinada);
                 }
+                else
+                {
+
+                }
             }
         }
         private static void PreencherOpcaoDaQuestao(object opcaoPreenchida, QuestaoTO questaoSelecinada)

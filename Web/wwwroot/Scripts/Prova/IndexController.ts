@@ -96,7 +96,18 @@ class Instancia {
         Instancia.paginaExibidaElemento = Instancia.fatiarListaEmPedacos(elementoQuestoes, numeroPorPagina);
     }
 
-   private static getFatia(lista, indiceFatiaInicio, numeroRegistroPorPagina) {
+    public static getIndiceFatiaFromPaginaAtual(numeroPaginaAtual: number) {
+        var dados = numeroPaginaAtual - 1;
+
+        const dadosZerado = dados == 0;
+        if (dadosZerado) {
+            dados = 1;
+        }
+
+        return dados;
+    }
+
+    private static getFatia(lista, indiceFatiaInicio, numeroRegistroPorPagina) {
         var fatia;
         if (indiceFatiaInicio == numeroRegistroPorPagina) {
             fatia = lista.slice(indiceFatiaInicio, numeroRegistroPorPagina + 1);
@@ -107,27 +118,63 @@ class Instancia {
         return fatia;
     }
 
-    static fatiarListaEmPedacos(lista: any, tamanhoPorPedaco: number) {
-        var listaContemElementos = lista.length != 0;
+    static fatiarListaEmPedacos(lista: any, numeroRegistroPorPagina: number) {
+
+        var tamanhoListaFinal = lista.length;        
+        var listaContemElementos = tamanhoListaFinal != 0;
 
         var listaFatiada = [];
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
-        var indiceFatiaInicia = numeroPaginaAtual - 1;
+
+        var indiceFatiaInicial = Instancia.getFatiaInicial(numeroPaginaAtual, numeroRegistroPorPagina);
+        var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina);
+
         while (listaContemElementos) {
-            var fatia = this.getFatia(lista, indiceFatiaInicia, tamanhoPorPedaco);
+
+            const indiceFinalInvalido = indiceFatiaFinal > tamanhoListaFinal;
+            if (indiceFinalInvalido) {
+                break;
+            }
+
+            var fatia = this.getFatia(lista, indiceFatiaInicial, indiceFatiaFinal);
             listaFatiada.push(fatia);
 
-            const concluiuPagina = listaFatiada.length == tamanhoPorPedaco;
+            const concluiuPagina = listaFatiada.length == numeroRegistroPorPagina;
 
             if (concluiuPagina)
                 break;
             else {
-                listaContemElementos = lista.length > indiceFatiaInicia;
-                indiceFatiaInicia += tamanhoPorPedaco;
+                listaContemElementos = tamanhoListaFinal >= indiceFatiaInicial + numeroRegistroPorPagina;
+
+                indiceFatiaInicial += numeroRegistroPorPagina;
+                indiceFatiaFinal += numeroRegistroPorPagina;
             }
         }
 
         return listaFatiada;
+    }
+
+    static getFatiaInicial(numeroPaginaAtual: number, tamanhoPorPedaco: number): number {
+        const ehPrimeiraPagina = numeroPaginaAtual == 1;
+
+        if (ehPrimeiraPagina) {
+            return 0;
+        } else {
+            var indicePaginaAtual = numeroPaginaAtual - 1;
+            var indiceInicial = (indicePaginaAtual * tamanhoPorPedaco) - 1;
+            return indiceInicial;
+        }
+    }
+
+    static getFatiaFinal(tamanhoLista: number, indiceFatiaInicial: number, numeroPorRegistro: number): number {
+        var indiceFatiaFinal = indiceFatiaInicial + numeroPorRegistro;
+        const indiceFinalUltrapassado = indiceFatiaFinal > tamanhoLista - 1;
+
+        if (indiceFinalUltrapassado) {
+            indiceFatiaFinal = tamanhoLista - 1;    
+        }
+
+        return indiceFatiaFinal;
     }
 }
 
@@ -198,3 +245,5 @@ var controller = new IndexController();
 document.addEventListener("DOMContentLoaded", function () {
     controller.onLoad();
 });
+
+

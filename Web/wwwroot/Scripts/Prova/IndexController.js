@@ -72,6 +72,14 @@ var Instancia = /** @class */ (function () {
         var numeroPorPagina = SelectPagina.opcoes[indiceSelectNumeroPaginaValor];
         Instancia.paginaExibidaElemento = Instancia.fatiarListaEmPedacos(elementoQuestoes, numeroPorPagina);
     };
+    Instancia.getIndiceFatiaFromPaginaAtual = function (numeroPaginaAtual) {
+        var dados = numeroPaginaAtual - 1;
+        var dadosZerado = dados == 0;
+        if (dadosZerado) {
+            dados = 1;
+        }
+        return dados;
+    };
     Instancia.getFatia = function (lista, indiceFatiaInicio, numeroRegistroPorPagina) {
         var fatia;
         if (indiceFatiaInicio == numeroRegistroPorPagina) {
@@ -82,23 +90,49 @@ var Instancia = /** @class */ (function () {
         }
         return fatia;
     };
-    Instancia.fatiarListaEmPedacos = function (lista, tamanhoPorPedaco) {
-        var listaContemElementos = lista.length != 0;
+    Instancia.fatiarListaEmPedacos = function (lista, numeroRegistroPorPagina) {
+        var tamanhoListaFinal = lista.length;
+        var listaContemElementos = tamanhoListaFinal != 0;
         var listaFatiada = [];
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
-        var indiceFatiaInicia = numeroPaginaAtual - 1;
+        var indiceFatiaInicial = Instancia.getFatiaInicial(numeroPaginaAtual, numeroRegistroPorPagina);
+        var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina);
         while (listaContemElementos) {
-            var fatia = this.getFatia(lista, indiceFatiaInicia, tamanhoPorPedaco);
+            var indiceFinalInvalido = indiceFatiaFinal > tamanhoListaFinal;
+            if (indiceFinalInvalido) {
+                break;
+            }
+            var fatia = this.getFatia(lista, indiceFatiaInicial, indiceFatiaFinal);
             listaFatiada.push(fatia);
-            var concluiuPagina = listaFatiada.length == tamanhoPorPedaco;
+            var concluiuPagina = listaFatiada.length == numeroRegistroPorPagina;
             if (concluiuPagina)
                 break;
             else {
-                listaContemElementos = lista.length > indiceFatiaInicia;
-                indiceFatiaInicia += tamanhoPorPedaco;
+                listaContemElementos = tamanhoListaFinal >= indiceFatiaInicial + numeroRegistroPorPagina;
+                indiceFatiaInicial += numeroRegistroPorPagina;
+                indiceFatiaFinal += numeroRegistroPorPagina;
             }
         }
         return listaFatiada;
+    };
+    Instancia.getFatiaInicial = function (numeroPaginaAtual, tamanhoPorPedaco) {
+        var ehPrimeiraPagina = numeroPaginaAtual == 1;
+        if (ehPrimeiraPagina) {
+            return 0;
+        }
+        else {
+            var indicePaginaAtual = numeroPaginaAtual - 1;
+            var indiceInicial = (indicePaginaAtual * tamanhoPorPedaco) - 1;
+            return indiceInicial;
+        }
+    };
+    Instancia.getFatiaFinal = function (tamanhoLista, indiceFatiaInicial, numeroPorRegistro) {
+        var indiceFatiaFinal = indiceFatiaInicial + numeroPorRegistro;
+        var indiceFinalUltrapassado = indiceFatiaFinal > tamanhoLista - 1;
+        if (indiceFinalUltrapassado) {
+            indiceFatiaFinal = tamanhoLista - 1;
+        }
+        return indiceFatiaFinal;
     };
     return Instancia;
 }());
