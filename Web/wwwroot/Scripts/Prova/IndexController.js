@@ -12,6 +12,9 @@ var Instancia = /** @class */ (function () {
     Instancia.listaPaginadaElemento = function () {
         this.preeencherListaPaginada();
     };
+    Instancia.getPaginaExibidaElemento = function () {
+        return this.paginaExibidaElemento;
+    };
     Instancia.selectNumeroPaginaElemento = function () {
         this.elementoSelectNumeroPaginaAtual = $("#numeroQuestaoPorPagina");
     };
@@ -43,38 +46,59 @@ var Instancia = /** @class */ (function () {
         return this.elementoNumeroPaginaAtual;
     };
     Instancia.atualizarPaginaExibida = function () {
+        Instancia.preeencherListaPaginada();
         this.ocultarTodasQuestoes();
         this.mostrarPaginaExibida();
     };
     Instancia.mostrarPaginaExibida = function () {
-        Instancia.paginaExibidaElemento.map(function (e) { return $(e).show(); });
+        var paginaExibida = Instancia.getPaginaExibidaElemento();
+        $(paginaExibida[0]).show();
+    };
+    Instancia.getNumeroPossivelPaginas = function () {
+        var numeroTotalRegistros = this.elementoQuestoes.length;
+        var indiceSelectNumeroPaginaAtual = Number(Instancia.getSelectNumeroPaginaElemento().val());
+        var numeroRegistroPorPagina = SelectPagina.opcoes[indiceSelectNumeroPaginaAtual];
+        var numeroTotalDePaginas = numeroTotalRegistros / numeroRegistroPorPagina;
+        return numeroTotalDePaginas;
     };
     Instancia.ocultarTodasQuestoes = function () {
-        Instancia.listaPaginadaElement.map(function (e) { return $(e).hide(); });
+        var todasQuestoes = Instancia.getQuestoesElemento();
+        todasQuestoes.hide();
     };
     Instancia.preeencherListaPaginada = function () {
         var elementoNumeroQuestoesPorPagina = Instancia.getSelectNumeroPaginaElemento();
         var elementoQuestoes = Instancia.getQuestoesElemento();
         var indiceSelectNumeroPaginaValor = Number(elementoNumeroQuestoesPorPagina.val());
         var numeroPorPagina = SelectPagina.opcoes[indiceSelectNumeroPaginaValor];
-        Instancia.listaPaginadaElement = Instancia.fatiarListaEmPedacos(elementoQuestoes, numeroPorPagina);
+        Instancia.paginaExibidaElemento = Instancia.fatiarListaEmPedacos(elementoQuestoes, numeroPorPagina);
+    };
+    Instancia.getFatia = function (lista, indiceFatiaInicio, numeroRegistroPorPagina) {
+        var fatia;
+        if (indiceFatiaInicio == numeroRegistroPorPagina) {
+            fatia = lista.slice(indiceFatiaInicio, numeroRegistroPorPagina + 1);
+        }
+        else {
+            fatia = lista.slice(indiceFatiaInicio, numeroRegistroPorPagina);
+        }
+        return fatia;
     };
     Instancia.fatiarListaEmPedacos = function (lista, tamanhoPorPedaco) {
         var listaContemElementos = lista.length != 0;
         var listaFatiada = [];
-        while (listaContemElementos) {
-            var fatia = lista.splice(0, tamanhoPorPedaco);
-            listaFatiada.push(fatia);
-            listaContemElementos = lista.length != 0;
-        }
-        Instancia.questoesElemento();
-        return listaFatiada;
-    };
-    Instancia.paginaExibida = function () {
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
-        var indiceNextPagina = numeroPaginaAtual - 1;
-        Instancia.paginaExibidaElemento = Instancia.listaPaginadaElement[indiceNextPagina];
-        Instancia.atualizarPaginaExibida();
+        var indiceFatiaInicia = numeroPaginaAtual - 1;
+        while (listaContemElementos) {
+            var fatia = this.getFatia(lista, indiceFatiaInicia, tamanhoPorPedaco);
+            listaFatiada.push(fatia);
+            var concluiuPagina = listaFatiada.length == tamanhoPorPedaco;
+            if (concluiuPagina)
+                break;
+            else {
+                listaContemElementos = lista.length > indiceFatiaInicia;
+                indiceFatiaInicia += tamanhoPorPedaco;
+            }
+        }
+        return listaFatiada;
     };
     return Instancia;
 }());
@@ -89,22 +113,19 @@ var IndexController = /** @class */ (function () {
         var isso = this;
         Instancia.getBtnPrev().click(function () {
             isso.prevPagina();
-            Instancia.preeencherListaPaginada();
-            Instancia.paginaExibida();
+            Instancia.atualizarPaginaExibida();
         });
         Instancia.getBtnNext().click(function () {
             isso.nextPagina();
-            Instancia.preeencherListaPaginada();
-            Instancia.paginaExibida();
         });
         Instancia.getSelectNumeroPaginaElemento().change(function (e) {
-            Instancia.preeencherListaPaginada();
-            Instancia.paginaExibida();
+            Instancia.elementoNumeroPaginaAtual.val(1);
+            Instancia.atualizarPaginaExibida();
         });
     };
     IndexController.prototype.nextPagina = function () {
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
-        var possivelPaginar = numeroPaginaAtual < Instancia.listaPaginadaElement.length;
+        var possivelPaginar = numeroPaginaAtual < Instancia.getNumeroPossivelPaginas();
         if (possivelPaginar) {
             var proximaPagina = numeroPaginaAtual + 1;
             Instancia.elementoNumeroPaginaAtual.val(proximaPagina);
@@ -125,7 +146,6 @@ var IndexController = /** @class */ (function () {
         Instancia.selectNumeroPaginaElemento();
         Instancia.numeroPaginaElemento();
         Instancia.listaPaginadaElemento();
-        Instancia.paginaExibida();
         Instancia.atualizarPaginaExibida();
         Instancia.BtnPrev();
         Instancia.BtnNext();

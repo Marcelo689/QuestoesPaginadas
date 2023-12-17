@@ -9,6 +9,10 @@ class Instancia {
         this.preeencherListaPaginada();
     }
 
+    static getPaginaExibidaElemento() {
+        return this.paginaExibidaElemento;
+    }
+
     static elementoNumeroPaginaAtual: JQuery;
     static elementoQuestoes: JQuery;
     static btnPrevElement: JQuery<HTMLElement>;
@@ -20,6 +24,7 @@ class Instancia {
     public static selectNumeroPaginaElemento() {
         this.elementoSelectNumeroPaginaAtual = $("#numeroQuestaoPorPagina");
     }
+
     static getSelectNumeroPaginaElemento() {
         return this.elementoSelectNumeroPaginaAtual;
     }
@@ -27,6 +32,7 @@ class Instancia {
     public  static questoesElemento() {
         this.elementoQuestoes = $(".container-questao");
     }
+
     static getQuestoesElemento() {
         return this.elementoQuestoes;
     }
@@ -34,6 +40,7 @@ class Instancia {
     public static BtnNext() {
         this.btnNextElement = $("#btn-next");
     }
+
     static getBtnNext() {
         return this.btnNextElement;
     }
@@ -41,6 +48,7 @@ class Instancia {
     public static BtnPrev() {
         this.btnPrevElement = $("#btn-prev");
     }
+
     static getBtnPrev() {
         return this.btnPrevElement;
     }
@@ -48,22 +56,34 @@ class Instancia {
     public static numeroPaginaElemento() {
         this.elementoNumeroPaginaAtual = $("#pagina-atual");
     }
+
     static getNumeroPaginaElemento() {
         return this.elementoNumeroPaginaAtual;
     }
 
-
     static atualizarPaginaExibida() {
+        Instancia.preeencherListaPaginada();
         this.ocultarTodasQuestoes();
         this.mostrarPaginaExibida();
     }
 
     static mostrarPaginaExibida() {
-        Instancia.paginaExibidaElemento.map(e => $(e).show());
+        var paginaExibida: any = Instancia.getPaginaExibidaElemento();
+        $(paginaExibida[0]).show();
+    }
+
+    static getNumeroPossivelPaginas() : number{
+        var numeroTotalRegistros = this.elementoQuestoes.length;
+        var indiceSelectNumeroPaginaAtual = Number(Instancia.getSelectNumeroPaginaElemento().val());
+        var numeroRegistroPorPagina = SelectPagina.opcoes[indiceSelectNumeroPaginaAtual];
+
+        var numeroTotalDePaginas = numeroTotalRegistros / numeroRegistroPorPagina;
+        return numeroTotalDePaginas;
     }
 
     static ocultarTodasQuestoes() {
-        Instancia.listaPaginadaElement.map(e => $(e).hide());
+        var todasQuestoes : any = Instancia.getQuestoesElemento();
+        todasQuestoes.hide();
     }
 
     static preeencherListaPaginada() {
@@ -73,29 +93,41 @@ class Instancia {
         var indiceSelectNumeroPaginaValor = Number(elementoNumeroQuestoesPorPagina.val());
         var numeroPorPagina: number = SelectPagina.opcoes[indiceSelectNumeroPaginaValor];
 
-        Instancia.listaPaginadaElement = Instancia.fatiarListaEmPedacos(elementoQuestoes, numeroPorPagina);
+        Instancia.paginaExibidaElemento = Instancia.fatiarListaEmPedacos(elementoQuestoes, numeroPorPagina);
+    }
+
+   private static getFatia(lista, indiceFatiaInicio, numeroRegistroPorPagina) {
+        var fatia;
+        if (indiceFatiaInicio == numeroRegistroPorPagina) {
+            fatia = lista.slice(indiceFatiaInicio, numeroRegistroPorPagina + 1);
+        } else {
+            fatia = lista.slice(indiceFatiaInicio, numeroRegistroPorPagina);
+        }
+
+        return fatia;
     }
 
     static fatiarListaEmPedacos(lista: any, tamanhoPorPedaco: number) {
         var listaContemElementos = lista.length != 0;
 
         var listaFatiada = [];
+        var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
+        var indiceFatiaInicia = numeroPaginaAtual - 1;
         while (listaContemElementos) {
-            var fatia = lista.splice(0, tamanhoPorPedaco);
+            var fatia = this.getFatia(lista, indiceFatiaInicia, tamanhoPorPedaco);
             listaFatiada.push(fatia);
-            listaContemElementos = lista.length != 0;
+
+            const concluiuPagina = listaFatiada.length == tamanhoPorPedaco;
+
+            if (concluiuPagina)
+                break;
+            else {
+                listaContemElementos = lista.length > indiceFatiaInicia;
+                indiceFatiaInicia += tamanhoPorPedaco;
+            }
         }
 
-        Instancia.questoesElemento();
         return listaFatiada;
-    }
-
-    public static paginaExibida() {
-        var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
-        var indiceNextPagina = numeroPaginaAtual - 1;
-        Instancia.paginaExibidaElemento = Instancia.listaPaginadaElement[indiceNextPagina];
-
-        Instancia.atualizarPaginaExibida();
     }
 }
 
@@ -111,26 +143,23 @@ class IndexController {
 
         Instancia.getBtnPrev().click(function () {
             isso.prevPagina();
-            Instancia.preeencherListaPaginada();
-            Instancia.paginaExibida();
+            Instancia.atualizarPaginaExibida();
         });
 
         Instancia.getBtnNext().click(function () {
             isso.nextPagina();
-            Instancia.preeencherListaPaginada();
-            Instancia.paginaExibida();
         });
 
         Instancia.getSelectNumeroPaginaElemento().change(function (e) {
-            Instancia.preeencherListaPaginada();
-            Instancia.paginaExibida();
+            Instancia.elementoNumeroPaginaAtual.val(1);
+            Instancia.atualizarPaginaExibida();
         });
     }
 
 
     public nextPagina() {
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
-        const possivelPaginar = numeroPaginaAtual < Instancia.listaPaginadaElement.length;
+        const possivelPaginar = numeroPaginaAtual < Instancia.getNumeroPossivelPaginas();
 
         if (possivelPaginar) {
             var proximaPagina = numeroPaginaAtual + 1;
@@ -157,7 +186,6 @@ class IndexController {
         Instancia.selectNumeroPaginaElemento();
         Instancia.numeroPaginaElemento();
         Instancia.listaPaginadaElemento();
-        Instancia.paginaExibida();
         Instancia.atualizarPaginaExibida();
         Instancia.BtnPrev();
         Instancia.BtnNext();
