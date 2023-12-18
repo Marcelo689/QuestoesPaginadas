@@ -13,3 +13,7 @@ D:\QuestoesApi\BancoProject\obj\Debug\net7.0\BancoProject.pdb
 D:\QuestoesApi\BancoProject\obj\Debug\net7.0\BancoProject.genruntimeconfig.cache
 D:\QuestoesApi\BancoProject\obj\Debug\net7.0\ref\BancoProject.dll
 D:\QuestoesApi\BancoProject\obj\Debug\net7.0\BancoProject.sourcelink.json
+D:\QuestoesApi\BancoProject\bin\Debug\net7.0\DTO.dll
+D:\QuestoesApi\BancoProject\bin\Debug\net7.0\DTO.pdb
+D:\QuestoesApi\BancoProject\bin\Debug\net7.0\DTO.dll.config
+D:\QuestoesApi\BancoProject\obj\Debug\net7.0\BancoProject.csproj.CopyComplete

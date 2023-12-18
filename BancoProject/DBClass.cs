@@ -1,19 +1,25 @@
-﻿using BancoProject;
+﻿using DTO.BancoClasses.Login;
+using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
+using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
+using DTO.BancoClasses.Prova;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banco
 {
     public class DBClass : DbContext
     {
-        public DbSet<Student> Student { get; set; }
-        public DbSet<Exam> Exam { get; set; }
-        public DbSet<ExamAnswerSheet> ExamAnswerSheet { get; set; }
-        public DbSet<Question> Question { get; set; }
+
+        public DbSet<Professor>  Professor{ get; set; }
+        public DbSet<Estudante> Estudante{ get; set; }
+        public DbSet<Usuario> Usuario{ get; set; }
+        public DbSet<Prova> Prova { get; set; }
+        public DbSet<Questao> Questao { get; set; }
+        public DbSet<QuestaoOpcao> QuestaoOpcao { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                @"Server=localhost;Database=MyDataBase;Trusted_Connection=True;TrustServerCertificate=True");
+                @"Server=localhost;Database=Universidade;Trusted_Connection=True;TrustServerCertificate=True");
         }
     }
 }

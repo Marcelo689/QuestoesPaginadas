@@ -287,14 +287,5 @@ namespace ProvaApi.Controllers
             return "Nao faz nada, totalmente ficticio";
         }
 
-        [HttpGet("Example")]
-        public ExampleTO Example()
-        {
-            return new ExampleTO
-            {
-                Id = 1,
-                Nome = "Marcelo",
-            };
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DTO.ProvaModels;
+﻿using DTO.Login;
+using DTO.ProvaModels;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -19,6 +20,8 @@ namespace DTO
         
         [JsonPropertyName("questoes")]
         public QuestaoTO[]  Questoes { get; set; }
+
+        public UsuarioTO Usuario { get; set; }
 
         public ProvaResultado GetResultados()
         {

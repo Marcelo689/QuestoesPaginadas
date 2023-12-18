@@ -33,7 +33,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\QuestoesApi\\DTO\\DTO.csproj": {
+                "projectPath": "D:\\QuestoesApi\\DTO\\DTO.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -79,6 +83,21 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "D:\\QuestoesApi\\DTO\\DTO.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\QuestoesApi\\DTO\\DTO.csproj",
+        "projectName": "DTO",
+        "projectPath": "D:\\QuestoesApi\\DTO\\DTO.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
       }
     }
   }

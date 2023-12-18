@@ -1,4 +1,6 @@
 ﻿using DTO;
+using DTO.Login;
+using DTO.Login.Estudante;
 using DTO.ProvaModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -7,23 +9,21 @@ namespace Web.Controllers
 {
     public class ProvaController : Controller
     {
-        public static Estudante EstudanteLogado { get; set; }
+        public static EstudanteTO EstudanteLogado { get; set; }
         public static ProvaTO ProvaEmProgresso { get; set; }
         public ProvaController()
         {
-            EstudanteLogado = new Estudante
+            EstudanteLogado = new EstudanteTO
             {
                 Id = 1,
                 Name = "Marcelo",
             };
         }
-        public IActionResult Index()
+        public IActionResult Index(UsuarioTO usuarioTO)
         {
             var jsonString = new HttpClient().GetStringAsync("https://localhost:7059/api/Prova").Result;
-
-            var jsonOptions = new JsonSerializerOptions();
-            jsonOptions.IncludeFields = true;
-            ProvaTO? provaModel = JsonSerializer.Deserialize<ProvaTO>(jsonString, jsonOptions);
+            ProvaTO? provaModel = JsonSerializer.Deserialize<ProvaTO>(jsonString);
+            provaModel.Usuario = usuarioTO;
             ProvaEmProgresso = provaModel;
             return View(provaModel);
         }
