@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using BancoProject.ProvaFolder;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProvaApi.Controllers
@@ -17,6 +18,13 @@ namespace ProvaApi.Controllers
             return prova;
 
         }
+
+        [HttpGet("GetProva")]
+        public ProvaTO GetProvaDB()
+        {
+            return ProvaDB.GetProvaDB(1);
+        }
+
         private static QuestaoTO[] GetQuestoes()
         {
             return new QuestaoTO[] {
@@ -263,12 +271,12 @@ namespace ProvaApi.Controllers
                 };
         }
 
-        [HttpPost]
-        public ProvaTO SaveAnswers(ProvaTO provaTO)
-        {
-            SalvaQuestoesPreenchidas(provaTO);
-            return provaTO;
-        }
+        //[HttpPost]
+        //public ProvaTO SaveAnswers(ProvaTO provaTO)
+        //{
+        //    SalvaQuestoesPreenchidas(provaTO);
+        //    return provaTO;
+        //}
 
         private void SalvaQuestoesPreenchidas(ProvaTO provaTO)
         {

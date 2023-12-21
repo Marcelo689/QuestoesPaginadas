@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO.BancoClasses.ProvaFolder;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -61,6 +62,29 @@ namespace DTO
         public bool QuestaoPreenchida()
         {
             return SelectedOption != null;
+        }
+
+        public static explicit operator QuestaoTO(Questao questao)
+        {
+            return new QuestaoTO
+            {
+                Id = questao.Id,
+                Name = questao.Descricao,
+                OptionDescriptions = GetQuestaoOptionsDescriptions(questao)
+            };
+        }
+
+        private static Dictionary<Options, string> GetQuestaoOptionsDescriptions(Questao questao)
+        {
+            var opcoes = new Dictionary<Options, string>();
+            
+            opcoes.Add(Options.A, questao.DescricaoOpcao1);
+            opcoes.Add(Options.B, questao.DescricaoOpcao2);
+            opcoes.Add(Options.C, questao.DescricaoOpcao3);
+            opcoes.Add(Options.D, questao.DescricaoOpcao4);
+            opcoes.Add(Options.E, questao.DescricaoOpcao5);
+
+            return opcoes;
         }
     }
 }

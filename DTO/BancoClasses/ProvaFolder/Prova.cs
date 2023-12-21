@@ -1,6 +1,6 @@
 ﻿using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
 
-namespace DTO.BancoClasses.Prova
+namespace DTO.BancoClasses.ProvaFolder
 {
     public class Prova
     {

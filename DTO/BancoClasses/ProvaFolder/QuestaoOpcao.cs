@@ -1,4 +1,4 @@
-﻿namespace DTO.BancoClasses.Prova
+﻿namespace DTO.BancoClasses.ProvaFolder
 {
     public enum EnumOpcao
     {

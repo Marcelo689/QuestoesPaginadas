@@ -1,4 +1,4 @@
-﻿namespace DTO.Login.Estudante
+﻿namespace DTO.Login.EstudanteFolder
 {
     public class EstudanteTO
     {

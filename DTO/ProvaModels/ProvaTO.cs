@@ -1,4 +1,5 @@
-﻿using DTO.Login;
+﻿using DTO.BancoClasses.ProvaFolder;
+using DTO.Login;
 using DTO.ProvaModels;
 using System;
 using System.Linq;
@@ -20,9 +21,8 @@ namespace DTO
         
         [JsonPropertyName("questoes")]
         public QuestaoTO[]  Questoes { get; set; }
-
         public UsuarioTO Usuario { get; set; }
-
+        //public ProfessorTO ProfessorTO { get;  set; }
         public ProvaResultado GetResultados()
         {
             return new ProvaResultado
@@ -73,6 +73,16 @@ namespace DTO
                 return 0;
             else
                 return Questoes.Length;
+        }
+
+        public static explicit operator ProvaTO(Prova to)
+        {
+            return new ProvaTO
+            {
+                Id = to.Id,
+                Name = to.Name,
+                //ProfessorTO = to.Professor,
+            };
         }
     }
 }

@@ -97,11 +97,10 @@ var Instancia = /** @class */ (function () {
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
         var indiceFatiaInicial = Instancia.getFatiaInicial(numeroPaginaAtual, numeroRegistroPorPagina);
         var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina);
+        var notPrimeiraPagina = numeroPaginaAtual != 1 || numeroRegistroPorPagina != 1;
+        if (notPrimeiraPagina)
+            indiceFatiaFinal++;
         while (listaContemElementos) {
-            var indiceFinalInvalido = indiceFatiaFinal > tamanhoListaFinal;
-            if (indiceFinalInvalido) {
-                break;
-            }
             var fatia = this.getFatia(lista, indiceFatiaInicial, indiceFatiaFinal);
             listaFatiada.push(fatia);
             var concluiuPagina = listaFatiada.length == numeroRegistroPorPagina;
@@ -123,6 +122,9 @@ var Instancia = /** @class */ (function () {
         else {
             var indicePaginaAtual = numeroPaginaAtual - 1;
             var indiceInicial = (indicePaginaAtual * tamanhoPorPedaco) - 1;
+            var ehZero = indiceInicial == 0;
+            if (ehZero)
+                indiceInicial = 1;
             return indiceInicial;
         }
     };

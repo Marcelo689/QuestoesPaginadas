@@ -1,6 +1,4 @@
-﻿using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
-using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
-using System;
+﻿using System;
 
 namespace DTO.BancoClasses.Login
 {

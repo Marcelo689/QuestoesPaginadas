@@ -1,7 +1,7 @@
 ﻿using DTO.BancoClasses.Login;
 using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
 using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
-using DTO.BancoClasses.Prova;
+using DTO.BancoClasses.ProvaFolder;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banco

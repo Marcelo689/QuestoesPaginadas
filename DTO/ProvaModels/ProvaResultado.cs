@@ -2,6 +2,6 @@
 {
     public class ProvaResultado
     {
-        public QuestaoTO[] Questoes { get; internal set; }
+        public QuestaoTO[] Questoes { get; set; }
     }
 }

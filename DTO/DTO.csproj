@@ -78,16 +78,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BancoClasses\Login\Entidades\EstudanteFolder\Estudante.cs" />
-    <Compile Include="BancoClasses\Login\Entidades\ProfessorFolder\Area.cs" />
-    <Compile Include="BancoClasses\Login\Entidades\ProfessorFolder\Professor.cs" />
-    <Compile Include="BancoClasses\Login\Usuario.cs" />
-    <Compile Include="BancoClasses\Prova\Questao.cs" />
-    <Compile Include="BancoClasses\Prova\QuestaoOpcao.cs" />
-    <Compile Include="Login\Estudante\EstudanteTO.cs" />
+    <Compile Include="BancoClasses\LoginFolder\Entidades\EstudanteFolder\Estudante.cs" />
+    <Compile Include="BancoClasses\LoginFolder\Entidades\ProfessorFolder\Area.cs" />
+    <Compile Include="BancoClasses\LoginFolder\Entidades\ProfessorFolder\Professor.cs" />
+    <Compile Include="BancoClasses\LoginFolder\Usuario.cs" />
+    <Compile Include="BancoClasses\ProvaFolder\Questao.cs" />
+    <Compile Include="BancoClasses\ProvaFolder\QuestaoOpcao.cs" />
+    <Compile Include="Login\EstudanteFolder\EstudanteTO.cs" />
+    <Compile Include="Login\ProfessorFolder\ProfessorTO.cs" />
     <Compile Include="Login\UsuarioTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BancoClasses\Prova\Prova.cs" />
+    <Compile Include="BancoClasses\ProvaFolder\Prova.cs" />
     <Compile Include="ProvaModels\ProvaOpcoesMarcadasViewModel.cs" />
     <Compile Include="ProvaModels\ProvaResultado.cs" />
     <Compile Include="ProvaModels\ProvaTO.cs" />
