@@ -5,6 +5,25 @@
 }
 
 class Instancia {
+    static paginar() {
+        var numeroPaginaAtual = Number(this.elementoNumeroPaginaAtual.val());
+        var indiceSelectPagina = Number(this.elementoSelectNumeroPaginaAtual.val());
+        var numeroRegistrosPorPagina = Number(SelectPagina.opcoes[indiceSelectPagina]);
+
+        var indiceInicial = Instancia.getIndiceInicialPagina(numeroPaginaAtual, numeroRegistrosPorPagina);
+        this.paginaExibidaElemento = this.elementoQuestoes.slice(indiceInicial, indiceInicial + numeroRegistrosPorPagina);
+    }
+
+    private static getIndiceInicialPagina(numeroPaginaAtual: number, numeroRegistrosPorPagina: number) : number {
+        var indiceInicial = 0;
+        const primeiraPagina = numeroPaginaAtual != 1;
+        if (primeiraPagina) {
+            indiceInicial = numeroPaginaAtual * numeroRegistrosPorPagina;
+        }
+
+        return indiceInicial;
+    }
+
     static listaPaginadaElemento() {
         this.preeencherListaPaginada();
     }
@@ -61,15 +80,18 @@ class Instancia {
         return this.elementoNumeroPaginaAtual;
     }
 
-    static atualizarPaginaExibida() {
+    static atualizarPaginaExibida(isSelect: boolean = false) {
         Instancia.preeencherListaPaginada();
         this.ocultarTodasQuestoes();
-        this.mostrarPaginaExibida();
+        this.mostrarPaginaExibida(isSelect);
     }
 
-    static mostrarPaginaExibida() {
+    static mostrarPaginaExibida(isSelect : boolean) {
         var paginaExibida: any = Instancia.getPaginaExibidaElemento();
-        $(paginaExibida[0]).show();
+        if (isSelect)
+            $(paginaExibida).show();
+        else
+            $(paginaExibida[0]).show();
     }
 
     static getNumeroPossivelPaginas() : number{
@@ -127,11 +149,8 @@ class Instancia {
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
 
         var indiceFatiaInicial = Instancia.getFatiaInicial(numeroPaginaAtual, numeroRegistroPorPagina);
-        var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina);
-
-        const notPrimeiraPagina = numeroPaginaAtual != 1 || numeroRegistroPorPagina != 1;
-        if (notPrimeiraPagina)
-            indiceFatiaFinal++;
+        var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina, numeroPaginaAtual);
+        indiceFatiaFinal++;
 
         while (listaContemElementos) {
             var fatia = this.getFatia(lista, indiceFatiaInicial, indiceFatiaFinal);
@@ -159,7 +178,7 @@ class Instancia {
             return 0;
         } else {
             var indicePaginaAtual = numeroPaginaAtual - 1;
-            var indiceInicial = (indicePaginaAtual * tamanhoPorPedaco) - 1;
+            var indiceInicial = (indicePaginaAtual * tamanhoPorPedaco);
 
             const ehZero = indiceInicial == 0;
             if (ehZero)
@@ -168,8 +187,12 @@ class Instancia {
         }
     }
 
-    static getFatiaFinal(tamanhoLista: number, indiceFatiaInicial: number, numeroPorRegistro: number): number {
-        var indiceFatiaFinal = indiceFatiaInicial + numeroPorRegistro;
+    static getFatiaFinal(tamanhoLista: number, indiceFatiaInicial: number, numeroPorRegistro: number, numeroPagina:number): number {
+        //const primeiraPagina = numeroPagina == 1;
+        //if (primeiraPagina) {
+        //    numeroPorRegistro += 1;
+        //}
+        var indiceFatiaFinal = indiceFatiaInicial + numeroPorRegistro -1;
         const indiceFinalUltrapassado = indiceFatiaFinal > tamanhoLista - 1;
 
         if (indiceFinalUltrapassado) {
@@ -194,17 +217,17 @@ class IndexController {
             isso.prevPagina();
             Instancia.atualizarPaginaExibida();
         });
-
         Instancia.getBtnNext().click(function () {
             isso.nextPagina();
         });
 
         Instancia.getSelectNumeroPaginaElemento().change(function (e) {
             Instancia.elementoNumeroPaginaAtual.val(1);
-            Instancia.atualizarPaginaExibida();
+            Instancia.paginar();
+            Instancia.ocultarTodasQuestoes();
+            Instancia.mostrarPaginaExibida(true);
         });
     }
-
 
     public nextPagina() {
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());

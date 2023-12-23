@@ -9,6 +9,21 @@ var SelectPagina = /** @class */ (function () {
 var Instancia = /** @class */ (function () {
     function Instancia() {
     }
+    Instancia.paginar = function () {
+        var numeroPaginaAtual = Number(this.elementoNumeroPaginaAtual.val());
+        var indiceSelectPagina = Number(this.elementoSelectNumeroPaginaAtual.val());
+        var numeroRegistrosPorPagina = Number(SelectPagina.opcoes[indiceSelectPagina]);
+        var indiceInicial = Instancia.getIndiceInicialPagina(numeroPaginaAtual, numeroRegistrosPorPagina);
+        this.paginaExibidaElemento = this.elementoQuestoes.slice(indiceInicial, indiceInicial + numeroRegistrosPorPagina);
+    };
+    Instancia.getIndiceInicialPagina = function (numeroPaginaAtual, numeroRegistrosPorPagina) {
+        var indiceInicial = 0;
+        var primeiraPagina = numeroPaginaAtual != 1;
+        if (primeiraPagina) {
+            indiceInicial = numeroPaginaAtual * numeroRegistrosPorPagina;
+        }
+        return indiceInicial;
+    };
     Instancia.listaPaginadaElemento = function () {
         this.preeencherListaPaginada();
     };
@@ -45,14 +60,18 @@ var Instancia = /** @class */ (function () {
     Instancia.getNumeroPaginaElemento = function () {
         return this.elementoNumeroPaginaAtual;
     };
-    Instancia.atualizarPaginaExibida = function () {
+    Instancia.atualizarPaginaExibida = function (isSelect) {
+        if (isSelect === void 0) { isSelect = false; }
         Instancia.preeencherListaPaginada();
         this.ocultarTodasQuestoes();
-        this.mostrarPaginaExibida();
+        this.mostrarPaginaExibida(isSelect);
     };
-    Instancia.mostrarPaginaExibida = function () {
+    Instancia.mostrarPaginaExibida = function (isSelect) {
         var paginaExibida = Instancia.getPaginaExibidaElemento();
-        $(paginaExibida[0]).show();
+        if (isSelect)
+            $(paginaExibida).show();
+        else
+            $(paginaExibida[0]).show();
     };
     Instancia.getNumeroPossivelPaginas = function () {
         var numeroTotalRegistros = this.elementoQuestoes.length;
@@ -96,10 +115,8 @@ var Instancia = /** @class */ (function () {
         var listaFatiada = [];
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
         var indiceFatiaInicial = Instancia.getFatiaInicial(numeroPaginaAtual, numeroRegistroPorPagina);
-        var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina);
-        var notPrimeiraPagina = numeroPaginaAtual != 1 || numeroRegistroPorPagina != 1;
-        if (notPrimeiraPagina)
-            indiceFatiaFinal++;
+        var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina, numeroPaginaAtual);
+        indiceFatiaFinal++;
         while (listaContemElementos) {
             var fatia = this.getFatia(lista, indiceFatiaInicial, indiceFatiaFinal);
             listaFatiada.push(fatia);
@@ -121,15 +138,19 @@ var Instancia = /** @class */ (function () {
         }
         else {
             var indicePaginaAtual = numeroPaginaAtual - 1;
-            var indiceInicial = (indicePaginaAtual * tamanhoPorPedaco) - 1;
+            var indiceInicial = (indicePaginaAtual * tamanhoPorPedaco);
             var ehZero = indiceInicial == 0;
             if (ehZero)
                 indiceInicial = 1;
             return indiceInicial;
         }
     };
-    Instancia.getFatiaFinal = function (tamanhoLista, indiceFatiaInicial, numeroPorRegistro) {
-        var indiceFatiaFinal = indiceFatiaInicial + numeroPorRegistro;
+    Instancia.getFatiaFinal = function (tamanhoLista, indiceFatiaInicial, numeroPorRegistro, numeroPagina) {
+        //const primeiraPagina = numeroPagina == 1;
+        //if (primeiraPagina) {
+        //    numeroPorRegistro += 1;
+        //}
+        var indiceFatiaFinal = indiceFatiaInicial + numeroPorRegistro - 1;
         var indiceFinalUltrapassado = indiceFatiaFinal > tamanhoLista - 1;
         if (indiceFinalUltrapassado) {
             indiceFatiaFinal = tamanhoLista - 1;
@@ -156,7 +177,9 @@ var IndexController = /** @class */ (function () {
         });
         Instancia.getSelectNumeroPaginaElemento().change(function (e) {
             Instancia.elementoNumeroPaginaAtual.val(1);
-            Instancia.atualizarPaginaExibida();
+            Instancia.paginar();
+            Instancia.ocultarTodasQuestoes();
+            Instancia.mostrarPaginaExibida(true);
         });
     };
     IndexController.prototype.nextPagina = function () {
