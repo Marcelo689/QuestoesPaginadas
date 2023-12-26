@@ -15,7 +15,7 @@ namespace Banco
         public DbSet<Prova> Prova { get; set; }
         public DbSet<Questao> Questao { get; set; }
         public DbSet<QuestaoOpcao> QuestaoOpcao { get; set; }
-
+        public DbSet<ProvaQuestaoResposta> ProvaQuestaoResposta { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(

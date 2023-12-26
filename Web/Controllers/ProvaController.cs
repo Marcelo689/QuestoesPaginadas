@@ -10,6 +10,7 @@ namespace Web.Controllers
     public class ProvaController : Controller
     {
         public static EstudanteTO EstudanteLogado { get; set; }
+        public static HttpClient HttpClient = new HttpClient();
         public static ProvaTO ProvaEmProgresso { get; set; }
         public ProvaController()
         {
@@ -21,13 +22,32 @@ namespace Web.Controllers
         }
         public IActionResult Index(UsuarioTO usuarioTO)
         {
-            var jsonString = new HttpClient().GetStringAsync("https://localhost:7059/api/Prova/GetProva").Result;
-            ProvaTO? provaModel = JsonSerializer.Deserialize<ProvaTO>(jsonString);
+            /// mandar usuario para backend para logar e pegar os resultados desse usuario
+            const string getProvaURL = "https://localhost:7059/ProvaApi/GetProva";
+            ProvaTO? provaModel = RequestFromURLGetProvaTO(getProvaURL);
             provaModel.Usuario = usuarioTO;
 
             ProvaEmProgresso = provaModel;
             return View(provaModel);
         }
+
+        private static ProvaTO? RequestFromURLGetProvaTO(string url)
+        {
+            var jsonString = HttpClient.GetStringAsync(url).Result;
+            ProvaTO? provaModel = JsonSerializer.Deserialize<ProvaTO>(jsonString);
+            return provaModel;
+        }
+
+        [HttpPost]
+        public ActionResult SaveAnswers(ProvaOpcoesMarcadasViewModel provaOpcoes)
+        {
+            ProvaEmProgresso.PreencherRespostas(provaOpcoes);
+            const string saveAnswersURL = "https://localhost:7059/ProvaApi/SaveAnswers";
+
+            HttpClient.PostAsJsonAsync(saveAnswersURL,ProvaEmProgresso ).Wait();
+            return RedirectToAction("Index", ProvaEmProgresso);
+        }
+
         [HttpPost]
         public ActionResult SalvarQuestoes(ProvaOpcoesMarcadasViewModel provaViewModel)
         {

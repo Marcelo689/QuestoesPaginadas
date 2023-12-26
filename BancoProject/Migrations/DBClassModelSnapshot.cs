@@ -128,6 +128,42 @@ namespace BancoProject.Migrations
                     b.ToTable("Prova");
                 });
 
+            modelBuilder.Entity("DTO.BancoClasses.ProvaFolder.ProvaQuestaoResposta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataRespondida")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EstudanteId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OpcaoSelecionadaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProvaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("QuestaoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstudanteId");
+
+                    b.HasIndex("OpcaoSelecionadaId");
+
+                    b.HasIndex("ProvaId");
+
+                    b.HasIndex("QuestaoId");
+
+                    b.ToTable("ProvaQuestaoResposta");
+                });
+
             modelBuilder.Entity("DTO.BancoClasses.ProvaFolder.Questao", b =>
                 {
                     b.Property<int>("Id")
@@ -160,12 +196,17 @@ namespace BancoProject.Migrations
                     b.Property<int?>("OpcaoCorretaId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OpcaoSelecionadaId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProvaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OpcaoCorretaId");
+
+                    b.HasIndex("OpcaoSelecionadaId");
 
                     b.HasIndex("ProvaId");
 
@@ -221,17 +262,50 @@ namespace BancoProject.Migrations
                     b.Navigation("Professor");
                 });
 
+            modelBuilder.Entity("DTO.BancoClasses.ProvaFolder.ProvaQuestaoResposta", b =>
+                {
+                    b.HasOne("DTO.BancoClasses.Login.Entidades.EstudanteFolder.Estudante", "Estudante")
+                        .WithMany()
+                        .HasForeignKey("EstudanteId");
+
+                    b.HasOne("DTO.BancoClasses.ProvaFolder.QuestaoOpcao", "OpcaoSelecionada")
+                        .WithMany()
+                        .HasForeignKey("OpcaoSelecionadaId");
+
+                    b.HasOne("DTO.BancoClasses.ProvaFolder.Prova", "Prova")
+                        .WithMany()
+                        .HasForeignKey("ProvaId");
+
+                    b.HasOne("DTO.BancoClasses.ProvaFolder.Questao", "Questao")
+                        .WithMany()
+                        .HasForeignKey("QuestaoId");
+
+                    b.Navigation("Estudante");
+
+                    b.Navigation("OpcaoSelecionada");
+
+                    b.Navigation("Prova");
+
+                    b.Navigation("Questao");
+                });
+
             modelBuilder.Entity("DTO.BancoClasses.ProvaFolder.Questao", b =>
                 {
                     b.HasOne("DTO.BancoClasses.ProvaFolder.QuestaoOpcao", "OpcaoCorreta")
                         .WithMany()
                         .HasForeignKey("OpcaoCorretaId");
 
+                    b.HasOne("DTO.BancoClasses.ProvaFolder.QuestaoOpcao", "OpcaoSelecionada")
+                        .WithMany()
+                        .HasForeignKey("OpcaoSelecionadaId");
+
                     b.HasOne("DTO.BancoClasses.ProvaFolder.Prova", "Prova")
                         .WithMany()
                         .HasForeignKey("ProvaId");
 
                     b.Navigation("OpcaoCorreta");
+
+                    b.Navigation("OpcaoSelecionada");
 
                     b.Navigation("Prova");
                 });

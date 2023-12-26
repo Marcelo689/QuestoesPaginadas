@@ -82,6 +82,7 @@
     <Compile Include="BancoClasses\LoginFolder\Entidades\ProfessorFolder\Area.cs" />
     <Compile Include="BancoClasses\LoginFolder\Entidades\ProfessorFolder\Professor.cs" />
     <Compile Include="BancoClasses\LoginFolder\Usuario.cs" />
+    <Compile Include="BancoClasses\ProvaFolder\ProvaQuestaoResposta.cs" />
     <Compile Include="BancoClasses\ProvaFolder\Questao.cs" />
     <Compile Include="BancoClasses\ProvaFolder\QuestaoOpcao.cs" />
     <Compile Include="Login\EstudanteFolder\EstudanteTO.cs" />

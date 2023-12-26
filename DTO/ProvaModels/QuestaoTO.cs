@@ -7,11 +7,12 @@ namespace DTO
 {
     public enum Options
     {
-        A = 0,
-        B = 1,
-        C = 2,
-        D = 3,
-        E = 4,
+        Vazio = 0,
+        A = 1,
+        B = 2,
+        C = 3,
+        D = 4,
+        E = 5,
     }
 
     public class QuestaoTO

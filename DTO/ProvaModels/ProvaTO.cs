@@ -44,24 +44,27 @@ namespace DTO
                 var campo = property[i];
                 string nome = campo.Name;
                 var questaoId = GetGetIdFromQuestionName(nome);
-                var opcaoPreenchida = campo.GetValue(provaViewModel);
+                int indiceOpcaoPreenchida = (int)campo.GetValue(provaViewModel);
 
                 QuestaoTO questaoSelecinada = this.Questoes.FirstOrDefault(questao => questao.Id == questaoId);
 
-                bool questaoFoiEncontrada = questaoSelecinada != null;
-                if (questaoFoiEncontrada)
+                if (questaoFoiPreenchida(questaoSelecinada, indiceOpcaoPreenchida))
                 {
-                    PreencherOpcaoDaQuestao(opcaoPreenchida, questaoSelecinada);
-                }
-                else
-                {
-
+                    PreencherOpcaoDaQuestao(indiceOpcaoPreenchida, questaoSelecinada);
                 }
             }
         }
+
+        private static bool questaoFoiPreenchida(QuestaoTO questaoSelecinada, int indiceOpcaoPreenchida)
+        {
+            bool questaoFoiEncontrada = questaoSelecinada != null;
+            return questaoFoiEncontrada && indiceOpcaoPreenchida != 0;
+        }
+
         private static void PreencherOpcaoDaQuestao(object opcaoPreenchida, QuestaoTO questaoSelecinada)
         {
             questaoSelecinada.SelectedOption = (Options)opcaoPreenchida;
+
         }
         private static int GetGetIdFromQuestionName(string nome)
         {
@@ -81,7 +84,7 @@ namespace DTO
             {
                 Id = to.Id,
                 Name = to.Name,
-                //ProfessorTO = to.Professor,
+                Description = to.Name,
             };
         }
     }

@@ -18,7 +18,7 @@
     
     @foreach (KeyValuePair<Options, string> opcao in Model.OptionDescriptions)
     {
-        bool opcaoJaMarcada = Model.SelectedOption == opcao.Key;
+        bool opcaoJaMarcada = Model.SelectedOption == opcao.Key && opcao.Key != 0;
         
 
         <div class="w-75 d-flex justify-content-between text-lg-start">

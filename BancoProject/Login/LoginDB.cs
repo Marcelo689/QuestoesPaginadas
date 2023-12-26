@@ -10,6 +10,10 @@ namespace BancoProject.Login
              e.Password == user.Password &&
              e.Username == user.Username);
 
+            bool usuarioExiste = usuario != null;
+            if (usuarioExiste)
+                usuario.AtualizaDataLogin();   
+
             UsuarioTO usuarioTO = (UsuarioTO) usuario;
             return usuarioTO; 
         }
