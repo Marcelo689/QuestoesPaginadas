@@ -22,13 +22,11 @@ namespace Web.Controllers
         }
         public IActionResult Index(UsuarioTO usuarioTO)
         {
-            /// mandar usuario para backend para logar e pegar os resultados desse usuario
             const string getProvaURL = "https://localhost:7059/ProvaApi/GetProva";
-            ProvaTO? provaModel = RequestFromURLGetProvaTO(getProvaURL);
-            provaModel.Usuario = usuarioTO;
+            ProvaEmProgresso = RequestFromURLGetProvaTO(getProvaURL);
+            ProvaEmProgresso.Usuario = usuarioTO;
 
-            ProvaEmProgresso = provaModel;
-            return View(provaModel);
+            return View(ProvaEmProgresso);
         }
 
         private static ProvaTO? RequestFromURLGetProvaTO(string url)

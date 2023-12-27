@@ -2,6 +2,7 @@
 using DTO;
 using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
 using DTO.BancoClasses.ProvaFolder;
+using DTO.Login.EstudanteFolder;
 
 namespace BancoProject.ProvaFolder
 {
@@ -15,23 +16,26 @@ namespace BancoProject.ProvaFolder
         private static ProvaTO PreencheProvaTO(int provaId)
         {
             Prova provaDB = DBInstance.DB.Prova.FirstOrDefault(e => e.Id == provaId);
+            Estudante estudante = DBInstance.DB.Estudante.ToList().FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
             IQueryable<Questao> questoes = DBInstance.DB.Questao.Where(e => e.Prova.Id == provaId);
             List<int> questoesIds = questoes.Select(e => e.Id).ToList();
-            IQueryable<ProvaQuestaoResposta> questaoRespondidas = DBInstance.DB.ProvaQuestaoResposta.Where(e => e.OpcaoSelecionada.Opcao != 0);
-            var listaTO = PreencherOpcoesSelecionadas(questoes.ToList(), questoesIds, questaoRespondidas.ToList());
+            IQueryable<ProvaQuestaoResposta> questaoRespondidas = DBInstance.DB.ProvaQuestaoResposta.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
+            var listaTO = PreencherOpcoesSelecionadas(questoes.ToList(), questoesIds, questaoRespondidas);
 
             var provaTO = (ProvaTO) provaDB;
             provaTO.Questoes = listaTO.ToArray();
+            provaTO.Estudante = (EstudanteTO) estudante;
             return provaTO;
         }
 
-        private static List<QuestaoTO> PreencherOpcoesSelecionadas(List<Questao> questoes, List<int> questoesIds, List<ProvaQuestaoResposta> questaoRespondidas)
+        private static List<QuestaoTO> PreencherOpcoesSelecionadas(List<Questao> questoes, List<int> questoesIds, IQueryable<ProvaQuestaoResposta> questaoRespondidas)
         {
             foreach (var questao in questoes)
             {
                 if (questoesIds.Contains(questao.Id))
                 {
-                    var opcao = questaoRespondidas.Where(e => e.Questao.Id == questao.Id).Select(e => e.OpcaoSelecionada).FirstOrDefault();
+                    var algo = questaoRespondidas.Where(e => e.Questao.Id == questao.Id).ToList();
+                    var opcao = algo.Select(e => e.QuestaoOpcao).FirstOrDefault();
                     bool opcaoExiste = opcao != null;
                     if (opcaoExiste)
                     {
@@ -57,7 +61,6 @@ namespace BancoProject.ProvaFolder
             Questao questao = DBInstance.DB.Questao.FirstOrDefault(q => q.Id == questaoTO.Id);
             var num1 = GetSelectedOption(questaoTO);
             QuestaoOpcao opcaoSelecionada = DBInstance.DB.QuestaoOpcao.FirstOrDefault(qo => ((int)qo.Opcao) == num1);
-            questao.OpcaoSelecionada = opcaoSelecionada;
 
             Prova prova = DBInstance.DB.Prova.FirstOrDefault(e => e.Id == provaTO.Id);
             Estudante estudante = DBInstance.DB.Estudante.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
@@ -71,7 +74,7 @@ namespace BancoProject.ProvaFolder
                     DataRespondida = DateTime.Now,
                     Questao = questao,
                     Estudante = estudante,
-                    OpcaoSelecionada = opcaoSelecionada,
+                    QuestaoOpcao = opcaoSelecionada,
                     Prova = prova
                 };
                 DBInstance.DB.ProvaQuestaoResposta.Add(provaQuestaoResposta);
@@ -82,7 +85,7 @@ namespace BancoProject.ProvaFolder
                 provaQuestaoResposta.Prova = prova;
                 provaQuestaoResposta.Questao = questao;
                 provaQuestaoResposta.Estudante = estudante;
-                provaQuestaoResposta.OpcaoSelecionada = opcaoSelecionada;
+                provaQuestaoResposta.QuestaoOpcao = opcaoSelecionada;
             }
 
             DBInstance.DB.SaveChanges();

@@ -10,6 +10,7 @@ namespace DTO.Login
         public string Password { get; set; }
         public DateTime? LastLoginDate { get; set; }
         public DateTime? CreatedLoginDate{ get; set; }
+        public ProvaTO ProvaTO { get; set; }
 
         public static explicit operator UsuarioTO(Usuario to)
         {

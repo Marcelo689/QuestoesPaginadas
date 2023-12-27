@@ -1,5 +1,6 @@
 ﻿using DTO.BancoClasses.ProvaFolder;
 using DTO.Login;
+using DTO.Login.EstudanteFolder;
 using DTO.ProvaModels;
 using System;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace DTO
         
         [JsonPropertyName("questoes")]
         public QuestaoTO[]  Questoes { get; set; }
+        public EstudanteTO Estudante { get; set; }
         public UsuarioTO Usuario { get; set; }
         //public ProfessorTO ProfessorTO { get;  set; }
         public ProvaResultado GetResultados()

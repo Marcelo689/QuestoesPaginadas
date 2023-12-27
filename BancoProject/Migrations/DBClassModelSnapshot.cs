@@ -115,6 +115,9 @@ namespace BancoProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("EstudanteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -122,6 +125,8 @@ namespace BancoProject.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EstudanteId");
 
                     b.HasIndex("ProfessorId");
 
@@ -142,24 +147,24 @@ namespace BancoProject.Migrations
                     b.Property<int?>("EstudanteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OpcaoSelecionadaId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProvaId")
                         .HasColumnType("int");
 
                     b.Property<int?>("QuestaoId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("QuestaoOpcaoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EstudanteId");
 
-                    b.HasIndex("OpcaoSelecionadaId");
-
                     b.HasIndex("ProvaId");
 
                     b.HasIndex("QuestaoId");
+
+                    b.HasIndex("QuestaoOpcaoId");
 
                     b.ToTable("ProvaQuestaoResposta");
                 });
@@ -255,9 +260,15 @@ namespace BancoProject.Migrations
 
             modelBuilder.Entity("DTO.BancoClasses.ProvaFolder.Prova", b =>
                 {
+                    b.HasOne("DTO.BancoClasses.Login.Entidades.EstudanteFolder.Estudante", "Estudante")
+                        .WithMany()
+                        .HasForeignKey("EstudanteId");
+
                     b.HasOne("DTO.BancoClasses.Login.Entidades.ProfessorFolder.Professor", "Professor")
                         .WithMany()
                         .HasForeignKey("ProfessorId");
+
+                    b.Navigation("Estudante");
 
                     b.Navigation("Professor");
                 });
@@ -268,10 +279,6 @@ namespace BancoProject.Migrations
                         .WithMany()
                         .HasForeignKey("EstudanteId");
 
-                    b.HasOne("DTO.BancoClasses.ProvaFolder.QuestaoOpcao", "OpcaoSelecionada")
-                        .WithMany()
-                        .HasForeignKey("OpcaoSelecionadaId");
-
                     b.HasOne("DTO.BancoClasses.ProvaFolder.Prova", "Prova")
                         .WithMany()
                         .HasForeignKey("ProvaId");
@@ -280,13 +287,17 @@ namespace BancoProject.Migrations
                         .WithMany()
                         .HasForeignKey("QuestaoId");
 
-                    b.Navigation("Estudante");
+                    b.HasOne("DTO.BancoClasses.ProvaFolder.QuestaoOpcao", "QuestaoOpcao")
+                        .WithMany()
+                        .HasForeignKey("QuestaoOpcaoId");
 
-                    b.Navigation("OpcaoSelecionada");
+                    b.Navigation("Estudante");
 
                     b.Navigation("Prova");
 
                     b.Navigation("Questao");
+
+                    b.Navigation("QuestaoOpcao");
                 });
 
             modelBuilder.Entity("DTO.BancoClasses.ProvaFolder.Questao", b =>

@@ -9,7 +9,7 @@ namespace DTO.BancoClasses.ProvaFolder
         public Prova Prova { get; set; }
         public Estudante Estudante { get; set; }
         public DateTime DataRespondida { get; set; }    
-        public QuestaoOpcao OpcaoSelecionada { get; set; }  
+        public QuestaoOpcao QuestaoOpcao { get; set; }  
         public Questao Questao { get; set; }   
     }
 }

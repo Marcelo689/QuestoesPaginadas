@@ -9,9 +9,9 @@ namespace Banco
     public class DBClass : DbContext
     {
 
-        public DbSet<Professor>  Professor{ get; set; }
-        public DbSet<Estudante> Estudante{ get; set; }
-        public DbSet<Usuario> Usuario{ get; set; }
+        public DbSet<Professor>  Professor { get; set; }
+        public DbSet<Estudante> Estudante { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Prova> Prova { get; set; }
         public DbSet<Questao> Questao { get; set; }
         public DbSet<QuestaoOpcao> QuestaoOpcao { get; set; }

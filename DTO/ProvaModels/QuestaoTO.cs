@@ -71,7 +71,8 @@ namespace DTO
             {
                 Id = questao.Id,
                 Name = questao.Descricao,
-                OptionDescriptions = GetQuestaoOptionsDescriptions(questao)
+                OptionDescriptions = GetQuestaoOptionsDescriptions(questao),
+                SelectedOption = (Options) questao.OpcaoSelecionada.Opcao
             };
         }
 
