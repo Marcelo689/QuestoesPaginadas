@@ -3,6 +3,7 @@ using DTO;
 using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
 using DTO.BancoClasses.ProvaFolder;
 using DTO.Login.EstudanteFolder;
+using Microsoft.EntityFrameworkCore;
 
 namespace BancoProject.ProvaFolder
 {
@@ -34,7 +35,7 @@ namespace BancoProject.ProvaFolder
             {
                 if (questoesIds.Contains(questao.Id))
                 {
-                    var algo = questaoRespondidas.Where(e => e.Questao.Id == questao.Id).ToList();
+                    var algo = questaoRespondidas.Include(e => e.QuestaoOpcao).Where(e => e.Questao.Id == questao.Id).ToList();
                     var opcao = algo.Select(e => e.QuestaoOpcao).FirstOrDefault();
                     bool opcaoExiste = opcao != null;
                     if (opcaoExiste)
