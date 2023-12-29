@@ -16,7 +16,7 @@ namespace BancoProject.ProvaFolder
 
         private static ProvaTO PreencheProvaTO(int provaId)
         {
-            Prova provaDB = DBInstance.DB.Prova.FirstOrDefault(e => e.Id == provaId);
+            Prova provaDB = DBInstance.DB.Prova.Include(e => e.Professor.Usuario).FirstOrDefault(e => e.Id == provaId);
             Estudante estudante = DBInstance.DB.Estudante.ToList().FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
             IQueryable<Questao> questoes = DBInstance.DB.Questao.Where(e => e.Prova.Id == provaId);
             List<int> questoesIds = questoes.Select(e => e.Id).ToList();
@@ -100,6 +100,14 @@ namespace BancoProject.ProvaFolder
             }
 
             return (int)questaoTO.SelectedOption;
+        }
+
+        public static List<ProvaTO> GetAllProvas()
+        {
+            IQueryable<Prova> provas = DBInstance.DB.Prova.AsQueryable();
+            List<ProvaTO> provasTO = provas.Include(e => e.Professor.Usuario).Select(prova => (ProvaTO) prova).ToList();
+
+            return provasTO;
         }
     }
 }

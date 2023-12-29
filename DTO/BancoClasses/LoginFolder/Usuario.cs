@@ -9,7 +9,6 @@ namespace DTO.BancoClasses.Login
         public string Password { get; set; }
         public DateTime? LastLoginDate { get; set; }
         public DateTime CreatedAccountDate { get; set; }
-
         public void AtualizaDataLogin()
         {
             LastLoginDate = DateTime.Now;

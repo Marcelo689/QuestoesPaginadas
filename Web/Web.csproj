@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Prova\ListaProvaProfessor.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="wwwroot\Scripts\Prova\IndexController.ts" />
   </ItemGroup>
 
@@ -28,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Prova\ListaProvaProfessor.cshtml" />
     <None Include="wwwroot\Scripts\Prova\IndexController.js" />
     <None Include="wwwroot\Scripts\Prova\IndexController.js.map" />
   </ItemGroup>

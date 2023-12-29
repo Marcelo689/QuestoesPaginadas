@@ -1,0 +1,7 @@
+﻿@using DTO.Login
+@model UsuarioTO
+
+<h1>@Model.Username</h1>
+<h3>@Model.Password</h3>
+
+@Html.ActionLink("Provas", "ListarProvas", "Prova", Model)

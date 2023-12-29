@@ -25,6 +25,7 @@ D:\QuestoesApi\Web\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConn
 D:\QuestoesApi\Web\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
 D:\QuestoesApi\Web\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
 D:\QuestoesApi\Web\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\QuestoesApi\Web\bin\Debug\net7.0\Newtonsoft.Json.dll
 D:\QuestoesApi\Web\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
 D:\QuestoesApi\Web\bin\Debug\net7.0\System.Drawing.Common.dll
 D:\QuestoesApi\Web\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
@@ -78,4 +79,3 @@ D:\QuestoesApi\Web\obj\Debug\net7.0\refint\Web.dll
 D:\QuestoesApi\Web\obj\Debug\net7.0\Web.pdb
 D:\QuestoesApi\Web\obj\Debug\net7.0\Web.genruntimeconfig.cache
 D:\QuestoesApi\Web\obj\Debug\net7.0\ref\Web.dll
-D:\QuestoesApi\Web\bin\Debug\net7.0\Newtonsoft.Json.dll

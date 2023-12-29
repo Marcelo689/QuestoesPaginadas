@@ -23,8 +23,10 @@ namespace DTO
         [JsonPropertyName("questoes")]
         public QuestaoTO[]  Questoes { get; set; }
         public EstudanteTO Estudante { get; set; }
+
+        [JsonPropertyName("professorNome")]
+        public string ProfessorNome { get; set; }  
         public UsuarioTO Usuario { get; set; }
-        //public ProfessorTO ProfessorTO { get;  set; }
         public ProvaResultado GetResultados()
         {
             return new ProvaResultado
@@ -87,6 +89,7 @@ namespace DTO
                 Id = to.Id,
                 Name = to.Name,
                 Description = to.Name,
+                ProfessorNome = to.Professor.Usuario.Username
             };
         }
     }

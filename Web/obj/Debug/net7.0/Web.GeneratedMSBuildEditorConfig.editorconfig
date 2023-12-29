@@ -26,8 +26,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/QuestoesApi/Web/Views/Prova/ListaProvaEstudante.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcTGlzdGFQcm92YUVzdHVkYW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/QuestoesApi/Web/Views/Prova/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcTWVudS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/QuestoesApi/Web/Views/Prova/Resultados.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcUmVzdWx0YWRvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/QuestoesApi/Web/Views/Shared/ListaProvas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExpc3RhUHJvdmFzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/QuestoesApi/Web/Views/Shared/_QuestaoOpcoes.cshtml]

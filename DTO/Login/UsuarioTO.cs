@@ -8,9 +8,11 @@ namespace DTO.Login
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public bool UserIsTeacher { get; set; } 
         public DateTime? LastLoginDate { get; set; }
         public DateTime? CreatedLoginDate{ get; set; }
         public ProvaTO ProvaTO { get; set; }
+        public bool IsTeacher { get; set; }
 
         public static explicit operator UsuarioTO(Usuario to)
         {

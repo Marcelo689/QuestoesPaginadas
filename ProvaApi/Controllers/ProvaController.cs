@@ -14,6 +14,12 @@ namespace ProvaApi.Controllers
             return ProvaDB.GetProvaDB(1);
         }
 
+        [HttpGet("ListProvas")]
+        public List<ProvaTO> GetListProva()
+        {
+            return ProvaDB.GetAllProvas();
+        }
+
         [HttpPost("SaveAnswers")]
         public ProvaTO SaveAnswers(ProvaTO? provaTO)
         {

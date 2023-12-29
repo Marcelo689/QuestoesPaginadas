@@ -1,5 +1,3 @@
-D:\QuestoesApi\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
-D:\QuestoesApi\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 D:\QuestoesApi\DTO\bin\Debug\DTO.dll.config
 D:\QuestoesApi\DTO\bin\Debug\DTO.dll
 D:\QuestoesApi\DTO\bin\Debug\DTO.pdb
@@ -23,6 +21,8 @@ D:\QuestoesApi\DTO\bin\Debug\System.Text.Encodings.Web.xml
 D:\QuestoesApi\DTO\bin\Debug\System.Text.Json.xml
 D:\QuestoesApi\DTO\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\QuestoesApi\DTO\bin\Debug\System.ValueTuple.xml
+D:\QuestoesApi\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+D:\QuestoesApi\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 D:\QuestoesApi\DTO\obj\Debug\DTO.csproj.CopyComplete
 D:\QuestoesApi\DTO\obj\Debug\DTO.dll
 D:\QuestoesApi\DTO\obj\Debug\DTO.pdb

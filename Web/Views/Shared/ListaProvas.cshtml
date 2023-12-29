@@ -1,0 +1,31 @@
+﻿@using DTO
+@using Web.Models
+@model ListProvaViewModel
+
+<table class="table table-bordered">
+    <tr>
+        <td>Nome</td>
+        <td>Professor</td>
+    </tr>
+    <tbody>
+        @foreach(ProvaTO prova in Model.ListProvaTO)
+        {
+            if(Model.IsTeacher)
+            {
+                <a href="">
+                    <tr>
+                        <td>@prova.Name</td>
+                        <td>@prova.ProfessorNome </td>
+                    </tr>
+                </a>
+            }
+            else
+            {
+                <tr>
+                    <td>@prova.Name</td>
+                    <td>@prova.ProfessorNome </td>
+                </tr>
+            }
+        }
+    </tbody>    
+</table>
