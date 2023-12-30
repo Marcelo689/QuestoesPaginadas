@@ -14,6 +14,19 @@ namespace ProvaApi.Controllers
             return ProvaDB.GetProvaDB(1);
         }
 
+        [HttpPost("CriarProva")]
+        public ProvaTO CriarProva(ProvaTO provaTO)
+        {
+            return ProvaDB.CriarProva(provaTO);
+        }
+
+        [HttpGet("EditarProva")]
+        public ProvaTO GetProvaById(int provaId)
+        {
+            ProvaTO provaTO = ProvaDB.GetProvaById(provaId);
+
+            return provaTO;
+        }
         [HttpGet("ListProvas")]
         public List<ProvaTO> GetListProva()
         {

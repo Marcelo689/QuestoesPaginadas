@@ -22,12 +22,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/QuestoesApi/Web/Views/Prova/CriarProva.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcQ3JpYXJQcm92YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/QuestoesApi/Web/Views/Prova/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/QuestoesApi/Web/Views/Prova/ListaProvaEstudante.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcTGlzdGFQcm92YUVzdHVkYW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/QuestoesApi/Web/Views/Prova/ListaProvaProfessor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcTGlzdGFQcm92YVByb2Zlc3Nvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/QuestoesApi/Web/Views/Prova/Menu.cshtml]

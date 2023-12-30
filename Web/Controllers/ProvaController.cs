@@ -12,6 +12,7 @@ namespace Web.Controllers
     {
         public static EstudanteTO EstudanteLogado { get; set; }
         public static HttpClient HttpClient = new HttpClient();
+        public static UsuarioTO UsuarioLogado { get; set; }
         public static ProvaTO ProvaEmProgresso { get; set; }
         public ProvaController()
         {
@@ -31,6 +32,7 @@ namespace Web.Controllers
         {
             const string getProvaURL = "https://localhost:7059/ProvaApi/GetProva";
             ProvaEmProgresso = RequestFromURLGetProvaTO(getProvaURL);
+            UsuarioLogado = usuarioTO;
             ProvaEmProgresso.Usuario = usuarioTO;
         }
 
@@ -45,10 +47,29 @@ namespace Web.Controllers
             List<ProvaTO> listProvaTO = GetListaProvaFromApi(urlListProvas);
             return listProvaTO;
         }
+        public ActionResult CriarProva()
+        {
+            return View(new ProvaTO());
+        }
+
+        public ActionResult EditarProva(int provaId)
+        {
+            string urlEditarProva = $"https://localhost:7059/ProvaApi/EditarProva/?provaId={provaId}";
+            ProvaTO provaTO = GetProvaById(urlEditarProva);
+            return View(provaTO);   
+        }
+
+        private ProvaTO GetProvaById(string urlEditarProva)
+        {
+            string jsonContent = HttpClient.GetStringAsync(urlEditarProva).Result;
+            ProvaTO provaTO = JsonSerializer.Deserialize<ProvaTO>(jsonContent);
+
+            return provaTO;
+        }
 
         public ActionResult ListarProvas()
         {
-            bool isTeacher = ProvaEmProgresso.Usuario.UserIsTeacher;
+            bool isTeacher = ProvaEmProgresso.Usuario.IsTeacher;
 
             if (isTeacher)
             {
@@ -62,7 +83,7 @@ namespace Web.Controllers
 
         public ActionResult ListaProvaProfessor()
         {
-            return ReturnViewListViewModelProva("ListProvaProfessor");
+            return ReturnViewListViewModelProva("ListaProvaProfessor");
         }
 
         private ActionResult ReturnViewListViewModelProva(string nameMethodAction)
@@ -88,12 +109,20 @@ namespace Web.Controllers
             return listProvaTO;
         }
 
+        [HttpPost]
         public ActionResult CriarProva(ProvaTO provaTO)
         {
             const string urlCriarProva = "https://localhost:7059/ProvaApi/CriarProva";
+            PreencheProvaTOComUsuario(provaTO);
             HttpClient.PostAsJsonAsync(urlCriarProva, provaTO);
-            return View();
+            return RedirectToAction("Menu", UsuarioLogado);
         }
+
+        private void PreencheProvaTOComUsuario(ProvaTO provaTO)
+        {
+            provaTO.Usuario = UsuarioLogado;
+        }
+
         private static ProvaTO? RequestFromURLGetProvaTO(string url)
         {
             var jsonString = HttpClient.GetStringAsync(url).Result;

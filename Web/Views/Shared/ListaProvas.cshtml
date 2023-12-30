@@ -1,31 +1,40 @@
 ﻿@using DTO
 @using Web.Models
 @model ListProvaViewModel
+<div class="container">
 
-<table class="table table-bordered">
-    <tr>
-        <td>Nome</td>
-        <td>Professor</td>
-    </tr>
-    <tbody>
-        @foreach(ProvaTO prova in Model.ListProvaTO)
-        {
-            if(Model.IsTeacher)
+    @if (Model.IsTeacher)
+    {
+        <div class="container">
+            @Html.ActionLink("Criar Nova Prova", "CriarProva", "Prova")
+        </div>
+    }
+
+    <table class="table table-bordered">
+        <tr>
+            <td>Nome</td>
+            <td>Professor</td>
+        </tr>
+        <tbody>
+            @foreach(ProvaTO prova in Model.ListProvaTO)
             {
-                <a href="">
+                if(Model.IsTeacher)
+                {
+                    <a href="EditarProva/@prova.Id">
+                        <tr>
+                            <td>@prova.Name</td>
+                            <td>@prova.ProfessorNome </td>
+                        </tr>
+                    </a>
+                }
+                else
+                {
                     <tr>
                         <td>@prova.Name</td>
                         <td>@prova.ProfessorNome </td>
                     </tr>
-                </a>
+                }
             }
-            else
-            {
-                <tr>
-                    <td>@prova.Name</td>
-                    <td>@prova.ProfessorNome </td>
-                </tr>
-            }
-        }
-    </tbody>    
-</table>
+        </tbody>    
+    </table>
+</div>

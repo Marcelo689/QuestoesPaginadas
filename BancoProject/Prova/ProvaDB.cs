@@ -1,6 +1,7 @@
 ﻿using BancoProject.Login;
 using DTO;
 using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
+using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
 using DTO.BancoClasses.ProvaFolder;
 using DTO.Login.EstudanteFolder;
 using Microsoft.EntityFrameworkCore;
@@ -108,6 +109,52 @@ namespace BancoProject.ProvaFolder
             List<ProvaTO> provasTO = provas.Include(e => e.Professor.Usuario).Select(prova => (ProvaTO) prova).ToList();
 
             return provasTO;
+        }
+
+        public static ProvaTO GetProvaById(int provaId)
+        {
+            Prova prova = DBInstance.DB.Prova.FirstOrDefault(e => e.Id == provaId);
+
+            return ProvaToTO(provaId, prova);
+        }
+
+        private static ProvaTO ProvaToTO(int provaId, Prova prova)
+        {
+            IQueryable<Questao> questoesDB = DBInstance.DB.Questao.Include(e => e.Prova).Where(questao => questao.Prova.Id == provaId);
+            IQueryable<QuestaoTO> questoes = questoesDB.Select(questao => (QuestaoTO) questao);
+            ProvaTO provaTO = (ProvaTO)prova;
+
+            Estudante? estudante = DBInstance.DB.Estudante.ToList().FirstOrDefault(e => e.Id == prova.Estudante.Id);
+
+            if(estudante is not null) {
+                List<int> questoesIds = questoes.Select(e => e.Id).ToList();
+                IQueryable<ProvaQuestaoResposta> questaoRespondidas = DBInstance.DB.ProvaQuestaoResposta.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
+                provaTO.Questoes = PreencherOpcoesSelecionadas(questoesDB.ToList(), questoesIds, questaoRespondidas).ToArray();
+            }
+            else
+            {
+                provaTO.Questoes = questoes.ToArray();
+            }
+            
+            return provaTO;
+        }
+
+        public static ProvaTO CriarProva(ProvaTO provaTO)
+        {
+            Estudante? estudante = DBInstance.DB.Estudante.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
+            Professor? professor = DBInstance.DB.Professor.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
+            Prova prova = new Prova
+            {
+                Estudante = estudante,
+                Professor = professor,
+                Name = provaTO.Name,
+            };
+
+            DBInstance.DB.Prova.Add(prova);
+
+            SaveChanges();
+            ProvaTO provaCriada = (ProvaTO)prova;
+            return provaCriada;
         }
     }
 }

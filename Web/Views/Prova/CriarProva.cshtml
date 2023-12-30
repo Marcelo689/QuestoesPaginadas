@@ -1,0 +1,20 @@
+﻿@using DTO
+@model ProvaTO
+
+@using (Html.BeginForm("CriarProva", "Prova", HttpMethod.Post))
+{
+    <div class="container m-3 w-50">
+        <h1>Criar Prova</h1>
+        <div class="d-flex flex-column">
+            @Html.LabelFor(e => e.Description, new { @class = "group-control m-1" })
+            @Html.EditorFor(e => e.Description, new { @class = "group-control m-1"})
+        </div>
+        <div class="d-flex flex-column">
+            @Html.LabelFor(e => e.Name, new { @class = "group-control m-1" })
+            @Html.EditorFor(e => e.Name, new { @class = "group-control m-1" })
+        </div>
+        <div class="container">
+            <button type="submit" class="btn btn-outline-success m-2 " >Criar</button>
+        </div>
+    </div>
+}

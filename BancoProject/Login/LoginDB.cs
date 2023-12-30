@@ -15,7 +15,7 @@ namespace BancoProject.Login
                 usuario.AtualizaDataLogin();   
 
             UsuarioTO usuarioTO = (UsuarioTO) usuario;
-            usuarioTO.IsTeacher = DBInstance.DB.Professor.FirstOrDefault(user => user.Usuario.Id == usuario.Id) != null;
+            usuarioTO.IsTeacher = DBInstance.DB.Professor.FirstOrDefault(professor => professor.Usuario.Id == usuario.Id) != null;
             return usuarioTO; 
         }
     }
