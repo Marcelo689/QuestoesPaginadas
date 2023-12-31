@@ -41,6 +41,7 @@ namespace Web.Controllers
             PreencheProvaEmProgresso(usuarioTO);
             return View(usuarioTO); 
         }
+
         public List<ProvaTO> GetListaProva()
         {
             const string urlListProvas = "https://localhost:7059/ProvaApi/ListProvas";
@@ -99,7 +100,7 @@ namespace Web.Controllers
 
         public ActionResult ListaProvaEstudante()
         {
-            return ReturnViewListViewModelProva("ListProvaProfessor");
+            return ReturnViewListViewModelProva("ListaProvaEstudante");
         }
         private List<ProvaTO> GetListaProvaFromApi(string urlListProvas)
         {

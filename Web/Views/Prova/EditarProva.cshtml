@@ -1,0 +1,34 @@
+﻿@using DTO
+@model ProvaTO
+
+<style>
+    .text-box{
+        width:500px;
+        border:groove;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    label{
+        font-weight:bolder;
+    }
+
+    li{
+        margin:20px;
+        margin-left:0px;
+    }
+</style>
+
+<div class="container m-2">
+
+    @using (Html.BeginForm(actionName: "SaveAnswers", controllerName: "Prova", FormMethod.Post))
+    {
+        @Html.HiddenFor(e => e.Id)
+
+        <div class="d-flex flex-column">
+            @Html.LabelFor(e => e.Name, new { @class = "group-control" })
+            @Html.EditorFor(e => e.Name, new { @class = "group-control" })
+        </div>
+    
+        @Html.Partial("RenderQuestoes", Model.Questoes.ToList())
+    }
+</div>

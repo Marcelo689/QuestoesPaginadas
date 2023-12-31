@@ -1,5 +1,4 @@
 ﻿using BancoProject.Login;
-using DTO.BancoClasses.Login;
 using DTO.Login;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,10 +17,12 @@ namespace Web.Controllers
 
             bool usuarioExiste = usuarioTO != null;
             if (usuarioExiste) { 
-                //return RedirectToAction("Index", "Prova", usuarioTo);
                 return RedirectToAction("Menu", "Prova", usuarioTO);
             }
             return View(usuarioTO);
         }
+
+
+
     }
 }

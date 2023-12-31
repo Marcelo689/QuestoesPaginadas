@@ -20,17 +20,23 @@
             {
                 if(Model.IsTeacher)
                 {
-                    <a href="EditarProva/@prova.Id">
-                        <tr>
-                            <td>@prova.Name</td>
-                            <td>@prova.ProfessorNome </td>
-                        </tr>
-                    </a>
+                    <tr>
+                        <td>
+                            <a href="EditarProva/?provaId=@prova.Id">
+                            @prova.Name
+                            </a>
+                        </td>
+                        <td>@prova.ProfessorNome </td>
+                    </tr>
                 }
                 else
                 {
                     <tr>
-                        <td>@prova.Name</td>
+                        <td>
+                            <a href="EditarProva/@prova.Id">
+                                @prova.Name
+                            </a>
+                        </td>
                         <td>@prova.ProfessorNome </td>
                     </tr>
                 }

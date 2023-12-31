@@ -5,7 +5,6 @@
     .container-opcoes {
         margin:30px;
         width:fit-content;
-        back
     }
 
     #container-questoes{
@@ -20,40 +19,7 @@
 
 <h1>@Model.Usuario.Username</h1>
 
-@using (Html.BeginForm(actionName: "SaveAnswers", controllerName:"Prova" , FormMethod.Post))
+@using (Html.BeginForm(actionName: "SaveAnswers", controllerName: "Prova", FormMethod.Post))
 {
-
-    <div id="container-questoes" class="container">
-        @foreach(QuestaoTO questao in Model.Questoes){
-            <div class="container-questao">
-                <li>@questao.Name</li>
-                @Html.Partial("_QuestaoOpcoes", questao)
-            </div>
-        }
-        <div>
-            <div class="d-flex justify-content-center ">
-                <label class="m-2 font-monospace card-title" >Pagina</label>
-                <select class="m-2 form-select-sm" id="numeroQuestaoPorPagina">
-                    <option value="0">1</option>
-                    <option value="1">2</option>
-                    <option value="2">4</option>
-                    <option value="3">6</option>
-                    <option value="4">8</option>
-                    <option value="5">10</option>
-                </select>
-                <input class="m-2" style="width:60px" type="number" disabled id="pagina-atual" value="1" />
-            </div>
-            <div class="container d-flex justify-content-center">
-                <button type="button" class="btn btn-info m-1" id="btn-prev"> Anterior </button> 
-                <button type="button" class="btn btn-info m-1" id="btn-next"> Próxima </button>
-            </div>
-        </div>
-        <div class="container btn-group-lg">
-            <button class="btn btn-success" type="submit">
-                Enviar Respostas
-            </button>
-        </div>
-    </div>
+    @Html.Partial("RenderQuestoes", Model.Questoes)
 }
-
-<script src="~/Scripts/Prova/IndexController.js"></script>

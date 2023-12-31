@@ -89,7 +89,7 @@ namespace DTO
                 Id = to.Id,
                 Name = to.Name,
                 Description = to.Name,
-                ProfessorNome = to.Professor.Usuario.Username
+                ProfessorNome = to.Professor != null ? to.Professor.Usuario.Username : null,
             };
         }
     }

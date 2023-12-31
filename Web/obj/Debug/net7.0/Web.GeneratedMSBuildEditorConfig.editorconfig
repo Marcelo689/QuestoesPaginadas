@@ -26,6 +26,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcQ3JpYXJQcm92YS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/QuestoesApi/Web/Views/Prova/EditarProva.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcRWRpdGFyUHJvdmEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/QuestoesApi/Web/Views/Prova/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -50,8 +54,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExpc3RhUHJvdmFzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/QuestoesApi/Web/Views/Shared/RenderEditableQuestoes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFJlbmRlckVkaXRhYmxlUXVlc3RvZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/QuestoesApi/Web/Views/Shared/RenderQuestoes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFJlbmRlclF1ZXN0b2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/QuestoesApi/Web/Views/Shared/_QuestaoOpcoes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9RdWVzdGFvT3Bjb2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/QuestoesApi/Web/Views/Shared/_QuestaoOpcoesEditavel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9RdWVzdGFvT3Bjb2VzRWRpdGF2ZWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/QuestoesApi/Web/Views/Shared/_ValidationScriptsPartial.cshtml]
