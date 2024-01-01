@@ -10,6 +10,12 @@
 
     label{
         font-weight:bolder;
+        margin:10px;
+    }
+
+    textarea{
+       padding:4px;
+       width:800px;
     }
 
     li{
@@ -29,6 +35,6 @@
             @Html.EditorFor(e => e.Name, new { @class = "group-control" })
         </div>
     
-        @Html.Partial("RenderQuestoes", Model.Questoes.ToList())
+        @Html.Partial("RenderEditableQuestoes", Model.Questoes.ToList())
     }
 </div>

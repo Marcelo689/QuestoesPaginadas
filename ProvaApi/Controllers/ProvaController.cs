@@ -1,5 +1,6 @@
 ﻿using BancoProject.ProvaFolder;
 using DTO;
+using DTO.BancoClasses.ProvaFolder;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProvaApi.Controllers
@@ -36,11 +37,41 @@ namespace ProvaApi.Controllers
         [HttpPost("SaveAnswers")]
         public ProvaTO SaveAnswers(ProvaTO? provaTO)
         {
-            SalvaQuestoesPreenchidas(provaTO);
+            SalvarQuestoesPreenchidas(provaTO);
             return provaTO;
         }
 
-        private void SalvaQuestoesPreenchidas(ProvaTO provaTO)
+        [HttpPost("EditAnswers")]
+        public ProvaTO EditAnswers(ProvaTO? provaTO)
+        {
+            EditarQuestoesPreenchidas(provaTO);
+            return provaTO;
+        }
+
+        private void EditarQuestoesPreenchidas(ProvaTO? provaTO)
+        {
+            try
+            {
+                EditarQuestoesPreenchidasBanco(provaTO);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void EditarQuestoesPreenchidasBanco(ProvaTO? provaTO)
+        {
+            List<QuestaoTO> questoesTO = provaTO.Questoes.ToList();
+
+            foreach (QuestaoTO questaoTO in questoesTO) 
+            {
+                Questao questao = ProvaDB.UpdateQuestaoWithTO\(questaoTO.Id);
+
+            }
+        }
+
+        private void SalvarQuestoesPreenchidas(ProvaTO provaTO)
         {
             try
             {

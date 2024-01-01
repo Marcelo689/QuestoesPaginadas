@@ -156,5 +156,35 @@ namespace BancoProject.ProvaFolder
             ProvaTO provaCriada = (ProvaTO)prova;
             return provaCriada;
         }
+
+        public static void UpdateQuestaoWithTO(QuestaoTO questaoTO)
+        {
+            Questao questao = DBInstance.DB.Questao.FirstOrDefault(quest => quest.Id == questaoTO.Id);
+
+            PreencherDescricoesQuestaoDB(questaoTO, questao);
+            questao.Descricao = questaoTO.Name;
+            PreencherOpcaoSelecionada(questaoTO, questao);
+
+            DBInstance.DB.SaveChanges();
+        }
+
+        private static void PreencherOpcaoSelecionada(QuestaoTO questaoTO, Questao questao)
+        {
+            QuestaoOpcao questaoOpcao = DBInstance.DB.QuestaoOpcao.FirstOrDefault(e => (int)e.Opcao == (int)questaoTO.SelectedOption);
+
+            if (questaoOpcao is not null)
+            {
+                questao.OpcaoSelecionada = questaoOpcao;
+            }
+        }
+
+        private static void PreencherDescricoesQuestaoDB(QuestaoTO questaoTO, Questao questao)
+        {
+            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.A];
+            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.B];
+            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.C];
+            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.D];
+            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.E];
+        }
     }
 }

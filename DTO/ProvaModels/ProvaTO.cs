@@ -47,14 +47,24 @@ namespace DTO
             {
                 var campo = property[i];
                 string nome = campo.Name;
+                if (nome.Contains("descricao"))
+                {
+                    continue;
+                }
+
+                var campoDescricao = property[i+1];
+                var campoDescricaoNome = campoDescricao.Name;
+
                 var questaoId = GetGetIdFromQuestionName(nome);
-                int indiceOpcaoPreenchida = (int)campo.GetValue(provaViewModel);
+
+                int indiceOpcaoPreenchida = (int) campo.GetValue(provaViewModel);
+                string questaoDescricaoPreenchida = campoDescricao.GetValue(provaViewModel).ToString();
 
                 QuestaoTO questaoSelecinada = this.Questoes.FirstOrDefault(questao => questao.Id == questaoId);
 
                 if (questaoFoiPreenchida(questaoSelecinada, indiceOpcaoPreenchida))
                 {
-                    PreencherOpcaoDaQuestao(indiceOpcaoPreenchida, questaoSelecinada);
+                    PreencherOpcaoDaQuestao(indiceOpcaoPreenchida, questaoSelecinada, questaoDescricaoPreenchida);
                 }
             }
         }
@@ -65,9 +75,10 @@ namespace DTO
             return questaoFoiEncontrada && indiceOpcaoPreenchida != 0;
         }
 
-        private static void PreencherOpcaoDaQuestao(object opcaoPreenchida, QuestaoTO questaoSelecinada)
+        private static void PreencherOpcaoDaQuestao(int indiceOpcaoPreenchida, QuestaoTO questaoSelecinada, string questaoDescricaoPreenchida)
         {
-            questaoSelecinada.SelectedOption = (Options)opcaoPreenchida;
+            questaoSelecinada.OptionDescriptions[(Options)indiceOpcaoPreenchida] = questaoDescricaoPreenchida;
+            questaoSelecinada.SelectedOption = (Options) indiceOpcaoPreenchida;
 
         }
         private static int GetGetIdFromQuestionName(string nome)
