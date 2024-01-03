@@ -15,6 +15,10 @@
 
 <div class="container-opcoes d-flex flex-column w-75">
 
+    @{
+        var contador = 1;
+    }
+
     @foreach (KeyValuePair<Options, string> opcao in Model.OptionDescriptions)
     {
         bool opcaoJaMarcada = Model.SelectedOption == opcao.Key && opcao.Key != 0;
@@ -23,18 +27,19 @@
 
             @if (opcaoJaMarcada)
             {
-                <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao" value="@opcao.Key.ToInt()" checked />
+                <input type="radio" name="opcao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador" value="@opcao.Key.ToInt()" checked />
             }
             else
             {
-                <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao" value="@opcao.Key.ToInt()" />
+                <input type="radio" name="opcao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador" value="@opcao.Key.ToInt()" />
             }
 
-            <label for="@index.ToString()_@Model.Id.ToString()opcao" class="label-opcao">
-                <textarea name="opcao_descricao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao" >@opcao.Value</textarea>
+            <label for="@index.ToString()_@Model.Id.ToString()opcao_@contador" class="label-opcao">
+                <textarea name="opcao_descricao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador">@opcao.Value</textarea>
             </label>
 
         </div>
+        contador++;
         index++;
     }
 </div>

@@ -163,14 +163,16 @@ namespace BancoProject.ProvaFolder
 
             PreencherDescricoesQuestaoDB(questaoTO, questao);
             questao.Descricao = questaoTO.Name;
-            PreencherOpcaoSelecionada(questaoTO, questao);
 
+            DBInstance.DB.Questao.Update(questao);
             DBInstance.DB.SaveChanges();
         }
 
         private static void PreencherOpcaoSelecionada(QuestaoTO questaoTO, Questao questao)
         {
-            QuestaoOpcao questaoOpcao = DBInstance.DB.QuestaoOpcao.FirstOrDefault(e => (int)e.Opcao == (int)questaoTO.SelectedOption);
+            int opcaoSelecionada = ((int)questaoTO.SelectedOption);
+
+            QuestaoOpcao questaoOpcao = DBInstance.DB.QuestaoOpcao.FirstOrDefault(e => ((int) e.Opcao) == opcaoSelecionada);
 
             if (questaoOpcao is not null)
             {
@@ -181,10 +183,10 @@ namespace BancoProject.ProvaFolder
         private static void PreencherDescricoesQuestaoDB(QuestaoTO questaoTO, Questao questao)
         {
             questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.A];
-            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.B];
-            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.C];
-            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.D];
-            questao.DescricaoOpcao1 = questaoTO.OptionDescriptions[Options.E];
+            questao.DescricaoOpcao2 = questaoTO.OptionDescriptions[Options.B];
+            questao.DescricaoOpcao3 = questaoTO.OptionDescriptions[Options.C];
+            questao.DescricaoOpcao4 = questaoTO.OptionDescriptions[Options.D];
+            questao.DescricaoOpcao5 = questaoTO.OptionDescriptions[Options.E];
         }
     }
 }

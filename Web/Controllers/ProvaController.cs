@@ -60,6 +60,20 @@ namespace Web.Controllers
             return View(provaTO);   
         }
 
+        [HttpPost]
+        public ActionResult AtualizarProva(ProvaOpcoesMarcadasViewModel provaOpcoes)
+        {
+            AtualizarProvaOpcoes(provaOpcoes);
+            return RedirectToAction("Menu", UsuarioLogado);
+        }
+
+        private void AtualizarProvaOpcoes(ProvaOpcoesMarcadasViewModel provaOpcoes)
+        {
+            ProvaEmProgresso.PreencherRespostas(provaOpcoes, true);
+            const string urlEditarProva = "https://localhost:7059/ProvaApi/EditAnswers";
+            HttpClient.PostAsJsonAsync(urlEditarProva, ProvaEmProgresso);
+        }
+
         private ProvaTO GetProvaById(string urlEditarProva)
         {
             string jsonContent = HttpClient.GetStringAsync(urlEditarProva).Result;

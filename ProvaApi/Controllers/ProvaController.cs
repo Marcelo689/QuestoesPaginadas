@@ -1,6 +1,6 @@
-﻿using BancoProject.ProvaFolder;
+﻿using BancoProject.Login;
+using BancoProject.ProvaFolder;
 using DTO;
-using DTO.BancoClasses.ProvaFolder;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProvaApi.Controllers
@@ -53,6 +53,7 @@ namespace ProvaApi.Controllers
             try
             {
                 EditarQuestoesPreenchidasBanco(provaTO);
+                DBInstance.DB.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -66,8 +67,7 @@ namespace ProvaApi.Controllers
 
             foreach (QuestaoTO questaoTO in questoesTO) 
             {
-                Questao questao = ProvaDB.UpdateQuestaoWithTO\(questaoTO.Id);
-
+               ProvaDB.UpdateQuestaoWithTO(questaoTO);
             }
         }
 
