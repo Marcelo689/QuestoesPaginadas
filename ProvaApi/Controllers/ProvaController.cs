@@ -53,7 +53,6 @@ namespace ProvaApi.Controllers
             try
             {
                 EditarQuestoesPreenchidasBanco(provaTO);
-                DBInstance.DB.SaveChanges();
             }
             catch (Exception ex)
             {

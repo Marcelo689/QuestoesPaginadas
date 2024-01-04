@@ -10,7 +10,7 @@ namespace BancoProject.ProvaFolder
 {
     public static class ProvaDB
     {
-        public static ProvaTO GetProvaDB(int id) { 
+        public static ProvaTO GetProvaDB(int id) {
             ProvaTO provaTO = PreencheProvaTO(id);
             return provaTO;
         }
@@ -25,8 +25,10 @@ namespace BancoProject.ProvaFolder
             var listaTO = PreencherOpcoesSelecionadas(questoes.ToList(), questoesIds, questaoRespondidas);
 
             var provaTO = (ProvaTO) provaDB;
+
             provaTO.Questoes = listaTO.ToArray();
             provaTO.Estudante = (EstudanteTO) estudante;
+
             return provaTO;
         }
 
@@ -162,9 +164,6 @@ namespace BancoProject.ProvaFolder
             Questao questao = DBInstance.DB.Questao.FirstOrDefault(quest => quest.Id == questaoTO.Id);
             PreencherDescricoesQuestaoDB(questaoTO, questao);
             questao.Descricao = questaoTO.Name;
-
-            DBInstance.DB.Questao.Update(questao);
-            DBInstance.DB.SaveChanges();
         }
 
         private static void PreencherOpcaoSelecionada(QuestaoTO questaoTO, Questao questao)
