@@ -11,6 +11,7 @@ namespace Web.Controllers
     public class ProvaController : Controller
     {
         public static EstudanteTO EstudanteLogado { get; set; }
+
         public static HttpClient HttpClient = new HttpClient();
         public static UsuarioTO UsuarioLogado { get; set; }
         public static ProvaTO ProvaEmProgresso { get; set; }

@@ -1,9 +1,9 @@
-﻿using BancoProject.Login;
-using DTO;
+﻿using DTO;
+using DTO.Login.EstudanteFolder;
 using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
 using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
 using DTO.BancoClasses.ProvaFolder;
-using DTO.Login.EstudanteFolder;
+using BancoProject.Login;
 using Microsoft.EntityFrameworkCore;
 
 namespace BancoProject.ProvaFolder
@@ -17,8 +17,8 @@ namespace BancoProject.ProvaFolder
 
         private static ProvaTO PreencheProvaTO(int provaId)
         {
-            Prova provaDB = DBInstance.DB.Prova.Include(e => e.Professor.Usuario).FirstOrDefault(e => e.Id == provaId);
-            Estudante estudante = DBInstance.DB.Estudante.ToList().FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
+            Prova provaDB = DBInstance.DB.Prova.Include(e => e.Professor.Usuario).Include(e => e.Estudante).FirstOrDefault(e => e.Id == provaId);
+            Estudante estudante = DBInstance.DB.Estudante.FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
             IQueryable<Questao> questoes = DBInstance.DB.Questao.Where(e => e.Prova.Id == provaId);
             List<int> questoesIds = questoes.Select(e => e.Id).ToList();
             IQueryable<ProvaQuestaoResposta> questaoRespondidas = DBInstance.DB.ProvaQuestaoResposta.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
@@ -157,10 +157,9 @@ namespace BancoProject.ProvaFolder
             return provaCriada;
         }
 
-        public static void UpdateQuestaoWithTO(QuestaoTO questaoTO)
+        public static void UpdateQuestaoFromTO(QuestaoTO questaoTO)
         {
             Questao questao = DBInstance.DB.Questao.FirstOrDefault(quest => quest.Id == questaoTO.Id);
-
             PreencherDescricoesQuestaoDB(questaoTO, questao);
             questao.Descricao = questaoTO.Name;
 
@@ -171,7 +170,6 @@ namespace BancoProject.ProvaFolder
         private static void PreencherOpcaoSelecionada(QuestaoTO questaoTO, Questao questao)
         {
             int opcaoSelecionada = ((int)questaoTO.SelectedOption);
-
             QuestaoOpcao questaoOpcao = DBInstance.DB.QuestaoOpcao.FirstOrDefault(e => ((int) e.Opcao) == opcaoSelecionada);
 
             if (questaoOpcao is not null)

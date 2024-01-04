@@ -77,9 +77,6 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_descricao_4_5")]
         public string opcao_descricao_4_5 { get; set; }
 
-        [JsonPropertyName("opcao_descricao_3")]
-        public string opcao_descricao_3 { get; set; }
-
         [JsonPropertyName("opcao_5")]
         public int opcao_5 { get; set; }
 
@@ -187,6 +184,7 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_descricao_10_5")]
         public string opcao_descricao_10_5 { get; set; }
+
         [JsonPropertyName("opcao_11")]
         public int opcao_11 { get; set; }
 

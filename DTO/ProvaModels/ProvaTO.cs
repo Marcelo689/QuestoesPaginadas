@@ -43,14 +43,11 @@ namespace DTO
         }
         private void PreencherRespostas(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] property, int quantidadeQuestoes, bool isEditar = false)
         {
-            for (int i = 0; i < quantidadeQuestoes; i++)
+            int numeroOpcoesPorQuestao = 5;
+            for (int i = 0; i < quantidadeQuestoes * numeroOpcoesPorQuestao; i+= 6)
             {
                 var campo = property[i];
                 string nome = campo.Name;
-                if (nome.Contains("descricao"))
-                {
-                    continue;
-                }
 
                 var questaoId = GetGetIdFromQuestionName(nome);
 
@@ -70,13 +67,11 @@ namespace DTO
 
         private void AtualizaDescricoesOpcoes(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] propertyArray, int indiceQuestao, QuestaoTO questaoSelecinada)
         {
-            int indiceInicial = indiceQuestao * 5;
-            indiceInicial += 1;
-            string campoDescricaoNome1 = propertyArray[indiceInicial].GetValue(provaViewModel).ToString();
-            string campoDescricaoNome2 = propertyArray[ indiceInicial + 1].GetValue(provaViewModel).ToString();
-            string campoDescricaoNome3 = propertyArray[indiceInicial + 2].GetValue(provaViewModel).ToString();
-            string campoDescricaoNome4 = propertyArray[indiceInicial + 3].GetValue(provaViewModel).ToString();
-            string campoDescricaoNome5 = propertyArray[indiceInicial + 4].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome1 = propertyArray[indiceQuestao + 1].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome2 = propertyArray[indiceQuestao + 2].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome3 = propertyArray[indiceQuestao + 3].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome4 = propertyArray[indiceQuestao + 4].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome5 = propertyArray[indiceQuestao + 5].GetValue(provaViewModel).ToString();
 
             questaoSelecinada.OptionDescriptions[Options.A] = campoDescricaoNome1;
             questaoSelecinada.OptionDescriptions[Options.B] = campoDescricaoNome2;

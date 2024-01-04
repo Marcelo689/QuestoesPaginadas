@@ -27,11 +27,11 @@
 
             @if (opcaoJaMarcada)
             {
-                <input type="radio" name="opcao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador" value="@opcao.Key.ToInt()" checked />
+                <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao_@contador" value="@opcao.Key.ToInt()" checked />
             }
             else
             {
-                <input type="radio" name="opcao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador" value="@opcao.Key.ToInt()" />
+                <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao_@contador" value="@opcao.Key.ToInt()" />
             }
 
             <label for="@index.ToString()_@Model.Id.ToString()opcao_@contador" class="label-opcao">
