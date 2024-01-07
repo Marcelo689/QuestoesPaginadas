@@ -1,5 +1,4 @@
-﻿using BancoProject.Login;
-using BancoProject.ProvaFolder;
+﻿using BancoProject.ProvaFolder;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +9,9 @@ namespace ProvaApi.Controllers
     public class ProvaController : ControllerBase
     {
         [HttpGet("GetProva")]
-        public ProvaTO GetProvaDB()
+        public ProvaTO GetProvaDB(int provaId = 1)
         {
-            return ProvaDB.GetProvaDB(1);
+            return ProvaDB.GetProvaDB(provaId);
         }
 
         [HttpPost("CriarProva")]
@@ -25,7 +24,6 @@ namespace ProvaApi.Controllers
         public ProvaTO GetProvaById(int provaId)
         {
             ProvaTO provaTO = ProvaDB.GetProvaById(provaId);
-
             return provaTO;
         }
         [HttpGet("ListProvas")]
@@ -53,6 +51,7 @@ namespace ProvaApi.Controllers
             try
             {
                 EditarQuestoesPreenchidasBanco(provaTO);
+                ProvaDB.SaveChanges();  
             }
             catch (Exception ex)
             {

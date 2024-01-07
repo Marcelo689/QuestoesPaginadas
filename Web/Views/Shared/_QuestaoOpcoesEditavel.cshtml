@@ -25,15 +25,6 @@
 
         <div class="w-75 d-flex justify-content-between text-lg-start">
 
-            @if (opcaoJaMarcada)
-            {
-                <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao_@contador" value="@opcao.Key.ToInt()" checked />
-            }
-            else
-            {
-                <input type="radio" name="opcao_@Model.Id.ToString()" id="@index.ToString()_@Model.Id.ToString()opcao_@contador" value="@opcao.Key.ToInt()" />
-            }
-
             <label for="@index.ToString()_@Model.Id.ToString()opcao_@contador" class="label-opcao">
                 <textarea name="opcao_descricao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador">@opcao.Value</textarea>
             </label>

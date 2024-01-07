@@ -31,6 +31,7 @@ namespace DTO
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        public bool IsTeacher { get; set; } 
 
         [JsonPropertyName("selectedOption")]
         public Options? SelectedOption { get; set; } = null;

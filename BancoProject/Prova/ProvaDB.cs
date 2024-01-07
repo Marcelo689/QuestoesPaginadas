@@ -10,30 +10,36 @@ namespace BancoProject.ProvaFolder
 {
     public static class ProvaDB
     {
+        public static readonly DbSet<Prova> ProvaRepository = DBInstance.DB.Set<Prova>();
+        public static readonly DbSet<Estudante> EstudanteRepository = DBInstance.DB.Set<Estudante>();
+        public static readonly DbSet<Professor> ProfessorRepository = DBInstance.DB.Set<Professor>();
+        public static readonly DbSet<Questao> QuestaoRepository = DBInstance.DB.Set<Questao>();
+        public static readonly DbSet<QuestaoOpcao> QuestaoOpcaoRepository = DBInstance.DB.Set<QuestaoOpcao>();
+        public static readonly DbSet<ProvaQuestaoResposta> ProvaQuestaoRespostaRepository = DBInstance.DB.Set<ProvaQuestaoResposta>();
         public static ProvaTO GetProvaDB(int id) {
-            ProvaTO provaTO = PreencheProvaTO(id);
+            ProvaTO provaTO = PreencheProvaTO(id).Result;
             return provaTO;
         }
 
-        private static ProvaTO PreencheProvaTO(int provaId)
+        public async static Task<ProvaTO> PreencheProvaTO(int provaId)
         {
-            Prova provaDB = DBInstance.DB.Prova.Include(e => e.Professor.Usuario).Include(e => e.Estudante).FirstOrDefault(e => e.Id == provaId);
-            Estudante estudante = DBInstance.DB.Estudante.FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
+            Prova? provaDB = await ProvaRepository.Include(e => e.Professor.Usuario).Include(e => e.Estudante).FirstOrDefaultAsync(e => e.Id == provaId);
+            Estudante? estudante = EstudanteRepository.FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
+
             IQueryable<Questao> questoes = DBInstance.DB.Questao.Where(e => e.Prova.Id == provaId);
-            List<int> questoesIds = questoes.Select(e => e.Id).ToList();
             IQueryable<ProvaQuestaoResposta> questaoRespondidas = DBInstance.DB.ProvaQuestaoResposta.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
-            var listaTO = PreencherOpcoesSelecionadas(questoes.ToList(), questoesIds, questaoRespondidas);
-
+            var listaTO = PreencherOpcoesSelecionadas(questoes.ToList(), questaoRespondidas);
+            
             var provaTO = (ProvaTO) provaDB;
-
             provaTO.Questoes = listaTO.ToArray();
             provaTO.Estudante = (EstudanteTO) estudante;
 
             return provaTO;
         }
 
-        private static List<QuestaoTO> PreencherOpcoesSelecionadas(List<Questao> questoes, List<int> questoesIds, IQueryable<ProvaQuestaoResposta> questaoRespondidas)
+        private static List<QuestaoTO> PreencherOpcoesSelecionadas(List<Questao> questoes, IQueryable<ProvaQuestaoResposta> questaoRespondidas)
         {
+            List<int> questoesIds = questoes.Select(e => e.Id).ToList();
             foreach (var questao in questoes)
             {
                 if (questoesIds.Contains(questao.Id))
@@ -43,11 +49,11 @@ namespace BancoProject.ProvaFolder
                     bool opcaoExiste = opcao != null;
                     if (opcaoExiste)
                     {
-                        questao.OpcaoSelecionada = DBInstance.DB.QuestaoOpcao.FirstOrDefault( e => e.Opcao == opcao.Opcao);// error 
+                        questao.OpcaoSelecionada = QuestaoOpcaoRepository.FirstOrDefault( e => e.Opcao == opcao.Opcao);// error 
                     }
                     else
                     {
-                        questao.OpcaoSelecionada = DBInstance.DB.QuestaoOpcao.FirstOrDefault(e => e.Id == 1);
+                        questao.OpcaoSelecionada = QuestaoOpcaoRepository.FirstOrDefault(e => e.Id == 1);
                     }
                 }
             }
@@ -62,12 +68,12 @@ namespace BancoProject.ProvaFolder
 
         public static void SalvarQuestoes(ProvaTO provaTO, QuestaoTO questaoTO)
         {
-            Questao questao = DBInstance.DB.Questao.FirstOrDefault(q => q.Id == questaoTO.Id);
+            Questao questao = QuestaoRepository.FirstOrDefault(q => q.Id == questaoTO.Id);
             var num1 = GetSelectedOption(questaoTO);
-            QuestaoOpcao opcaoSelecionada = DBInstance.DB.QuestaoOpcao.FirstOrDefault(qo => ((int)qo.Opcao) == num1);
+            QuestaoOpcao opcaoSelecionada = QuestaoOpcaoRepository.FirstOrDefault(qo => ((int)qo.Opcao) == num1);
 
-            Prova prova = DBInstance.DB.Prova.FirstOrDefault(e => e.Id == provaTO.Id);
-            Estudante estudante = DBInstance.DB.Estudante.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
+            Prova prova = ProvaRepository.FirstOrDefault(e => e.Id == provaTO.Id);
+            Estudante estudante = EstudanteRepository.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
 
             ProvaQuestaoResposta? provaQuestaoResposta = DBInstance.DB.ProvaQuestaoResposta.FirstOrDefault(e => e.Questao.Id == questaoTO.Id && e.Prova.Id == provaTO.Id);
 
@@ -107,7 +113,7 @@ namespace BancoProject.ProvaFolder
 
         public static List<ProvaTO> GetAllProvas()
         {
-            IQueryable<Prova> provas = DBInstance.DB.Prova.AsQueryable();
+            IQueryable<Prova> provas = ProvaRepository.AsQueryable();
             List<ProvaTO> provasTO = provas.Include(e => e.Professor.Usuario).Select(prova => (ProvaTO) prova).ToList();
 
             return provasTO;
@@ -115,23 +121,23 @@ namespace BancoProject.ProvaFolder
 
         public static ProvaTO GetProvaById(int provaId)
         {
-            Prova prova = DBInstance.DB.Prova.FirstOrDefault(e => e.Id == provaId);
-
-            return ProvaToTO(provaId, prova);
+            Prova prova = ProvaRepository.FirstOrDefault(e => e.Id == provaId);
+            ProvaTO provaTO = ProvaToTO(provaId, prova);
+            prova = null;
+            return provaTO;
         }
 
         private static ProvaTO ProvaToTO(int provaId, Prova prova)
         {
-            IQueryable<Questao> questoesDB = DBInstance.DB.Questao.Include(e => e.Prova).Where(questao => questao.Prova.Id == provaId);
+            IQueryable<Questao> questoesDB = QuestaoRepository.Include(e => e.Prova).Where(questao => questao.Prova.Id == provaId);
             IQueryable<QuestaoTO> questoes = questoesDB.Select(questao => (QuestaoTO) questao);
             ProvaTO provaTO = (ProvaTO)prova;
 
-            Estudante? estudante = DBInstance.DB.Estudante.ToList().FirstOrDefault(e => e.Id == prova.Estudante.Id);
+            Estudante? estudante = EstudanteRepository.ToList().FirstOrDefault(e => e.Id == prova.Estudante.Id);
 
             if(estudante is not null) {
-                List<int> questoesIds = questoes.Select(e => e.Id).ToList();
-                IQueryable<ProvaQuestaoResposta> questaoRespondidas = DBInstance.DB.ProvaQuestaoResposta.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
-                provaTO.Questoes = PreencherOpcoesSelecionadas(questoesDB.ToList(), questoesIds, questaoRespondidas).ToArray();
+                IQueryable<ProvaQuestaoResposta> questaoRespondidas = ProvaQuestaoRespostaRepository.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
+                provaTO.Questoes = PreencherOpcoesSelecionadas(questoesDB.ToList(), questaoRespondidas).ToArray();
             }
             else
             {
@@ -143,8 +149,8 @@ namespace BancoProject.ProvaFolder
 
         public static ProvaTO CriarProva(ProvaTO provaTO)
         {
-            Estudante? estudante = DBInstance.DB.Estudante.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
-            Professor? professor = DBInstance.DB.Professor.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
+            Estudante? estudante = EstudanteRepository.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
+            Professor? professor = ProfessorRepository.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
             Prova prova = new Prova
             {
                 Estudante = estudante,
@@ -161,7 +167,7 @@ namespace BancoProject.ProvaFolder
 
         public static void UpdateQuestaoFromTO(QuestaoTO questaoTO)
         {
-            Questao questao = DBInstance.DB.Questao.FirstOrDefault(quest => quest.Id == questaoTO.Id);
+            Questao questao = QuestaoRepository.FirstOrDefault(quest => quest.Id == questaoTO.Id);
             PreencherDescricoesQuestaoDB(questaoTO, questao);
             questao.Descricao = questaoTO.Name;
         }
@@ -169,7 +175,7 @@ namespace BancoProject.ProvaFolder
         private static void PreencherOpcaoSelecionada(QuestaoTO questaoTO, Questao questao)
         {
             int opcaoSelecionada = ((int)questaoTO.SelectedOption);
-            QuestaoOpcao questaoOpcao = DBInstance.DB.QuestaoOpcao.FirstOrDefault(e => ((int) e.Opcao) == opcaoSelecionada);
+            QuestaoOpcao questaoOpcao = QuestaoOpcaoRepository.FirstOrDefault(e => ((int) e.Opcao) == opcaoSelecionada);
 
             if (questaoOpcao is not null)
             {

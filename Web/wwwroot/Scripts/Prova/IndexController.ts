@@ -4,6 +4,112 @@
     ]; 
 }
 
+class QuestaoClass {
+    public Id: number;
+    public Descricao: string;
+    public QuestaoDescricao1: string;
+    public QuestaoDescricao2: string;
+    public QuestaoDescricao3: string;
+    public QuestaoDescricao4: string;
+    public QuestaoDescricao5: string;
+}
+class EditarQuestao {
+
+    public pegarQuestaoId() : number {
+        var questaoOpcaoForName = $(".container-questao").last().find("label:first").attr("for");
+        var questaoId :number = Number(questaoOpcaoForName.split("_")[2]);
+
+        return questaoId;
+    }
+
+    public pegarProximaQuestaoId(): number {
+        return this.pegarQuestaoId() + 1;
+    }
+
+    public removerIdDoNameTextArea(nameDefaultTextArea: string) {
+        var indiceAntesDoId = nameDefaultTextArea.lastIndexOf("_");
+
+        return nameDefaultTextArea.substr(0, indiceAntesDoId);
+    }
+
+    public gerarEsqueletoProximaQuestao(questaoClass: QuestaoClass): JQuery {
+
+        var IdDessaQuestao = this.pegarProximaQuestaoId();
+        var jqueryEsqueleto = $(`
+                                <div class="container-questao" style="display: none;">
+                                <li>Quantos lados possui o triangulo</li>
+
+
+                    <style>
+                        .label-opcao {
+                            margin-left: 10px;
+                            width: 100%;
+                        }
+                    </style>
+
+                    <div class="container-opcoes d-flex flex-column w-75">
+
+
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+
+                                <label for="0_2opcao_1" class="label-opcao">
+                                    <textarea name="opcao_descricao_2_1" id="0_2opcao_1">44</textarea>
+                                </label>
+
+                            </div>
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+
+                                <label for="1_2opcao_2" class="label-opcao">
+                                    <textarea name="opcao_descricao_2_2" id="1_2opcao_2">11</textarea>
+                                </label>
+
+                            </div>
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+
+                                <label for="2_2opcao_3" class="label-opcao">
+                                    <textarea name="opcao_descricao_2_3" id="2_2opcao_3">3</textarea>
+                                </label>
+
+                            </div>
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+
+                                <label for="3_2opcao_4" class="label-opcao">
+                                    <textarea name="opcao_descricao_2_4" id="3_2opcao_4">4</textarea>
+                                </label>
+
+                            </div>
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+
+                                <label for="4_2opcao_5" class="label-opcao">
+                                    <textarea name="opcao_descricao_2_5" id="4_2opcao_5">5</textarea>
+                                </label>
+
+                            </div>
+                    </div>
+                            </div>
+        `);
+
+        preencherDescricaoPrincipal();
+
+        var todosTextAreas: JQuery = jqueryEsqueleto.find("textarea");
+        todosTextAreas.each((indice, elemento) => {
+            this.gerarNames(elemento, IdDessaQuestao);
+            //continuar aqui
+        });
+
+        function preencherDescricaoPrincipal() {
+            jqueryEsqueleto.find("li:first").text(questaoClass.Descricao);
+        }
+    }
+
+    private gerarNames(elemento: HTMLElement, IdDessaQuestao: number) {
+        var nameDefaultTextArea = $(elemento).attr("name");
+        var nomeDefaultSemId = this.removerIdDoNameTextArea(nameDefaultTextArea);
+        var nameIdCorreto = nomeDefaultSemId + IdDessaQuestao;
+        $(elemento).attr("name", nameIdCorreto);
+    }
+}
+
 class Instancia {
     static paginar() {
         var numeroPaginaAtual = Number(this.elementoNumeroPaginaAtual.val());
@@ -149,7 +255,7 @@ class Instancia {
         var numeroPaginaAtual = Number(Instancia.elementoNumeroPaginaAtual.val());
 
         var indiceFatiaInicial = Instancia.getFatiaInicial(numeroPaginaAtual, numeroRegistroPorPagina);
-        var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina, numeroPaginaAtual);
+        var indiceFatiaFinal = Instancia.getFatiaFinal(tamanhoListaFinal, indiceFatiaInicial, numeroRegistroPorPagina);
         indiceFatiaFinal++;
 
         while (listaContemElementos) {
@@ -187,11 +293,7 @@ class Instancia {
         }
     }
 
-    static getFatiaFinal(tamanhoLista: number, indiceFatiaInicial: number, numeroPorRegistro: number, numeroPagina:number): number {
-        //const primeiraPagina = numeroPagina == 1;
-        //if (primeiraPagina) {
-        //    numeroPorRegistro += 1;
-        //}
+    static getFatiaFinal(tamanhoLista: number, indiceFatiaInicial: number, numeroPorRegistro: number): number {
         var indiceFatiaFinal = indiceFatiaInicial + numeroPorRegistro -1;
         const indiceFinalUltrapassado = indiceFatiaFinal > tamanhoLista - 1;
 
@@ -270,5 +372,6 @@ var controller = new IndexController();
 document.addEventListener("DOMContentLoaded", function () {
     controller.onLoad();
 });
+
 
 

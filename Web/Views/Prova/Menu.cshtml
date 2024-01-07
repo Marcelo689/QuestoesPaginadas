@@ -1,7 +1,14 @@
 ﻿@using DTO.Login
 @model UsuarioTO
-
-<h1>@Model.Username</h1>
-<h3>@Model.Password</h3>
+<style>
+    .user-container{
+        background:black;
+        color:white;
+    }
+</style>
+<div class="container user-container">
+    <h1>@Model.Username</h1>
+    <h3>@Model.Password</h3>
+</div>
 
 @Html.ActionLink("Provas", "ListarProvas", "Prova", Model)

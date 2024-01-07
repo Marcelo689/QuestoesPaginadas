@@ -54,6 +54,7 @@ namespace DTO
                 int indiceOpcaoPreenchida = (int) campo.GetValue(provaViewModel);
 
                 QuestaoTO questaoSelecinada = this.Questoes.FirstOrDefault(questao => questao.Id == questaoId);
+
                 if (isEditar)
                 {
                     AtualizaDescricoesOpcoes(provaViewModel, property, i , questaoSelecinada);

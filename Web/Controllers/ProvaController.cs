@@ -31,16 +31,26 @@ namespace Web.Controllers
 
         private static void PreencheProvaEmProgresso(UsuarioTO usuarioTO)
         {
-            const string getProvaURL = "https://localhost:7059/ProvaApi/GetProva";
+            const string getProvaURL = $"https://localhost:7059/ProvaApi/GetProva";
             ProvaEmProgresso = RequestFromURLGetProvaTO(getProvaURL);
             UsuarioLogado = usuarioTO;
             ProvaEmProgresso.Usuario = usuarioTO;
         }
 
-        public ActionResult Menu(UsuarioTO usuarioTO)
+        public ActionResult Menu(UsuarioTO? usuarioTO)
         {
-            PreencheProvaEmProgresso(usuarioTO);
-            return View(usuarioTO); 
+            if(usuarioTO is not null)
+            {
+                PreencheProvaEmProgresso(usuarioTO);
+                return View(usuarioTO);
+            }
+            else
+            {
+                if (UsuarioLogado is not null)
+                    return View(UsuarioLogado);
+                else
+                    return View("Error");
+            }
         }
 
         public List<ProvaTO> GetListaProva()
@@ -58,7 +68,12 @@ namespace Web.Controllers
         {
             string urlEditarProva = $"https://localhost:7059/ProvaApi/EditarProva/?provaId={provaId}";
             ProvaTO provaTO = GetProvaById(urlEditarProva);
-            return View(provaTO);   
+            provaTO.Usuario = UsuarioLogado;
+            return View(new EditarProvaViewModel
+            {
+                Prova = provaTO,
+                IsTeacher = UsuarioLogado.IsTeacher
+            });   
         }
 
         [HttpPost]
@@ -132,6 +147,13 @@ namespace Web.Controllers
             PreencheProvaTOComUsuario(provaTO);
             HttpClient.PostAsJsonAsync(urlCriarProva, provaTO);
             return RedirectToAction("Menu", UsuarioLogado);
+        }
+
+        [HttpPost]
+        public void CriarQuestaoAjax(ProvaTO provaTO)
+        {
+            const string urlCriarQuestao = $"";
+            HttpClient.PostAsJsonAsync(urlCriarQuestao, provaTO);
         }
 
         private void PreencheProvaTOComUsuario(ProvaTO provaTO)

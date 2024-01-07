@@ -1,12 +1,9 @@
-using Banco;
 using BancoProject;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DBClass>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:ConnectionName"]));
 var app = builder.Build();
 
 SeedData.Initialize();

@@ -3,8 +3,6 @@ using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
 using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
 using DTO.BancoClasses.ProvaFolder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
-using System.Configuration;
 
 namespace Banco
 {

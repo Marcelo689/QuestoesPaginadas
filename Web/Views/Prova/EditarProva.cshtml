@@ -1,5 +1,5 @@
-﻿@using DTO
-@model ProvaTO
+﻿@using Web.Models
+@model EditarProvaViewModel
 
 <style>
     .text-box{
@@ -26,15 +26,17 @@
 
 <div class="container m-2">
 
+    @Html.ActionLink("Menu","Menu", "Prova")
+
     @using (Html.BeginForm(actionName: "AtualizarProva", controllerName: "Prova", FormMethod.Post))
     {
-        @Html.HiddenFor(e => e.Id)
+        @Html.HiddenFor(e => e.Prova.Id)
 
         <div class="d-flex flex-column">
-            @Html.LabelFor(e => e.Name, new { @class = "group-control" })
-            @Html.EditorFor(e => e.Name, new { @class = "group-control" })
+            @Html.LabelFor(e => e.Prova.Name, new { @class = "group-control" })
+            @Html.EditorFor(e => e.Prova.Name, new { @class = "group-control" })
         </div>
-    
-        @Html.Partial("RenderEditableQuestoes", Model.Questoes.ToList())
+
+        @Html.Partial("RenderEditableQuestoes", Model.Prova.Questoes)
     }
 </div>

@@ -5,28 +5,12 @@
       "PackagePath": "staticwebassets\\Web.bundle.scp.css"
     },
     {
-      "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Enviroment.js",
-      "PackagePath": "staticwebassets\\Scripts\\Enviroment.js"
-    },
-    {
-      "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Enviroment.js.map",
-      "PackagePath": "staticwebassets\\Scripts\\Enviroment.js.map"
-    },
-    {
       "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Prova\\IndexController.js",
       "PackagePath": "staticwebassets\\Scripts\\Prova\\IndexController.js"
     },
     {
       "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Prova\\IndexController.js.map",
       "PackagePath": "staticwebassets\\Scripts\\Prova\\IndexController.js.map"
-    },
-    {
-      "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Prova\\Instancia.js",
-      "PackagePath": "staticwebassets\\Scripts\\Prova\\Instancia.js"
-    },
-    {
-      "Id": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Prova\\Instancia.js.map",
-      "PackagePath": "staticwebassets\\Scripts\\Prova\\Instancia.js.map"
     },
     {
       "Id": "D:\\QuestoesApi\\Web\\wwwroot\\css\\site.css",
