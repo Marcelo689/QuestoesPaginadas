@@ -22,8 +22,33 @@ var EditarQuestao = /** @class */ (function () {
     EditarQuestao.prototype.pegarProximaQuestaoId = function () {
         return this.pegarQuestaoId() + 1;
     };
-    EditarQuestao.prototype.gerarEsqueletoProximaQuestao = function (QuestaoClass) {
-        return $("\n                                <div class=\"container-questao\" style=\"display: none;\">\n                                <li>Quantos lados possui o triangulo</li>\n\n\n                    <style>\n                        .label-opcao {\n                            margin-left: 10px;\n                            width: 100%;\n                        }\n                    </style>\n\n                    <div class=\"container-opcoes d-flex flex-column w-75\">\n\n\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"0_2opcao_1\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_1\" id=\"0_2opcao_1\">44</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"1_2opcao_2\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_2\" id=\"1_2opcao_2\">11</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"2_2opcao_3\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_3\" id=\"2_2opcao_3\">3</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"3_2opcao_4\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_4\" id=\"3_2opcao_4\">4</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"4_2opcao_5\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_5\" id=\"4_2opcao_5\">5</textarea>\n                                </label>\n\n                            </div>\n                    </div>\n                            </div>\n        ");
+    EditarQuestao.prototype.removerIdDoNameTextArea = function (nameDefaultTextArea) {
+        var indiceAntesDoId = nameDefaultTextArea.lastIndexOf("_");
+        return nameDefaultTextArea.substr(0, indiceAntesDoId);
+    };
+    EditarQuestao.prototype.gerarEsqueletoProximaQuestao = function (questaoClass) {
+        var _this = this;
+        var IdDessaQuestao = this.pegarProximaQuestaoId();
+        var jqueryEsqueleto = $("\n                                <div class=\"container-questao\" style=\"display: none;\">\n                                <li>Quantos lados possui o triangulo</li>\n\n\n                    <style>\n                        .label-opcao {\n                            margin-left: 10px;\n                            width: 100%;\n                        }\n                    </style>\n\n                    <div class=\"container-opcoes d-flex flex-column w-75\">\n\n\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"0_2opcao_1\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_1\" id=\"0_2opcao_1\">44</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"1_2opcao_2\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_2\" id=\"1_2opcao_2\">11</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"2_2opcao_3\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_3\" id=\"2_2opcao_3\">3</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"3_2opcao_4\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_4\" id=\"3_2opcao_4\">4</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"4_2opcao_5\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_5\" id=\"4_2opcao_5\">5</textarea>\n                                </label>\n\n                            </div>\n                    </div>\n                            </div>\n        ");
+        preencherDescricaoPrincipal();
+        var todosTextAreas = jqueryEsqueleto.find("textarea");
+        todosTextAreas.each(function (indice, elemento) {
+            _this.gerarNames(elemento, IdDessaQuestao);
+            _this.esvaziarTextArea(elemento);
+        });
+        function preencherDescricaoPrincipal() {
+            jqueryEsqueleto.find("li:first").text(questaoClass.Descricao);
+        }
+        return jqueryEsqueleto;
+    };
+    EditarQuestao.prototype.esvaziarTextArea = function (elemento) {
+        $(elemento).text("");
+    };
+    EditarQuestao.prototype.gerarNames = function (elemento, IdDessaQuestao) {
+        var nameDefaultTextArea = $(elemento).attr("name");
+        var nomeDefaultSemId = this.removerIdDoNameTextArea(nameDefaultTextArea);
+        var nameIdCorreto = nomeDefaultSemId + IdDessaQuestao;
+        $(elemento).attr("name", nameIdCorreto);
     };
     return EditarQuestao;
 }());

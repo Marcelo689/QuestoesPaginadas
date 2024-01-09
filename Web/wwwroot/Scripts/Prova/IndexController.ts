@@ -94,12 +94,17 @@ class EditarQuestao {
         var todosTextAreas: JQuery = jqueryEsqueleto.find("textarea");
         todosTextAreas.each((indice, elemento) => {
             this.gerarNames(elemento, IdDessaQuestao);
-            //continuar aqui
+            this.esvaziarTextArea(elemento);
         });
 
         function preencherDescricaoPrincipal() {
             jqueryEsqueleto.find("li:first").text(questaoClass.Descricao);
         }
+
+        return jqueryEsqueleto;
+    }
+    public esvaziarTextArea(elemento: HTMLElement) {
+        $(elemento).text("");
     }
 
     private gerarNames(elemento: HTMLElement, IdDessaQuestao: number) {
