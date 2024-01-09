@@ -22,11 +22,27 @@
         margin:20px;
         margin-left:0px;
     }
+
+    .btn-adicionar{
+        display:flex;
+        margin:20px 0px;
+    }
+
+    a{
+        background:black;
+        outline:none;
+        color:white;
+        text-decoration:none;
+        padding:10px;
+        border-radius:14px;
+    }
 </style>
 
 <div class="container m-2">
 
     @Html.ActionLink("Menu","Menu", "Prova")
+
+    <button class="btn btn-primary btn-adicionar " onclick="adicionarQuestao()">Adicionar Questão</button>
 
     @using (Html.BeginForm(actionName: "AtualizarProva", controllerName: "Prova", FormMethod.Post))
     {

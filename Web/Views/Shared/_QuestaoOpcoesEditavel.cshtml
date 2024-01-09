@@ -28,9 +28,9 @@
             <label for="@index.ToString()_@Model.Id.ToString()opcao_@contador" class="label-opcao">
                 <textarea name="opcao_descricao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador">@opcao.Value</textarea>
             </label>
-
         </div>
         contador++;
         index++;
     }
+    <button class="btn btn-danger" onclick="removerQuestao()">Remover questão</button>
 </div>
