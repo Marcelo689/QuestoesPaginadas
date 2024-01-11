@@ -6,6 +6,9 @@ namespace DTO.ProvaModels
     {
         [JsonPropertyName("opcao_1")]
         public int opcao_1 { get; set; }
+        
+        [JsonPropertyName("descricao_1")]
+        public string descricao_1 { get; set; }    
 
         [JsonPropertyName("opcao_descricao_1_1")]
         public string opcao_descricao_1_1 { get; set; }
@@ -25,6 +28,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_2")]
         public int opcao_2 { get; set; }
 
+        [JsonPropertyName("descricao_2")]
+        public string descricao_2 { get; set; }
+
         [JsonPropertyName("opcao_descricao_2_1")]
         public string opcao_descricao_2_1 { get; set; }
 
@@ -40,9 +46,11 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_descricao_2_5")]
         public string opcao_descricao_2_5 { get; set; }
 
-
         [JsonPropertyName("opcao_3")]
         public int opcao_3 { get; set; }
+
+        [JsonPropertyName("descricao_3")]
+        public string descricao_3 { get; set; }
 
         [JsonPropertyName("opcao_descricao_3_1")]
         public string opcao_descricao_3_1 { get; set; }
@@ -62,6 +70,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_4")]
         public int opcao_4 { get; set; }
 
+        [JsonPropertyName("descricao_4")]
+        public string descricao_4 { get; set; }
+
         [JsonPropertyName("opcao_descricao_4_1")]
         public string opcao_descricao_4_1 { get; set; }
 
@@ -79,6 +90,12 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_5")]
         public int opcao_5 { get; set; }
+
+        [JsonPropertyName("descricao_5")]
+        public string descricao_5 { get; set; }
+
+        [JsonPropertyName("opcao_5descricao ")]
+        public string opcao_5descricao { get; set; }
 
         [JsonPropertyName("opcao_descricao_5_1")]
         public string opcao_descricao_5_1 { get; set; }
@@ -98,6 +115,12 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_6")]
         public int opcao_6 { get; set; }
 
+        [JsonPropertyName("descricao_6")]
+        public string descricao_6 { get; set; }
+
+        [JsonPropertyName("opcao_6descricao ")]
+        public string opcao_6descricao { get; set; }
+
         [JsonPropertyName("opcao_descricao_6_1")]
         public string opcao_descricao_6_1 { get; set; }
 
@@ -115,6 +138,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_7")]
         public int opcao_7 { get; set; }
+
+        [JsonPropertyName("descricao_7")]
+        public string descricao_7 { get; set; }
 
         [JsonPropertyName("opcao_descricao_7_1")]
         public string opcao_descricao_7_1 { get; set; }
@@ -134,6 +160,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_8")]
         public int opcao_8 { get; set; }
 
+        [JsonPropertyName("descricao_8")]
+        public string descricao_8 { get; set; }
+
         [JsonPropertyName("opcao_descricao_8_1")]
         public string opcao_descricao_8_1 { get; set; }
 
@@ -151,6 +180,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_9")]
         public int opcao_9 { get; set; }
+
+        [JsonPropertyName("descricao_9")]
+        public string descricao_9 { get; set; }
 
         [JsonPropertyName("opcao_descricao_9_1")]
         public string opcao_descricao_9_1 { get; set; }
@@ -170,6 +202,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_10")]
         public int opcao_10 { get; set; }
 
+        [JsonPropertyName("descricao_10")]
+        public string descricao_10 { get; set; }
+
         [JsonPropertyName("opcao_descricao_10_1")]
         public string opcao_descricao_10_1 { get; set; }
 
@@ -187,6 +222,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_11")]
         public int opcao_11 { get; set; }
+
+        [JsonPropertyName("descricao_11")]
+        public string descricao_11 { get; set; }
 
         [JsonPropertyName("opcao_descricao_11_1")]
         public string opcao_descricao_11_1 { get; set; }
@@ -206,6 +244,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_12")]
         public int opcao_12 { get; set; }
 
+        [JsonPropertyName("descricao_12")]
+        public string descricao_12 { get; set; }
+
         [JsonPropertyName("opcao_descricao_12_1")]
         public string opcao_descricao_12_1 { get; set; }
 
@@ -223,6 +264,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_13")]
         public int opcao_13 { get; set; }
+
+        [JsonPropertyName("descricao_13")]
+        public string descricao_13 { get; set; }
 
         [JsonPropertyName("opcao_descricao_13_1")]
         public string opcao_descricao_13_1 { get; set; }
@@ -242,6 +286,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_14")]
         public int opcao_14 { get; set; }
 
+        [JsonPropertyName("descricao_14")]
+        public string descricao_14 { get; set; }
+
         [JsonPropertyName("opcao_descricao_14_1")]
         public string opcao_descricao_14_1 { get; set; }
 
@@ -259,6 +306,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_15")]
         public int opcao_15 { get; set; }
+
+        [JsonPropertyName("descricao_15")]
+        public string descricao_15 { get; set; }
 
         [JsonPropertyName("opcao_descricao_15_1")]
         public string opcao_descricao_15_1 { get; set; }
@@ -278,6 +328,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_16")]
         public int opcao_16 { get; set; }
 
+        [JsonPropertyName("descricao_16")]
+        public string descricao_16 { get; set; }
+
         [JsonPropertyName("opcao_descricao_16_1")]
         public string opcao_descricao_16_1 { get; set; }
 
@@ -295,6 +348,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_17")]
         public int opcao_17 { get; set; }
+
+        [JsonPropertyName("descricao_17")]
+        public string descricao_17 { get; set; }
 
         [JsonPropertyName("opcao_descricao_17_1")]
         public string opcao_descricao_17_1 { get; set; }
@@ -314,6 +370,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_18")]
         public int opcao_18 { get; set; }
 
+        [JsonPropertyName("descricao_18")]
+        public string descricao_18 { get; set; }
+
         [JsonPropertyName("opcao_descricao_18_1")]
         public string opcao_descricao_18_1 { get; set; }
 
@@ -331,6 +390,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_19")]
         public int opcao_19 { get; set; }
+
+        [JsonPropertyName("descricao_19")]
+        public string descricao_19 { get; set; }
 
         [JsonPropertyName("opcao_descricao_19_1")]
         public string opcao_descricao_19_1 { get; set; }
@@ -350,6 +412,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_20")]
         public int opcao_20 { get; set; }
 
+        [JsonPropertyName("descricao_20")]
+        public string descricao_20 { get; set; }
+
         [JsonPropertyName("opcao_descricao_20_1")]
         public string opcao_descricao_20_1 { get; set; }
 
@@ -367,6 +432,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_21")]
         public int opcao_21 { get; set; }
+
+        [JsonPropertyName("descricao_21")]
+        public string descricao_21 { get; set; }
 
         [JsonPropertyName("opcao_descricao_21_1")]
         public string opcao_descricao_21_1 { get; set; }
@@ -386,6 +454,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_22")]
         public int opcao_22 { get; set; }
 
+        [JsonPropertyName("descricao_22")]
+        public string descricao_22 { get; set; }
+
         [JsonPropertyName("opcao_descricao_22_1")]
         public string opcao_descricao_22_1 { get; set; }
 
@@ -403,6 +474,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_23")]
         public int opcao_23 { get; set; }
+
+        [JsonPropertyName("descricao_23")]
+        public string descricao_23 { get; set; }
 
         [JsonPropertyName("opcao_descricao_23_1")]
         public string opcao_descricao_23_1 { get; set; }
@@ -422,6 +496,9 @@ namespace DTO.ProvaModels
         [JsonPropertyName("opcao_24")]
         public int opcao_24 { get; set; }
 
+        [JsonPropertyName("descricao_24")]
+        public string descricao_24 { get; set; }
+
         [JsonPropertyName("opcao_descricao_24_1")]
         public string opcao_descricao_24_1 { get; set; }
 
@@ -439,6 +516,9 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_25")]
         public int opcao_25 { get; set; }
+
+        [JsonPropertyName("descricao_25")]
+        public string descricao_25 { get; set; }
 
         [JsonPropertyName("opcao_descricao_25_1")]
         public string opcao_descricao_25_1 { get; set; }
