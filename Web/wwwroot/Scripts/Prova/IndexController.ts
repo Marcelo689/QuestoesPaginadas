@@ -17,7 +17,8 @@ class EditarQuestao {
 
     public pegarQuestaoId() : number {
         var questaoOpcaoForName = $(".container-questao").last().find("label:first").attr("for");
-        var questaoId :number = Number(questaoOpcaoForName.split("_")[2]);
+        var stringId = questaoOpcaoForName.split("_")[1].toString().replace("opcao", "");
+        var questaoId: number = Number(stringId);
 
         return questaoId;
     }
@@ -36,54 +37,39 @@ class EditarQuestao {
 
         var IdDessaQuestao = this.pegarProximaQuestaoId();
         var jqueryEsqueleto = $(`
-                                <div class="container-questao" style="display: none;">
+                                <div class="container-questao" style="display: block;">
                                 <li>Quantos lados possui o triangulo</li>
-
-
                     <style>
                         .label-opcao {
                             margin-left: 10px;
                             width: 100%;
                         }
                     </style>
-
                     <div class="container-opcoes d-flex flex-column w-75">
-
-
                             <div class="w-75 d-flex justify-content-between text-lg-start">
-
                                 <label for="0_2opcao_1" class="label-opcao">
                                     <textarea name="opcao_descricao_2_1" id="0_2opcao_1">44</textarea>
                                 </label>
-
                             </div>
                             <div class="w-75 d-flex justify-content-between text-lg-start">
-
                                 <label for="1_2opcao_2" class="label-opcao">
                                     <textarea name="opcao_descricao_2_2" id="1_2opcao_2">11</textarea>
                                 </label>
-
                             </div>
                             <div class="w-75 d-flex justify-content-between text-lg-start">
-
                                 <label for="2_2opcao_3" class="label-opcao">
                                     <textarea name="opcao_descricao_2_3" id="2_2opcao_3">3</textarea>
                                 </label>
-
                             </div>
                             <div class="w-75 d-flex justify-content-between text-lg-start">
-
                                 <label for="3_2opcao_4" class="label-opcao">
                                     <textarea name="opcao_descricao_2_4" id="3_2opcao_4">4</textarea>
                                 </label>
-
                             </div>
                             <div class="w-75 d-flex justify-content-between text-lg-start">
-
                                 <label for="4_2opcao_5" class="label-opcao">
                                     <textarea name="opcao_descricao_2_5" id="4_2opcao_5">5</textarea>
                                 </label>
-
                             </div>
                     </div>
                             </div>
@@ -94,6 +80,7 @@ class EditarQuestao {
         var todosTextAreas: JQuery = jqueryEsqueleto.find("textarea");
         todosTextAreas.each((indice, elemento) => {
             this.gerarNames(elemento, IdDessaQuestao);
+            this.renomearIds(elemento, IdDessaQuestao);
             this.esvaziarTextArea(elemento);
         });
 
@@ -103,6 +90,12 @@ class EditarQuestao {
 
         return jqueryEsqueleto;
     }
+    public renomearIds(elemento: HTMLElement, IdDessaQuestao: number) {
+        var questaoTemplate = `0_[id]opcao_1`;
+        questaoTemplate = questaoTemplate.replace("[id]", IdDessaQuestao.toString());
+        $(elemento).attr("id", questaoTemplate);
+    }
+
     public esvaziarTextArea(elemento: HTMLElement) {
         $(elemento).text("");
     }
@@ -110,11 +103,30 @@ class EditarQuestao {
     private gerarNames(elemento: HTMLElement, IdDessaQuestao: number) {
         var nameDefaultTextArea = $(elemento).attr("name");
         var nomeDefaultSemId = this.removerIdDoNameTextArea(nameDefaultTextArea);
-        var nameIdCorreto = nomeDefaultSemId + IdDessaQuestao;
+        var nameIdCorreto = nomeDefaultSemId + "_" + IdDessaQuestao;
         $(elemento).attr("name", nameIdCorreto);
     }
 }
 
+class BotoesAdicionarRemover {
+    public static EditarQuestao = new EditarQuestao();
+
+    public adicionarEventBotaoAdicionar() {
+
+        var containerListaQuestoes = $("#container-lista-questoes");
+        $(".btn-adicionar").click(function () {
+            var questaoData = new QuestaoClass();
+            var questaoNovaHtml = EditarQuestao.prototype.gerarEsqueletoProximaQuestao(questaoData);
+            containerListaQuestoes.prepend(questaoNovaHtml[0]);
+            Instancia.atualizarPaginaExibida();
+        });
+    }
+    public adicionarEventBotaoRemover() {
+        $(".btn-remover").click(function () {
+
+        });
+    }
+}
 class Instancia {
     static paginar() {
         var numeroPaginaAtual = Number(this.elementoNumeroPaginaAtual.val());
@@ -315,6 +327,8 @@ class IndexController {
     public onLoad() {
         this.instanciarObjetosPagina();
         this.adicionarEventosObjetosPagina();
+        BotoesAdicionarRemover.prototype.adicionarEventBotaoAdicionar();
+        BotoesAdicionarRemover.prototype.adicionarEventBotaoRemover();
     }
 
     public adicionarEventosObjetosPagina() {

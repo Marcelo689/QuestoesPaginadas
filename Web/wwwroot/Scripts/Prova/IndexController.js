@@ -16,7 +16,8 @@ var EditarQuestao = /** @class */ (function () {
     }
     EditarQuestao.prototype.pegarQuestaoId = function () {
         var questaoOpcaoForName = $(".container-questao").last().find("label:first").attr("for");
-        var questaoId = Number(questaoOpcaoForName.split("_")[2]);
+        var stringId = questaoOpcaoForName.split("_")[1].toString().replace("opcao", "");
+        var questaoId = Number(stringId);
         return questaoId;
     };
     EditarQuestao.prototype.pegarProximaQuestaoId = function () {
@@ -29,11 +30,12 @@ var EditarQuestao = /** @class */ (function () {
     EditarQuestao.prototype.gerarEsqueletoProximaQuestao = function (questaoClass) {
         var _this = this;
         var IdDessaQuestao = this.pegarProximaQuestaoId();
-        var jqueryEsqueleto = $("\n                                <div class=\"container-questao\" style=\"display: none;\">\n                                <li>Quantos lados possui o triangulo</li>\n\n\n                    <style>\n                        .label-opcao {\n                            margin-left: 10px;\n                            width: 100%;\n                        }\n                    </style>\n\n                    <div class=\"container-opcoes d-flex flex-column w-75\">\n\n\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"0_2opcao_1\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_1\" id=\"0_2opcao_1\">44</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"1_2opcao_2\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_2\" id=\"1_2opcao_2\">11</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"2_2opcao_3\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_3\" id=\"2_2opcao_3\">3</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"3_2opcao_4\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_4\" id=\"3_2opcao_4\">4</textarea>\n                                </label>\n\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n\n                                <label for=\"4_2opcao_5\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_5\" id=\"4_2opcao_5\">5</textarea>\n                                </label>\n\n                            </div>\n                    </div>\n                            </div>\n        ");
+        var jqueryEsqueleto = $("\n                                <div class=\"container-questao\" style=\"display: block;\">\n                                <li>Quantos lados possui o triangulo</li>\n                    <style>\n                        .label-opcao {\n                            margin-left: 10px;\n                            width: 100%;\n                        }\n                    </style>\n                    <div class=\"container-opcoes d-flex flex-column w-75\">\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n                                <label for=\"0_2opcao_1\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_1\" id=\"0_2opcao_1\">44</textarea>\n                                </label>\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n                                <label for=\"1_2opcao_2\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_2\" id=\"1_2opcao_2\">11</textarea>\n                                </label>\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n                                <label for=\"2_2opcao_3\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_3\" id=\"2_2opcao_3\">3</textarea>\n                                </label>\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n                                <label for=\"3_2opcao_4\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_4\" id=\"3_2opcao_4\">4</textarea>\n                                </label>\n                            </div>\n                            <div class=\"w-75 d-flex justify-content-between text-lg-start\">\n                                <label for=\"4_2opcao_5\" class=\"label-opcao\">\n                                    <textarea name=\"opcao_descricao_2_5\" id=\"4_2opcao_5\">5</textarea>\n                                </label>\n                            </div>\n                    </div>\n                            </div>\n        ");
         preencherDescricaoPrincipal();
         var todosTextAreas = jqueryEsqueleto.find("textarea");
         todosTextAreas.each(function (indice, elemento) {
             _this.gerarNames(elemento, IdDessaQuestao);
+            _this.renomearIds(elemento, IdDessaQuestao);
             _this.esvaziarTextArea(elemento);
         });
         function preencherDescricaoPrincipal() {
@@ -41,16 +43,40 @@ var EditarQuestao = /** @class */ (function () {
         }
         return jqueryEsqueleto;
     };
+    EditarQuestao.prototype.renomearIds = function (elemento, IdDessaQuestao) {
+        var questaoTemplate = "0_[id]opcao_1";
+        questaoTemplate = questaoTemplate.replace("[id]", IdDessaQuestao.toString());
+        $(elemento).attr("id", questaoTemplate);
+    };
     EditarQuestao.prototype.esvaziarTextArea = function (elemento) {
         $(elemento).text("");
     };
     EditarQuestao.prototype.gerarNames = function (elemento, IdDessaQuestao) {
         var nameDefaultTextArea = $(elemento).attr("name");
         var nomeDefaultSemId = this.removerIdDoNameTextArea(nameDefaultTextArea);
-        var nameIdCorreto = nomeDefaultSemId + IdDessaQuestao;
+        var nameIdCorreto = nomeDefaultSemId + "_" + IdDessaQuestao;
         $(elemento).attr("name", nameIdCorreto);
     };
     return EditarQuestao;
+}());
+var BotoesAdicionarRemover = /** @class */ (function () {
+    function BotoesAdicionarRemover() {
+    }
+    BotoesAdicionarRemover.prototype.adicionarEventBotaoAdicionar = function () {
+        var containerListaQuestoes = $("#container-lista-questoes");
+        $(".btn-adicionar").click(function () {
+            var questaoData = new QuestaoClass();
+            var questaoNovaHtml = EditarQuestao.prototype.gerarEsqueletoProximaQuestao(questaoData);
+            containerListaQuestoes.prepend(questaoNovaHtml[0]);
+            Instancia.atualizarPaginaExibida();
+        });
+    };
+    BotoesAdicionarRemover.prototype.adicionarEventBotaoRemover = function () {
+        $(".btn-remover").click(function () {
+        });
+    };
+    BotoesAdicionarRemover.EditarQuestao = new EditarQuestao();
+    return BotoesAdicionarRemover;
 }());
 var Instancia = /** @class */ (function () {
     function Instancia() {
@@ -207,6 +233,8 @@ var IndexController = /** @class */ (function () {
     IndexController.prototype.onLoad = function () {
         this.instanciarObjetosPagina();
         this.adicionarEventosObjetosPagina();
+        BotoesAdicionarRemover.prototype.adicionarEventBotaoAdicionar();
+        BotoesAdicionarRemover.prototype.adicionarEventBotaoRemover();
     };
     IndexController.prototype.adicionarEventosObjetosPagina = function () {
         var isso = this;

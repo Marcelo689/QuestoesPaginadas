@@ -2,13 +2,16 @@
 @model IEnumerable<QuestaoTO>
 
 <div id="container-questoes" class="container">
-    @foreach (QuestaoTO questao in Model)
-    {
-        <div class="container-questao">
-            <li>@questao.Name</li>
-            @Html.Partial("_QuestaoOpcoesEditavel", questao)
-        </div>
-    }
+        
+    <div id="container-lista-questoes">
+        @foreach (QuestaoTO questao in Model)
+        {
+            <div class="container-questao">
+                <li>@Html.TextBoxFor( e => e.First( q => q.Id == questao.Id).Name, new { @class = "form-control"})</li>
+                @Html.Partial("_QuestaoOpcoesEditavel", questao)
+            </div>
+        }
+    </div>
     <div>
         <div class="d-flex justify-content-center ">
             <label class="m-2 font-monospace card-title">Pagina</label>

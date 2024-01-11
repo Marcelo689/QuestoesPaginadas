@@ -14,7 +14,6 @@
 </style>
 
 <div class="container-opcoes d-flex flex-column w-75">
-
     @{
         var contador = 1;
     }
@@ -26,11 +25,11 @@
         <div class="w-75 d-flex justify-content-between text-lg-start">
 
             <label for="@index.ToString()_@Model.Id.ToString()opcao_@contador" class="label-opcao">
-                <textarea name="opcao_descricao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador">@opcao.Value</textarea>
+                <textarea class="form-control" name="opcao_descricao_@Model.Id.ToString()_@contador" id="@index.ToString()_@Model.Id.ToString()opcao_@contador">@opcao.Value</textarea>
             </label>
         </div>
         contador++;
         index++;
     }
-    <button class="btn btn-danger" onclick="removerQuestao()">Remover questão</button>
+    <button class="btn btn-danger btn-remover">Remover questão</button>
 </div>
