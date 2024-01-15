@@ -7,7 +7,7 @@
         @foreach (QuestaoTO questao in Model)
         {
             <div class="container-questao">
-                <li>@Html.TextBoxFor( e => e.First( q => q.Id == questao.Id).Name, new { @class = "form-control"})</li>
+                <li>@Html.TextBox("descricao_" + questao.Id.ToString(),questao.Name, new { @class = "form-control"})</li>
                 @Html.Partial("_QuestaoOpcoesEditavel", questao)
             </div>
         }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MATUuoWMKRhMHG6j5vbPPibktPZNGnmcwM9VY055bZY=",
+  "Hash": "XaD53DW5xTyUbAtvVo7AceThXlSG/Uou36rEXmUBxAA=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -1269,6 +1269,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Scripts\\Prova\\IndexController.js.map"
+    },
+    {
+      "Identity": "D:\\QuestoesApi\\Web\\wwwroot\\Scripts\\Prova\\tsconfig.json",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuestoesApi\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Scripts/Prova/tsconfig.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Scripts\\Prova\\tsconfig.json"
     }
   ]
 }

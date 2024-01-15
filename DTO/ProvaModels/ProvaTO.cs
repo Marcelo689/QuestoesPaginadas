@@ -44,7 +44,7 @@ namespace DTO
         private void PreencherRespostas(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] property, int quantidadeQuestoes, bool isEditar = false)
         {
             int numeroOpcoesPorQuestao = 5;
-            for (int i = 0; i < quantidadeQuestoes * numeroOpcoesPorQuestao; i+= 6)
+            for (int i = 0; i < quantidadeQuestoes * numeroOpcoesPorQuestao; i+= 7)
             {
                 var campo = property[i];
                 string nome = campo.Name;
@@ -66,19 +66,23 @@ namespace DTO
             }
         }
 
-        private void AtualizaDescricoesOpcoes(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] propertyArray, int indiceQuestao, QuestaoTO questaoSelecinada)
+        private void AtualizaDescricoesOpcoes(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] propertyArray, int indiceQuestao, QuestaoTO questaoSelecionada)
         {
-            string campoDescricaoNome1 = propertyArray[indiceQuestao + 1].GetValue(provaViewModel).ToString();
-            string campoDescricaoNome2 = propertyArray[indiceQuestao + 2].GetValue(provaViewModel).ToString();
-            string campoDescricaoNome3 = propertyArray[indiceQuestao + 3].GetValue(provaViewModel).ToString();
-            string campoDescricaoNome4 = propertyArray[indiceQuestao + 4].GetValue(provaViewModel).ToString();
-            string campoDescricaoNome5 = propertyArray[indiceQuestao + 5].GetValue(provaViewModel).ToString();
+            string descricaoPrincipal  = propertyArray[indiceQuestao + 1].GetValue(provaViewModel).ToString();
 
-            questaoSelecinada.OptionDescriptions[Options.A] = campoDescricaoNome1;
-            questaoSelecinada.OptionDescriptions[Options.B] = campoDescricaoNome2;
-            questaoSelecinada.OptionDescriptions[Options.C] = campoDescricaoNome3;
-            questaoSelecinada.OptionDescriptions[Options.D] = campoDescricaoNome4;
-            questaoSelecinada.OptionDescriptions[Options.E] = campoDescricaoNome5;
+            string campoDescricaoNome1 = propertyArray[indiceQuestao + 2].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome2 = propertyArray[indiceQuestao + 3].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome3 = propertyArray[indiceQuestao + 4].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome4 = propertyArray[indiceQuestao + 5].GetValue(provaViewModel).ToString();
+            string campoDescricaoNome5 = propertyArray[indiceQuestao + 6].GetValue(provaViewModel).ToString();
+
+            questaoSelecionada.Name = descricaoPrincipal;
+
+            questaoSelecionada.OptionDescriptions[Options.A] = campoDescricaoNome1;
+            questaoSelecionada.OptionDescriptions[Options.B] = campoDescricaoNome2;
+            questaoSelecionada.OptionDescriptions[Options.C] = campoDescricaoNome3;
+            questaoSelecionada.OptionDescriptions[Options.D] = campoDescricaoNome4;
+            questaoSelecionada.OptionDescriptions[Options.E] = campoDescricaoNome5;
         }
 
         private static bool questaoFoiPreenchida(QuestaoTO questaoSelecinada, int indiceOpcaoPreenchida)
@@ -87,14 +91,22 @@ namespace DTO
             return questaoFoiEncontrada && indiceOpcaoPreenchida != 0;
         }
 
-        private static void PreencherOpcaoDaQuestao(int indiceOpcaoPreenchida, QuestaoTO questaoSelecinada)
+        private static void PreencherOpcaoDaQuestao(int indiceQuestao, QuestaoTO questaoSelecinada)
         {
-            questaoSelecinada.SelectedOption = (Options) indiceOpcaoPreenchida;
+            questaoSelecinada.SelectedOption = (Options) Convert.ToInt32(indiceQuestao);
 
         }
         private static int GetGetIdFromQuestionName(string nome)
         {
-            return Convert.ToInt32(nome.Split('_')[1]);
+            if (nome.Contains("descricao"))
+            {
+                return Convert.ToInt32(nome.Split('_')[2]);
+            }
+            else
+            {
+                return Convert.ToInt32(nome.Split('_')[1]);
+            }
+
         }
         private int GetQuantidadeQuestoes()
         {

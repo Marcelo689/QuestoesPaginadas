@@ -33,12 +33,18 @@ class EditarQuestao {
         return nameDefaultTextArea.substr(0, indiceAntesDoId);
     }
 
+    public atualizaNomesContendoId(esqueletoQuestao: string, idQuestao: number) {
+        return esqueletoQuestao.replace("[id]", idQuestao.toString());
+    }
+
     public gerarEsqueletoProximaQuestao(questaoClass: QuestaoClass): JQuery {
 
         var IdDessaQuestao = this.pegarProximaQuestaoId();
         var jqueryEsqueleto = $(`
-                                <div class="container-questao" style="display: block;">
-                                <li>Quantos lados possui o triangulo</li>
+                    <div class="container-questao" style="display: block;">
+                        <li>
+                            <input class="form-control" type="text" name="descricao_[id]" id="descricao_[id]"/>
+                        </li>
                     <style>
                         .label-opcao {
                             margin-left: 10px;
@@ -74,21 +80,72 @@ class EditarQuestao {
                     </div>
                             </div>
         `);
+        var textoQuestao = `
+                    <div class="container-questao" style="display: block;">
+                        <li>
+                            <input class="form-control" type="text" name="descricao_[id]" id="descricao_[id]"/>
+                        </li>
+                    <style>
+                        .label-opcao {
+                            margin-left: 10px;
+                            width: 100%;
+                        }
+                    </style>
+                    <div class="container-opcoes d-flex flex-column w-75">
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+                                <label for="0_[id]opcao_1" class="label-opcao">
+                                    <textarea name="opcao_descricao_[id]_1" id="0_[id]opcao_1">44</textarea>
+                                </label>
+                            </div>
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+                                <label for="1_[id]opcao_2" class="label-opcao">
+                                    <textarea name="opcao_descricao_[id]_2" id="1_[id]opcao_2">11</textarea>
+                                </label>
+                            </div>
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+                                <label for="2_[id]opcao_3" class="label-opcao">
+                                    <textarea name="opcao_descricao_[id]_3" id="2_[id]opcao_3">3</textarea>
+                                </label>
+                            </div>
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+                                <label for="3_[id]opcao_4" class="label-opcao">
+                                    <textarea name="opcao_descricao_[id]_4" id="3_[id]opcao_4">4</textarea>
+                                </label>
+                            </div>
+                            <div class="w-75 d-flex justify-content-between text-lg-start">
+                                <label for="4_[id]opcao_5" class="label-opcao">
+                                    <textarea name="opcao_descricao_[id]_5" id="4_[id]opcao_5">5</textarea>
+                                </label>
+                            </div>
+                    </div>
+                            </div>
+        `;
+        var jqueryEsqueletoNovo = $(textoQuestao.replaceAll("[id]", IdDessaQuestao.toString()));
 
         preencherDescricaoPrincipal();
+        var todosTextAreas: JQuery = jqueryEsqueletoNovo.find("textarea");
 
-        var todosTextAreas: JQuery = jqueryEsqueleto.find("textarea");
         todosTextAreas.each((indice, elemento) => {
-            this.gerarNames(elemento, IdDessaQuestao);
-            this.renomearIds(elemento, IdDessaQuestao);
             this.esvaziarTextArea(elemento);
         });
 
         function preencherDescricaoPrincipal() {
-            jqueryEsqueleto.find("li:first").text(questaoClass.Descricao);
+            jqueryEsqueletoNovo.find("li:first").text(questaoClass.Descricao);
         }
 
-        return jqueryEsqueleto;
+        return jqueryEsqueletoNovo;
+    }
+    public atualizarAtributosDescricaoPrincipalQuestao(elemento: HTMLElement, questaoId : number) {
+        var containerQuestaoDiv = $(elemento).parents(".container-questao")[0];
+        var inputDescricaoQuestaoPrincipal: JQuery = $($(containerQuestaoDiv).find("input")[0]);
+
+        var nameAntigo = inputDescricaoQuestaoPrincipal.attr("name");
+        var nameAtualizado = nameAntigo.replace("[id]", questaoId.toString());
+        inputDescricaoQuestaoPrincipal.attr("name", nameAtualizado);
+
+        var idAntigo = inputDescricaoQuestaoPrincipal.attr("id");
+        var idAtualizado = idAntigo.replace("[id]", questaoId.toString());
+        inputDescricaoQuestaoPrincipal.attr("id", idAtualizado)
     }
     public renomearIds(elemento: HTMLElement, IdDessaQuestao: number) {
         var questaoTemplate = `0_[id]opcao_1`;
@@ -117,6 +174,7 @@ class BotoesAdicionarRemover {
         $(".btn-adicionar").click(function () {
             var questaoData = new QuestaoClass();
             var questaoNovaHtml = EditarQuestao.prototype.gerarEsqueletoProximaQuestao(questaoData);
+
             containerListaQuestoes.prepend(questaoNovaHtml[0]);
             Instancia.atualizarPaginaExibida();
         });
