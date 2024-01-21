@@ -170,15 +170,25 @@ class BotoesAdicionarRemover {
 
     public adicionarEventBotaoAdicionar() {
 
+        var isso = this;
         var containerListaQuestoes = $("#container-lista-questoes");
         $(".btn-adicionar").click(function () {
             var questaoData = new QuestaoClass();
             var questaoNovaHtml = EditarQuestao.prototype.gerarEsqueletoProximaQuestao(questaoData);
-
             containerListaQuestoes.prepend(questaoNovaHtml[0]);
+
+            isso.atualizarNumeroQuestoes();
             Instancia.atualizarPaginaExibida();
         });
     }
+    private atualizarNumeroQuestoes() {
+        var valorTextoNumeroQuestoes = Instancia.getElementoNumeroQuestoesAtual().text();
+        var quantidadeItens: number = Number(valorTextoNumeroQuestoes);
+        var quantidadeAtualizada: number = quantidadeItens + 1;
+        Instancia.getElementoNumeroQuestoesAtual().text(quantidadeAtualizada);
+        $("#QuantidadeQuestoesAtualizadas").val(quantidadeAtualizada);
+    }
+
     public adicionarEventBotaoRemover() {
         $(".btn-remover").click(function () {
 
@@ -214,12 +224,18 @@ class Instancia {
     }
 
     static elementoNumeroPaginaAtual: JQuery;
+    static elementoNumeroQuestoesAtual: JQuery;
     static elementoQuestoes: JQuery;
     static btnPrevElement: JQuery<HTMLElement>;
     static btnNextElement: JQuery<HTMLElement>;
     static elementoSelectNumeroPaginaAtual: JQuery<HTMLElement>;
     static listaPaginadaElement: any;
     static paginaExibidaElemento: any;
+
+    public static getElementoNumeroQuestoesAtual() {
+        this.elementoNumeroQuestoesAtual = $("#itens-number");
+        return this.elementoNumeroQuestoesAtual;
+    }
 
     public static selectNumeroPaginaElemento() {
         this.elementoSelectNumeroPaginaAtual = $("#numeroQuestaoPorPagina");

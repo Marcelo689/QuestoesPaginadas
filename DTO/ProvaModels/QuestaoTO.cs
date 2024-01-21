@@ -38,7 +38,15 @@ namespace DTO
 
         [JsonPropertyName("optionDescriptions")]
         public Dictionary<Options, string> OptionDescriptions { get; set; } = new Dictionary<Options, string>();
+        public QuestaoOpcao CorrectOption { get; internal set; }
 
+        public void InsertEmptyDescriptions()
+        {
+            AddDescriptions(new List<string>()
+            {
+                "","","","",""
+            });
+        }
         private void InsertDescriptions(List<string> optionsDescriptions)
         {
             bool optionsAmountError = optionsDescriptions.Count != 5;

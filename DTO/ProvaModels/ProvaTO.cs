@@ -3,6 +3,7 @@ using DTO.Login;
 using DTO.Login.EstudanteFolder;
 using DTO.ProvaModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
@@ -38,13 +39,16 @@ namespace DTO
         {
             var properties = provaViewModel.GetType().GetProperties();
 
-            int quantidadeQuestoes = GetQuantidadeQuestoes();
-            PreencherRespostas(provaViewModel, properties, quantidadeQuestoes, isEditar);
+            int quantidadeQuestoes = provaViewModel.QuantidadeQuestoesAtualizadas;
+            List<QuestaoTO> QuestoesAtualizadas = PreencherRespostas(provaViewModel, properties, quantidadeQuestoes, isEditar);
+
+            this.Questoes = QuestoesAtualizadas.ToArray();
         }
-        private void PreencherRespostas(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] property, int quantidadeQuestoes, bool isEditar = false)
+        private List<QuestaoTO> PreencherRespostas(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] property, int quantidadeQuestoes, bool isEditar = false)
         {
-            int numeroOpcoesPorQuestao = 5;
-            for (int i = 0; i < quantidadeQuestoes * numeroOpcoesPorQuestao; i+= 7)
+            var listaSaida = new List<QuestaoTO>();
+            int numeroOpcoesPorQuestao = 7;
+            for (int i = 1; i < quantidadeQuestoes * numeroOpcoesPorQuestao; i+= numeroOpcoesPorQuestao)
             {
                 var campo = property[i];
                 string nome = campo.Name;
@@ -53,20 +57,24 @@ namespace DTO
 
                 int indiceOpcaoPreenchida = (int) campo.GetValue(provaViewModel);
 
-                QuestaoTO questaoSelecinada = this.Questoes.FirstOrDefault(questao => questao.Id == questaoId);
+                QuestaoTO questaoSelecionada = this.Questoes.FirstOrDefault(questao => questao.Id == questaoId);
 
                 if (isEditar)
                 {
-                    AtualizaDescricoesOpcoes(provaViewModel, property, i , questaoSelecinada);
+                    questaoSelecionada = AtualizaDescricoesOpcoes(provaViewModel, property, i , questaoSelecionada, questaoId);
                 }
-                if (questaoFoiPreenchida(questaoSelecinada, indiceOpcaoPreenchida))
+                listaSaida.Add(questaoSelecionada);
+
+                if (questaoFoiPreenchida(questaoSelecionada, indiceOpcaoPreenchida))
                 {
-                    PreencherOpcaoDaQuestao(indiceOpcaoPreenchida, questaoSelecinada);
+                    PreencherOpcaoDaQuestao(indiceOpcaoPreenchida, questaoSelecionada);
                 }
             }
+
+            return listaSaida;
         }
 
-        private void AtualizaDescricoesOpcoes(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] propertyArray, int indiceQuestao, QuestaoTO questaoSelecionada)
+        private QuestaoTO AtualizaDescricoesOpcoes(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] propertyArray, int indiceQuestao, QuestaoTO questaoSelecionada, int questaoId)
         {
             string descricaoPrincipal  = propertyArray[indiceQuestao + 1].GetValue(provaViewModel).ToString();
 
@@ -76,6 +84,9 @@ namespace DTO
             string campoDescricaoNome4 = propertyArray[indiceQuestao + 5].GetValue(provaViewModel).ToString();
             string campoDescricaoNome5 = propertyArray[indiceQuestao + 6].GetValue(provaViewModel).ToString();
 
+            if (questaoSelecionada is null)
+                questaoSelecionada = NovaQuestao(questaoId);
+
             questaoSelecionada.Name = descricaoPrincipal;
 
             questaoSelecionada.OptionDescriptions[Options.A] = campoDescricaoNome1;
@@ -83,6 +94,15 @@ namespace DTO
             questaoSelecionada.OptionDescriptions[Options.C] = campoDescricaoNome3;
             questaoSelecionada.OptionDescriptions[Options.D] = campoDescricaoNome4;
             questaoSelecionada.OptionDescriptions[Options.E] = campoDescricaoNome5;
+
+            return questaoSelecionada;
+        }
+
+        private static QuestaoTO NovaQuestao(int questaoId)
+        {
+            var novaQuestao = new QuestaoTO() { Id = questaoId };
+            novaQuestao.InsertEmptyDescriptions();
+            return novaQuestao;
         }
 
         private static bool questaoFoiPreenchida(QuestaoTO questaoSelecinada, int indiceOpcaoPreenchida)
@@ -108,12 +128,12 @@ namespace DTO
             }
 
         }
-        private int GetQuantidadeQuestoes()
+        private int GetQuantidadeQuestoes(int quantidadeQuestoesAtualizadas)
         {
             if (Questoes is null)
                 return 0;
             else
-                return Questoes.Length;
+                return Questoes.Length + quantidadeQuestoesAtualizadas;
         }
 
         public static explicit operator ProvaTO(Prova to)

@@ -165,9 +165,17 @@ namespace BancoProject.ProvaFolder
             return provaCriada;
         }
 
-        public static void UpdateQuestaoFromTO(QuestaoTO questaoTO)
+        public static void UpdateQuestaoFromTO(QuestaoTO questaoTO, int provaId)
         {
             Questao questao = QuestaoRepository.FirstOrDefault(quest => quest.Id == questaoTO.Id);
+
+            if(questao is null)
+            {
+                questao = (Questao) questaoTO;
+                questao.Prova = ProvaRepository.FirstOrDefault(provaIdent => provaIdent.Id == provaId);
+                QuestaoRepository.Add(questao);
+            }
+
             PreencherDescricoesQuestaoDB(questaoTO, questao);
             questao.Descricao = questaoTO.Name;
         }

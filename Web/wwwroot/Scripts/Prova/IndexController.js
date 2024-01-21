@@ -142,13 +142,22 @@ class EditarQuestao {
 }
 class BotoesAdicionarRemover {
     adicionarEventBotaoAdicionar() {
+        var isso = this;
         var containerListaQuestoes = $("#container-lista-questoes");
         $(".btn-adicionar").click(function () {
             var questaoData = new QuestaoClass();
             var questaoNovaHtml = EditarQuestao.prototype.gerarEsqueletoProximaQuestao(questaoData);
             containerListaQuestoes.prepend(questaoNovaHtml[0]);
+            isso.atualizarNumeroQuestoes();
             Instancia.atualizarPaginaExibida();
         });
+    }
+    atualizarNumeroQuestoes() {
+        var valorTextoNumeroQuestoes = Instancia.getElementoNumeroQuestoesAtual().text();
+        var quantidadeItens = Number(valorTextoNumeroQuestoes);
+        var quantidadeAtualizada = quantidadeItens + 1;
+        Instancia.getElementoNumeroQuestoesAtual().text(quantidadeAtualizada);
+        $("#QuantidadeQuestoesAtualizadas").val(quantidadeAtualizada);
     }
     adicionarEventBotaoRemover() {
         $(".btn-remover").click(function () {
@@ -177,6 +186,10 @@ class Instancia {
     }
     static getPaginaExibidaElemento() {
         return this.paginaExibidaElemento;
+    }
+    static getElementoNumeroQuestoesAtual() {
+        this.elementoNumeroQuestoesAtual = $("#itens-number");
+        return this.elementoNumeroQuestoesAtual;
     }
     static selectNumeroPaginaElemento() {
         this.elementoSelectNumeroPaginaAtual = $("#numeroQuestaoPorPagina");

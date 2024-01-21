@@ -65,7 +65,7 @@ namespace ProvaApi.Controllers
 
             foreach (QuestaoTO questaoTO in questoesTO) 
             {
-               ProvaDB.UpdateQuestaoFromTO(questaoTO);
+               ProvaDB.UpdateQuestaoFromTO(questaoTO, provaTO.Id);
             }
         }
 

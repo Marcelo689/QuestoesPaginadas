@@ -47,7 +47,7 @@
     @using (Html.BeginForm(actionName: "AtualizarProva", controllerName: "Prova", FormMethod.Post))
     {
         @Html.HiddenFor(e => e.Prova.Id)
-
+        @Html.HiddenFor(e => e.QuantidadeQuestoesAtualizadas)
         <div class="d-flex flex-column">
             @Html.LabelFor(e => e.Prova.Name, new { @class = "group-control" })
             @Html.EditorFor(e => e.Prova.Name, new { @class = "group-control" })

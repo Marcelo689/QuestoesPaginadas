@@ -4,6 +4,9 @@ namespace DTO.ProvaModels
 {
     public class ProvaOpcoesMarcadasViewModel
     {
+        [JsonPropertyName("quantidadeQuestoesAtualizadas")]
+        public int QuantidadeQuestoesAtualizadas { get; set; }
+
         [JsonPropertyName("opcao_1")]
         public int opcao_1 { get; set; }
         
@@ -94,9 +97,6 @@ namespace DTO.ProvaModels
         [JsonPropertyName("descricao_5")]
         public string descricao_5 { get; set; }
 
-        [JsonPropertyName("opcao_5descricao ")]
-        public string opcao_5descricao { get; set; }
-
         [JsonPropertyName("opcao_descricao_5_1")]
         public string opcao_descricao_5_1 { get; set; }
 
@@ -117,9 +117,6 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("descricao_6")]
         public string descricao_6 { get; set; }
-
-        [JsonPropertyName("opcao_6descricao ")]
-        public string opcao_6descricao { get; set; }
 
         [JsonPropertyName("opcao_descricao_6_1")]
         public string opcao_descricao_6_1 { get; set; }
