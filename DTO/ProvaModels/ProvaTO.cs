@@ -23,6 +23,9 @@ namespace DTO
         
         [JsonPropertyName("questoes")]
         public QuestaoTO[]  Questoes { get; set; }
+
+        [JsonPropertyName("questaoDelete")]
+        public QuestaoTO QuestaoDelete { get; set; }
         public EstudanteTO Estudante { get; set; }
 
         [JsonPropertyName("professorNome")]

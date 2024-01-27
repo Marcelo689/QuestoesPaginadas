@@ -161,6 +161,15 @@ class BotoesAdicionarRemover {
     }
     adicionarEventBotaoRemover() {
         $(".btn-remover").click(function () {
+            var provaDeleteId = Number($(this).attr("data-id"));
+            $.ajax({
+                type: "post",
+                data: { Id: provaDeleteId },
+                url: "../../DeletarQuestao",
+                success: function (dados) {
+                    console.log(dados);
+                }
+            });
         });
     }
 }

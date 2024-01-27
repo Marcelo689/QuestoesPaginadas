@@ -199,5 +199,18 @@ namespace BancoProject.ProvaFolder
             questao.DescricaoOpcao4 = questaoTO.OptionDescriptions[Options.D];
             questao.DescricaoOpcao5 = questaoTO.OptionDescriptions[Options.E];
         }
+
+        public static void DeletarProva(ProvaTO provaTO)
+        {
+            Questao questaoParaDelete = QuestaoRepository.FirstOrDefault(e => provaTO.QuestaoDelete.Id == e.Id);
+            QuestaoRepository.Remove(questaoParaDelete);
+        }
+
+        public static void DeletarQuestao(int id)
+        {
+            Questao questaoParaDelete = QuestaoRepository.FirstOrDefault(e => id == e.Id);
+            QuestaoRepository.Remove(questaoParaDelete);
+            SaveChanges();
+        }
     }
 }

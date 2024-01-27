@@ -3,7 +3,6 @@
         1 ,2, 4 ,6 ,8 ,10
     ]; 
 }
-
 class QuestaoClass {
     public Id: number;
     public Descricao: string;
@@ -192,6 +191,16 @@ class BotoesAdicionarRemover {
     public adicionarEventBotaoRemover() {
         $(".btn-remover").click(function () {
 
+            var provaDeleteId = Number($(this).attr("data-id"));
+
+            $.ajax({
+                type: "post",
+                data: { Id: provaDeleteId },
+                url: "../../DeletarQuestao",
+                success: function (dados) {
+                    console.log(dados);    
+                }
+            });
         });
     }
 }

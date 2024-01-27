@@ -20,6 +20,12 @@ namespace ProvaApi.Controllers
             return ProvaDB.CriarProva(provaTO);
         }
 
+        [HttpPost("DeletarQuestao")]
+        public void DeletarQuestao(QuestaoTO questaoTO)
+        {
+            ProvaDB.DeletarQuestao(questaoTO.Id);
+        }
+
         [HttpGet("EditarProva")]
         public ProvaTO GetProvaById(int provaId)
         {

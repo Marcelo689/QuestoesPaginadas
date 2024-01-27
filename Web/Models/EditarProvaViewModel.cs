@@ -7,5 +7,6 @@ namespace Web.Models
         public ProvaTO Prova { get; set; }
         public bool IsTeacher { get; set; }
         public int QuantidadeQuestoesAtualizadas { get; set; } = 0;
+        public int QuestaoDeleteId { get; set; }
     }
 }

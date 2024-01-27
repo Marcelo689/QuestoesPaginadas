@@ -28,7 +28,6 @@ namespace Web.Controllers
             PreencheProvaEmProgresso(usuarioTO);
             return View(ProvaEmProgresso);
         }
-
         private static void PreencheProvaEmProgresso(UsuarioTO usuarioTO)
         {
             const string getProvaURL = $"https://localhost:7059/ProvaApi/GetProva";
@@ -36,7 +35,6 @@ namespace Web.Controllers
             UsuarioLogado = usuarioTO;
             ProvaEmProgresso.Usuario = usuarioTO;
         }
-
         public ActionResult Menu(UsuarioTO? usuarioTO)
         {
             if(usuarioTO is not null)
@@ -52,7 +50,6 @@ namespace Web.Controllers
                     return View("Error");
             }
         }
-
         public List<ProvaTO> GetListaProva()
         {
             const string urlListProvas = "https://localhost:7059/ProvaApi/ListProvas";
@@ -63,7 +60,6 @@ namespace Web.Controllers
         {
             return View(new ProvaTO());
         }
-
         public ActionResult EditarProva(int provaId)
         {
             string urlEditarProva = $"https://localhost:7059/ProvaApi/EditarProva/?provaId={provaId}";
@@ -83,6 +79,12 @@ namespace Web.Controllers
             return RedirectToAction("Menu", UsuarioLogado);
         }
 
+        [HttpPost("DeletarQuestao")]
+        public void DeletarQuestao(QuestaoTO questaoTO)
+        {
+            const string urlDeletarQuestao = $"https://localhost:7059/ProvaApi/DeletarQuestao";
+            HttpClient.PostAsJsonAsync(urlDeletarQuestao, questaoTO);
+        }
         private void AtualizarProvaOpcoes(ProvaOpcoesMarcadasViewModel provaOpcoes)
         {
             ProvaEmProgresso.PreencherRespostas(provaOpcoes, true);
@@ -90,7 +92,6 @@ namespace Web.Controllers
             
             HttpClient.PostAsJsonAsync(urlEditarProva, ProvaEmProgresso);
         }
-
         private ProvaTO GetProvaById(string urlEditarProva)
         {
             string jsonContent = HttpClient.GetStringAsync(urlEditarProva).Result;
@@ -98,7 +99,6 @@ namespace Web.Controllers
 
             return provaTO;
         }
-
         public ActionResult ListarProvas()
         {
             bool isTeacher = ProvaEmProgresso.Usuario.IsTeacher;
@@ -112,12 +112,10 @@ namespace Web.Controllers
                 return RedirectToAction("ListaProvaEstudante");
             }
         }
-
         public ActionResult ListaProvaProfessor()
         {
             return ReturnViewListViewModelProva("ListaProvaProfessor");
         }
-
         private ActionResult ReturnViewListViewModelProva(string nameMethodAction)
         {
             List<ProvaTO> listProvaTO = GetListaProva();
@@ -128,7 +126,6 @@ namespace Web.Controllers
             };
             return View(nameMethodAction, listProvaViewModel);
         }
-
         public ActionResult ListaProvaEstudante()
         {
             return ReturnViewListViewModelProva("ListaProvaEstudante");
@@ -156,12 +153,10 @@ namespace Web.Controllers
             const string urlCriarQuestao = $"";
             HttpClient.PostAsJsonAsync(urlCriarQuestao, provaTO);
         }
-
         private void PreencheProvaTOComUsuario(ProvaTO provaTO)
         {
             provaTO.Usuario = UsuarioLogado;
         }
-
         private static ProvaTO? RequestFromURLGetProvaTO(string url)
         {
             var jsonString = HttpClient.GetStringAsync(url).Result;
