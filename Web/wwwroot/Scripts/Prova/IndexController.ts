@@ -16,6 +16,11 @@ class EditarQuestao {
 
     public pegarQuestaoId() : number {
         var questaoOpcaoForName = $(".container-questao").last().find("label:first").attr("for");
+
+        if (questaoOpcaoForName == undefined) {
+            questaoOpcaoForName = "0_1opcao_1";
+        }
+
         var stringId = questaoOpcaoForName.split("_")[1].toString().replace("opcao", "");
         var questaoId: number = Number(stringId);
 

@@ -9,7 +9,7 @@ namespace ProvaApi.Controllers
     public class ProvaController : ControllerBase
     {
         [HttpGet("GetProva")]
-        public ProvaTO GetProvaDB(int provaId = 1)
+        public ProvaTO GetProvaDB(int provaId)
         {
             return ProvaDB.GetProvaDB(provaId);
         }

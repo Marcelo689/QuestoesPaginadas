@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\QuestoesApi\\ProvaApi\\ProvaApi.csproj": {}
+    "C:\\Dev folder\\QuestoesPaginadas\\ProvaApi\\ProvaApi.csproj": {}
   },
   "projects": {
-    "D:\\QuestoesApi\\BancoProject\\BancoProject.csproj": {
+    "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\QuestoesApi\\BancoProject\\BancoProject.csproj",
+        "projectUniqueName": "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj",
         "projectName": "BancoProject",
-        "projectPath": "D:\\QuestoesApi\\BancoProject\\BancoProject.csproj",
-        "packagesPath": "C:\\Users\\marce\\.nuget\\packages\\",
-        "outputPath": "D:\\QuestoesApi\\BancoProject\\obj\\",
+        "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj",
+        "packagesPath": "C:\\Users\\Desenvolvedor\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\marce\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Desenvolvedor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -34,8 +33,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\QuestoesApi\\DTO\\DTO.csproj": {
-                "projectPath": "D:\\QuestoesApi\\DTO\\DTO.csproj"
+              "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj": {
+                "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj"
               }
             }
           }
@@ -85,11 +84,11 @@
         }
       }
     },
-    "D:\\QuestoesApi\\DTO\\DTO.csproj": {
+    "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj": {
       "restore": {
-        "projectUniqueName": "D:\\QuestoesApi\\DTO\\DTO.csproj",
+        "projectUniqueName": "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj",
         "projectName": "DTO",
-        "projectPath": "D:\\QuestoesApi\\DTO\\DTO.csproj",
+        "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj",
         "frameworks": {
           "net48": {
             "projectReferences": {}
@@ -100,21 +99,20 @@
         "net48": {}
       }
     },
-    "D:\\QuestoesApi\\ProvaApi\\ProvaApi.csproj": {
+    "C:\\Dev folder\\QuestoesPaginadas\\ProvaApi\\ProvaApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\QuestoesApi\\ProvaApi\\ProvaApi.csproj",
+        "projectUniqueName": "C:\\Dev folder\\QuestoesPaginadas\\ProvaApi\\ProvaApi.csproj",
         "projectName": "ProvaApi",
-        "projectPath": "D:\\QuestoesApi\\ProvaApi\\ProvaApi.csproj",
-        "packagesPath": "C:\\Users\\marce\\.nuget\\packages\\",
-        "outputPath": "D:\\QuestoesApi\\ProvaApi\\obj\\",
+        "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\ProvaApi\\ProvaApi.csproj",
+        "packagesPath": "C:\\Users\\Desenvolvedor\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev folder\\QuestoesPaginadas\\ProvaApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\marce\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Desenvolvedor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -130,11 +128,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\QuestoesApi\\BancoProject\\BancoProject.csproj": {
-                "projectPath": "D:\\QuestoesApi\\BancoProject\\BancoProject.csproj"
+              "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj": {
+                "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj"
               },
-              "D:\\QuestoesApi\\DTO\\DTO.csproj": {
-                "projectPath": "D:\\QuestoesApi\\DTO\\DTO.csproj"
+              "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj": {
+                "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj"
               }
             }
           }

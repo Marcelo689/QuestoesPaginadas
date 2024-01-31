@@ -17,3 +17,22 @@ D:\QuestoesApi\BancoProject\obj\Debug\net7.0\refint\BancoProject.dll
 D:\QuestoesApi\BancoProject\obj\Debug\net7.0\BancoProject.pdb
 D:\QuestoesApi\BancoProject\obj\Debug\net7.0\BancoProject.genruntimeconfig.cache
 D:\QuestoesApi\BancoProject\obj\Debug\net7.0\ref\BancoProject.dll
+C:\Dev folder\QuestoesPaginadas\BancoProject\bin\Debug\net7.0\BancoProject.deps.json
+C:\Dev folder\QuestoesPaginadas\BancoProject\bin\Debug\net7.0\BancoProject.runtimeconfig.json
+C:\Dev folder\QuestoesPaginadas\BancoProject\bin\Debug\net7.0\BancoProject.dll
+C:\Dev folder\QuestoesPaginadas\BancoProject\bin\Debug\net7.0\BancoProject.pdb
+C:\Dev folder\QuestoesPaginadas\BancoProject\bin\Debug\net7.0\DTO.dll
+C:\Dev folder\QuestoesPaginadas\BancoProject\bin\Debug\net7.0\DTO.pdb
+C:\Dev folder\QuestoesPaginadas\BancoProject\bin\Debug\net7.0\DTO.dll.config
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.csproj.AssemblyReference.cache
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.AssemblyInfoInputs.cache
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.AssemblyInfo.cs
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.csproj.CoreCompileInputs.cache
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.sourcelink.json
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.csproj.CopyComplete
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.dll
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\refint\BancoProject.dll
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.pdb
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\BancoProject.genruntimeconfig.cache
+C:\Dev folder\QuestoesPaginadas\BancoProject\obj\Debug\net7.0\ref\BancoProject.dll

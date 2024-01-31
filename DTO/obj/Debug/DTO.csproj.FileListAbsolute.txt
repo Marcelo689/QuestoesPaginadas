@@ -26,3 +26,31 @@ D:\QuestoesApi\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 D:\QuestoesApi\DTO\obj\Debug\DTO.csproj.CopyComplete
 D:\QuestoesApi\DTO\obj\Debug\DTO.dll
 D:\QuestoesApi\DTO\obj\Debug\DTO.pdb
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\DTO.dll.config
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\DTO.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\DTO.pdb
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\Newtonsoft.Json.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Buffers.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Memory.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Numerics.Vectors.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Text.Encodings.Web.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Text.Json.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.ValueTuple.dll
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\Newtonsoft.Json.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Buffers.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Memory.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Numerics.Vectors.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Text.Encodings.Web.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Text.Json.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Dev folder\QuestoesPaginadas\DTO\bin\Debug\System.ValueTuple.xml
+C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.csproj.CopyComplete
+C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.dll
+C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.pdb

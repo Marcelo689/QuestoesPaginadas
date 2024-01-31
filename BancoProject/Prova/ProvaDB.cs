@@ -5,6 +5,7 @@ using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
 using DTO.BancoClasses.ProvaFolder;
 using BancoProject.Login;
 using Microsoft.EntityFrameworkCore;
+using DTO.Login.ProfessorFolder;
 
 namespace BancoProject.ProvaFolder
 {
@@ -24,15 +25,30 @@ namespace BancoProject.ProvaFolder
         public async static Task<ProvaTO> PreencheProvaTO(int provaId)
         {
             Prova? provaDB = await ProvaRepository.Include(e => e.Professor.Usuario).Include(e => e.Estudante).FirstOrDefaultAsync(e => e.Id == provaId);
-            Estudante? estudante = EstudanteRepository.FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
 
-            IQueryable<Questao> questoes = DBInstance.DB.Questao.Where(e => e.Prova.Id == provaId);
-            IQueryable<ProvaQuestaoResposta> questaoRespondidas = DBInstance.DB.ProvaQuestaoResposta.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
-            var listaTO = PreencherOpcoesSelecionadas(questoes.ToList(), questaoRespondidas);
-            
-            var provaTO = (ProvaTO) provaDB;
-            provaTO.Questoes = listaTO.ToArray();
-            provaTO.Estudante = (EstudanteTO) estudante;
+            var provaTO = new ProvaTO();
+
+            provaTO.Id = provaId;
+            if (provaDB is null)
+            {
+                List<QuestaoTO> questoesTO = new List<QuestaoTO>();
+
+                provaTO.Name = "ProvaDefault";
+                provaTO.Questoes = questoesTO.ToArray();
+                provaTO.Estudante = (EstudanteTO) EstudanteRepository.FirstOrDefault();
+                provaTO.ProfessorNome = ProfessorRepository.Include( e => e.Usuario).FirstOrDefault().Usuario.Username;
+            }
+            else
+            {
+                provaTO = (ProvaTO) provaDB;
+                Estudante? estudante = EstudanteRepository.FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
+
+                IQueryable<Questao> questoes = DBInstance.DB.Questao.Where(e => e.Prova.Id == provaId);
+                IQueryable<ProvaQuestaoResposta> questaoRespondidas = DBInstance.DB.ProvaQuestaoResposta.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
+                var listaTO = PreencherOpcoesSelecionadas(questoes.ToList(), questaoRespondidas);
+                provaTO.Questoes = listaTO.ToArray();
+                provaTO.Estudante = (EstudanteTO) estudante;
+            }
 
             return provaTO;
         }
