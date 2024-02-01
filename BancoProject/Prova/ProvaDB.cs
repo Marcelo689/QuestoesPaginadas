@@ -1,11 +1,10 @@
-﻿using DTO;
-using DTO.Login.EstudanteFolder;
+﻿using BancoProject.Login;
+using DTO;
 using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
 using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
 using DTO.BancoClasses.ProvaFolder;
-using BancoProject.Login;
+using DTO.Login.EstudanteFolder;
 using Microsoft.EntityFrameworkCore;
-using DTO.Login.ProfessorFolder;
 
 namespace BancoProject.ProvaFolder
 {
@@ -17,30 +16,48 @@ namespace BancoProject.ProvaFolder
         public static readonly DbSet<Questao> QuestaoRepository = DBInstance.DB.Set<Questao>();
         public static readonly DbSet<QuestaoOpcao> QuestaoOpcaoRepository = DBInstance.DB.Set<QuestaoOpcao>();
         public static readonly DbSet<ProvaQuestaoResposta> ProvaQuestaoRespostaRepository = DBInstance.DB.Set<ProvaQuestaoResposta>();
-        public static ProvaTO GetProvaDB(int id) {
+        public static ProvaTO GetProvaDB(int id)
+        { 
             ProvaTO provaTO = PreencheProvaTO(id).Result;
             return provaTO;
         }
 
         public async static Task<ProvaTO> PreencheProvaTO(int provaId)
         {
-            Prova? provaDB = await ProvaRepository.Include(e => e.Professor.Usuario).Include(e => e.Estudante).FirstOrDefaultAsync(e => e.Id == provaId);
-
+            Prova? provaDB = null;
             var provaTO = new ProvaTO();
 
-            provaTO.Id = provaId;
-            if (provaDB is null)
+            bool provaNaoExiste = provaId == 0;
+            
+            if(provaNaoExiste)
             {
+                return new ProvaTO();
+            }
+
+            bool provaExiste = !provaNaoExiste;
+
+            if (provaExiste)
+            {
+                provaDB = await ProvaRepository.Include(e => e.Professor.Usuario).Include(e => e.Estudante).FirstOrDefaultAsync(e => e.Id == provaId);
+            }
+
+            if (provaNaoExiste)
+            {
+                int provaUltimoId = ProvaRepository.OrderBy(e => e.Id).AsEnumerable().LastOrDefault().Id;
+                provaTO.Id = provaUltimoId + 1;
                 List<QuestaoTO> questoesTO = new List<QuestaoTO>();
 
                 provaTO.Name = "ProvaDefault";
                 provaTO.Questoes = questoesTO.ToArray();
                 provaTO.Estudante = (EstudanteTO) EstudanteRepository.FirstOrDefault();
                 provaTO.ProfessorNome = ProfessorRepository.Include( e => e.Usuario).FirstOrDefault().Usuario.Username;
+
+                var prova = (Prova) provaTO;
             }
             else
             {
                 provaTO = (ProvaTO) provaDB;
+                
                 Estudante? estudante = EstudanteRepository.FirstOrDefault(e => e.Id == provaDB.Estudante.Id);
 
                 IQueryable<Questao> questoes = DBInstance.DB.Questao.Where(e => e.Prova.Id == provaId);
@@ -185,15 +202,18 @@ namespace BancoProject.ProvaFolder
         {
             Questao questao = QuestaoRepository.FirstOrDefault(quest => quest.Id == questaoTO.Id);
 
-            if(questao is null)
-            {
+            if(questao is null){
                 questao = (Questao) questaoTO;
                 questao.Prova = ProvaRepository.FirstOrDefault(provaIdent => provaIdent.Id == provaId);
                 QuestaoRepository.Add(questao);
             }
 
+            if (provaId == 0)
+                questao.Prova = ProvaRepository.FirstOrDefault();
+
             PreencherDescricoesQuestaoDB(questaoTO, questao);
             questao.Descricao = questaoTO.Name;
+            QuestaoRepository.Update(questao);
         }
 
         private static void PreencherOpcaoSelecionada(QuestaoTO questaoTO, Questao questao)

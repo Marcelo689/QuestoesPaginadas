@@ -9,5 +9,14 @@ namespace DTO.BancoClasses.ProvaFolder
         public string Name { get; set; } 
         public Professor Professor { get; set; }
         public Estudante Estudante { get; set; }
+
+        public static explicit operator Prova(ProvaTO v)
+        {
+            return new Prova()
+            {
+                Name = v.Name,
+                Estudante = (Estudante)v.Estudante,
+            };
+        }
     }
 }

@@ -54,21 +54,18 @@ namespace DTO
             for (int i = 1; i < quantidadeQuestoes * numeroOpcoesPorQuestao; i+= numeroOpcoesPorQuestao)
             {
                 var campo = property[i];
-
                 string nome = campo.Name;
-
                 var questaoId = GetGetIdFromQuestionName(nome);
 
                 int indiceOpcaoPreenchida = (int) campo.GetValue(provaViewModel);
-
                 QuestaoTO questaoSelecionada = this.Questoes.FirstOrDefault(questao => questao.Id == questaoId);
 
                 if (isEditar)
                 {
                     questaoSelecionada = AtualizaDescricoesOpcoes(provaViewModel, property, i , questaoSelecionada, questaoId);
                 }
-                listaSaida.Add(questaoSelecionada);
 
+                listaSaida.Add(questaoSelecionada);
                 if (questaoFoiPreenchida(questaoSelecionada, indiceOpcaoPreenchida))
                 {
                     PreencherOpcaoDaQuestao(indiceOpcaoPreenchida, questaoSelecionada);
@@ -80,18 +77,7 @@ namespace DTO
 
         private QuestaoTO AtualizaDescricoesOpcoes(ProvaOpcoesMarcadasViewModel provaViewModel, PropertyInfo[] propertyArray, int indiceQuestao, QuestaoTO questaoSelecionada, int questaoId)
         {
-            string descricaoPrincipal = "";
-            try
-            {
-                descricaoPrincipal  = propertyArray[indiceQuestao + 1].GetValue(provaViewModel).ToString();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            var teste = propertyArray[indiceQuestao].GetValue(provaViewModel);
-            descricaoPrincipal = propertyArray[indiceQuestao].Name;
+            string descricaoPrincipal  = propertyArray[indiceQuestao + 1].GetValue(provaViewModel).ToString();
 
             string campoDescricaoNome1 = propertyArray[indiceQuestao + 2].GetValue(provaViewModel).ToString();
             string campoDescricaoNome2 = propertyArray[indiceQuestao + 3].GetValue(provaViewModel).ToString();

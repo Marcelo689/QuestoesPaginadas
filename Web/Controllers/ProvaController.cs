@@ -31,6 +31,7 @@ namespace Web.Controllers
         private static void PreencheProvaEmProgresso(UsuarioTO usuarioTO)
         {
             const string getProvaURL = $"https://localhost:7059/ProvaApi/GetProva";
+            
             ProvaEmProgresso = RequestFromURLGetProvaTO(getProvaURL);
             UsuarioLogado = usuarioTO;
             ProvaEmProgresso.Usuario = usuarioTO;

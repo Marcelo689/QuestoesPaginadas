@@ -18,7 +18,7 @@ class EditarQuestao {
         var questaoOpcaoForName = $(".container-questao").last().find("label:first").attr("for");
 
         if (questaoOpcaoForName == undefined) {
-            questaoOpcaoForName = "0_1opcao_1";
+            return 0;
         }
 
         var stringId = questaoOpcaoForName.split("_")[1].toString().replace("opcao", "");
@@ -84,6 +84,12 @@ class EditarQuestao {
                     </div>
                             </div>
         `);
+        var primeiroItem: boolean = $("#container-lista-questoes").length == 0;
+
+        if (primeiroItem) {
+            IdDessaQuestao = 1
+        }
+
         var textoQuestao = `
                     <div class="container-questao" style="display: block;">
                         <li>

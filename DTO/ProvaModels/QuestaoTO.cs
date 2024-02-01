@@ -81,7 +81,7 @@ namespace DTO
                 Id = questao.Id,
                 Name = questao.Descricao,
                 OptionDescriptions = GetQuestaoOptionsDescriptions(questao),
-                SelectedOption = (Options) questao.OpcaoSelecionada.Opcao
+                SelectedOption =  questao.OpcaoSelecionada is null ? Options.A : (Options) questao.OpcaoSelecionada.Opcao
             };
         }
 
