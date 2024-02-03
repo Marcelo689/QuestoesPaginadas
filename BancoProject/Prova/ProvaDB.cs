@@ -200,20 +200,27 @@ namespace BancoProject.ProvaFolder
 
         public static void UpdateQuestaoFromTO(QuestaoTO questaoTO, int provaId)
         {
-            Questao questao = QuestaoRepository.FirstOrDefault(quest => quest.Id == questaoTO.Id);
+            Questao? questao = QuestaoRepository.FirstOrDefault(quest => quest.Id == questaoTO.Id);
 
+            bool isAdd = false;
             if(questao is null){
                 questao = (Questao) questaoTO;
-                questao.Prova = ProvaRepository.FirstOrDefault(provaIdent => provaIdent.Id == provaId);
-                QuestaoRepository.Add(questao);
+                isAdd = true;
             }
 
-            if (provaId == 0)
+            bool provaSemId = provaId == 0;
+            if (provaSemId)
                 questao.Prova = ProvaRepository.FirstOrDefault();
+            else
+                questao.Prova = ProvaRepository.FirstOrDefault(e => e.Id == provaId);
 
             PreencherDescricoesQuestaoDB(questaoTO, questao);
             questao.Descricao = questaoTO.Name;
-            QuestaoRepository.Update(questao);
+
+            if (isAdd)
+                QuestaoRepository.Add(questao);
+            else
+                QuestaoRepository.Update(questao);
         }
 
         private static void PreencherOpcaoSelecionada(QuestaoTO questaoTO, Questao questao)

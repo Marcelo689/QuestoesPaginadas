@@ -58,8 +58,14 @@ namespace DTO
                 var questaoId = GetGetIdFromQuestionName(nome);
 
                 int indiceOpcaoPreenchida = (int) campo.GetValue(provaViewModel);
-                QuestaoTO questaoSelecionada = this.Questoes.FirstOrDefault(questao => questao.Id == questaoId);
+                bool existeQuestoes = Questoes != null;
 
+                QuestaoTO questaoSelecionada = new QuestaoTO(); 
+                questaoSelecionada.Id = questaoId;
+                if (existeQuestoes)
+                {
+                    questaoSelecionada = this.Questoes.FirstOrDefault(questao => questao.Id == questaoId);
+                }
                 if (isEditar)
                 {
                     questaoSelecionada = AtualizaDescricoesOpcoes(provaViewModel, property, i , questaoSelecionada, questaoId);
