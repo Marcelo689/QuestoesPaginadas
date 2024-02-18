@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj": {}
+    "D:\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj": {}
   },
   "projects": {
-    "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj": {
+    "D:\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj",
+        "projectUniqueName": "D:\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj",
         "projectName": "BancoProject",
-        "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj",
+        "projectPath": "D:\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj",
         "packagesPath": "C:\\Users\\Desenvolvedor\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\obj\\",
+        "outputPath": "D:\\QuestoesPaginadas\\BancoProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj": {
-                "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj"
+              "D:\\QuestoesPaginadas\\DTO\\DTO.csproj": {
+                "projectPath": "D:\\QuestoesPaginadas\\DTO\\DTO.csproj"
               }
             }
           }
@@ -84,11 +84,11 @@
         }
       }
     },
-    "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj": {
+    "D:\\QuestoesPaginadas\\DTO\\DTO.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj",
+        "projectUniqueName": "D:\\QuestoesPaginadas\\DTO\\DTO.csproj",
         "projectName": "DTO",
-        "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj",
+        "projectPath": "D:\\QuestoesPaginadas\\DTO\\DTO.csproj",
         "frameworks": {
           "net48": {
             "projectReferences": {}

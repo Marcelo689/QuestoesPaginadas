@@ -29,8 +29,13 @@ namespace ProvaApi.Controllers
         [HttpGet("EditarProva")]
         public ProvaTO GetProvaById(int provaId)
         {
-            ProvaTO provaTO = ProvaDB.GetProvaById(provaId);
-            return provaTO;
+            try
+            {
+                ProvaTO provaTO = ProvaDB.GetProvaById(provaId);
+                return provaTO;
+            }catch (Exception ex) {
+                return new ProvaTO() {  };
+            }
         }
         [HttpGet("ListProvas")]
         public List<ProvaTO> GetListProva()
@@ -67,12 +72,16 @@ namespace ProvaApi.Controllers
 
         private void EditarQuestoesPreenchidasBanco(ProvaTO? provaTO)
         {
-            List<QuestaoTO> questoesTO = provaTO.Questoes.ToList();
-
-            foreach (QuestaoTO questaoTO in questoesTO) 
+            try
             {
-               ProvaDB.UpdateQuestaoFromTO(questaoTO, provaTO.Id);
-            }
+
+                List<QuestaoTO> questoesTO = provaTO.Questoes.ToList();
+
+                foreach (QuestaoTO questaoTO in questoesTO) 
+                {
+                   ProvaDB.UpdateQuestaoFromTO(questaoTO, provaTO.Id);
+                }
+            }catch (Exception ex) { }
         }
 
         private void SalvarQuestoesPreenchidas(ProvaTO provaTO)
@@ -89,20 +98,26 @@ namespace ProvaApi.Controllers
 
         private void SalvarQuestoesPreenchidasBanco(ProvaTO provaTO)
         {
-            foreach (var questaoTO in provaTO.Questoes)
+            try
             {
-                bool opcaoPreenchida = questaoTO.SelectedOption != 0;
-                if (opcaoPreenchida)
+                foreach (var questaoTO in provaTO.Questoes)
                 {
-                    SalvarNoBanco(provaTO, questaoTO);
+                    bool opcaoPreenchida = questaoTO.SelectedOption != 0;
+                    if (opcaoPreenchida)
+                    {
+                        SalvarNoBanco(provaTO, questaoTO);
+                    }
                 }
-            }
-            ProvaDB.SaveChanges();
+                ProvaDB.SaveChanges();
+            }catch (Exception ex) { }
         }
 
         private void SalvarNoBanco(ProvaTO provaTO, QuestaoTO questaoTO)
         {
-            ProvaDB.SalvarQuestoes(provaTO, questaoTO);
+            try
+            {
+                ProvaDB.SalvarQuestoes(provaTO, questaoTO);
+            }catch (Exception ex) { }
         }
 
     }

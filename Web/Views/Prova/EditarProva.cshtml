@@ -39,13 +39,13 @@
 </style>
 
 <div class="container m-2">
-
     @Html.ActionLink("Menu","Menu", "Prova")
 
     <button class="btn btn-primary btn-adicionar">Adicionar Questão</button>
 
     @using (Html.BeginForm(actionName: "AtualizarProva", controllerName: "Prova", FormMethod.Post))
     {
+        @Html.Hidden("Id", Model.Prova.Id)
         @Html.HiddenFor(e => e.Prova.Id)
         @Html.HiddenFor(e => e.QuantidadeQuestoesAtualizadas)
         @Html.HiddenFor(e => e.QuestaoDeleteId)

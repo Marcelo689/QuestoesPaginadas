@@ -54,3 +54,31 @@ C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.csproj.CopyComplete
 C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.dll
 C:\Dev folder\QuestoesPaginadas\DTO\obj\Debug\DTO.pdb
+D:\QuestoesPaginadas\DTO\bin\Debug\DTO.dll.config
+D:\QuestoesPaginadas\DTO\bin\Debug\DTO.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\DTO.pdb
+D:\QuestoesPaginadas\DTO\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\Newtonsoft.Json.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Buffers.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Memory.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Numerics.Vectors.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Text.Encodings.Web.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Text.Json.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\System.ValueTuple.dll
+D:\QuestoesPaginadas\DTO\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\Newtonsoft.Json.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Buffers.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Memory.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Numerics.Vectors.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Text.Encodings.Web.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Text.Json.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\QuestoesPaginadas\DTO\bin\Debug\System.ValueTuple.xml
+D:\QuestoesPaginadas\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+D:\QuestoesPaginadas\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\QuestoesPaginadas\DTO\obj\Debug\DTO.csproj.CopyComplete
+D:\QuestoesPaginadas\DTO\obj\Debug\DTO.dll
+D:\QuestoesPaginadas\DTO\obj\Debug\DTO.pdb

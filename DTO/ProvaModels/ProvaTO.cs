@@ -150,6 +150,7 @@ namespace DTO
                 Id = to.Id,
                 Name = to.Name,
                 Description = to.Name,
+                Estudante = (EstudanteTO) to.Estudante,
                 ProfessorNome = to.Professor != null ? to.Professor.Usuario.Username : null,
             };
         }

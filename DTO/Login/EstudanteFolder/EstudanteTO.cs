@@ -9,6 +9,7 @@ namespace DTO.Login.EstudanteFolder
 
         public static explicit operator EstudanteTO(Estudante v)
         {
+            if(v == null) return null;  
             return new EstudanteTO { Id = v.Id, Name = v.Name };
         }
     }

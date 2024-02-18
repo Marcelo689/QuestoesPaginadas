@@ -88,6 +88,7 @@ namespace Web.Controllers
         }
         private void AtualizarProvaOpcoes(ProvaOpcoesMarcadasViewModel provaOpcoes)
         {
+            ProvaEmProgresso.Id = provaOpcoes.Id;
             ProvaEmProgresso.PreencherRespostas(provaOpcoes, true);
             const string urlEditarProva = "https://localhost:7059/ProvaApi/EditAnswers";
             

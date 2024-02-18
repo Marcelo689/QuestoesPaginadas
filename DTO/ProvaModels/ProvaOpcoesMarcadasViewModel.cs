@@ -531,5 +531,7 @@ namespace DTO.ProvaModels
 
         [JsonPropertyName("opcao_descricao_25_5")]
         public string opcao_descricao_25_5 { get; set; }
+
+        public int Id { get; set; }
     }
 }

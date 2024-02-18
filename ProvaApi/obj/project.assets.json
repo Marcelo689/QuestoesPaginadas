@@ -3170,11 +3170,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dev folder\\QuestoesPaginadas\\ProvaApi\\ProvaApi.csproj",
+      "projectUniqueName": "D:\\QuestoesPaginadas\\ProvaApi\\ProvaApi.csproj",
       "projectName": "ProvaApi",
-      "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\ProvaApi\\ProvaApi.csproj",
+      "projectPath": "D:\\QuestoesPaginadas\\ProvaApi\\ProvaApi.csproj",
       "packagesPath": "C:\\Users\\Desenvolvedor\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev folder\\QuestoesPaginadas\\ProvaApi\\obj\\",
+      "outputPath": "D:\\QuestoesPaginadas\\ProvaApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3196,11 +3196,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj": {
-              "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj"
+            "D:\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj": {
+              "projectPath": "D:\\QuestoesPaginadas\\BancoProject\\BancoProject.csproj"
             },
-            "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj": {
-              "projectPath": "C:\\Dev folder\\QuestoesPaginadas\\DTO\\DTO.csproj"
+            "D:\\QuestoesPaginadas\\DTO\\DTO.csproj": {
+              "projectPath": "D:\\QuestoesPaginadas\\DTO\\DTO.csproj"
             }
           }
         }

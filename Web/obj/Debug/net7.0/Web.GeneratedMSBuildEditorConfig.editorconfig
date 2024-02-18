@@ -9,83 +9,83 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Web
 build_property.RootNamespace = Web
-build_property.ProjectDir = C:\Dev folder\QuestoesPaginadas\Web\
+build_property.ProjectDir = D:\QuestoesPaginadas\Web\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Dev folder\QuestoesPaginadas\Web
+build_property.MSBuildProjectDirectory = D:\QuestoesPaginadas\Web
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Login/Index.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Prova/CriarProva.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Prova/CriarProva.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcQ3JpYXJQcm92YS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Prova/EditarProva.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Prova/EditarProva.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcRWRpdGFyUHJvdmEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Prova/Index.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Prova/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Prova/ListaProvaEstudante.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Prova/ListaProvaEstudante.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcTGlzdGFQcm92YUVzdHVkYW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Prova/ListaProvaProfessor.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Prova/ListaProvaProfessor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcTGlzdGFQcm92YVByb2Zlc3Nvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Prova/Menu.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Prova/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcTWVudS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Prova/Resultados.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Prova/Resultados.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmFcUmVzdWx0YWRvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Shared/Error.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Shared/ListaProvas.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Shared/ListaProvas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExpc3RhUHJvdmFzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Shared/RenderEditableQuestoes.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Shared/RenderEditableQuestoes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFJlbmRlckVkaXRhYmxlUXVlc3RvZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Shared/RenderQuestoes.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Shared/RenderQuestoes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFJlbmRlclF1ZXN0b2VzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Shared/_QuestaoOpcoes.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Shared/_QuestaoOpcoes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9RdWVzdGFvT3Bjb2VzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Shared/_QuestaoOpcoesEditavel.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Shared/_QuestaoOpcoesEditavel.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9RdWVzdGFvT3Bjb2VzRWRpdGF2ZWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/_ViewImports.cshtml]
+[D:/QuestoesPaginadas/Web/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/_ViewStart.cshtml]
+[D:/QuestoesPaginadas/Web/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Dev folder/QuestoesPaginadas/Web/Views/Shared/_Layout.cshtml]
+[D:/QuestoesPaginadas/Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-lzldzk1rll

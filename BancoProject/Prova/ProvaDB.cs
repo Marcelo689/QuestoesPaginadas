@@ -1,5 +1,6 @@
 ﻿using BancoProject.Login;
 using DTO;
+using DTO.BancoClasses.Login;
 using DTO.BancoClasses.Login.Entidades.EstudanteFolder;
 using DTO.BancoClasses.Login.Entidades.ProfessorFolder;
 using DTO.BancoClasses.ProvaFolder;
@@ -11,6 +12,7 @@ namespace BancoProject.ProvaFolder
     public static class ProvaDB
     {
         public static readonly DbSet<Prova> ProvaRepository = DBInstance.DB.Set<Prova>();
+        public static readonly DbSet<Usuario> UsuarioRepository = DBInstance.DB.Set<Usuario>();
         public static readonly DbSet<Estudante> EstudanteRepository = DBInstance.DB.Set<Estudante>();
         public static readonly DbSet<Professor> ProfessorRepository = DBInstance.DB.Set<Professor>();
         public static readonly DbSet<Questao> QuestaoRepository = DBInstance.DB.Set<Questao>();
@@ -146,56 +148,89 @@ namespace BancoProject.ProvaFolder
 
         public static List<ProvaTO> GetAllProvas()
         {
-            IQueryable<Prova> provas = ProvaRepository.AsQueryable();
-            List<ProvaTO> provasTO = provas.Include(e => e.Professor.Usuario).Select(prova => (ProvaTO) prova).ToList();
+            try
+            {
+                IQueryable<Prova> provas = ProvaRepository.AsQueryable();
+                List<ProvaTO> provasTO = provas.Include(e => e.Professor.Usuario).Select(prova => (ProvaTO) prova).ToList();
 
-            return provasTO;
+                return provasTO;
+            }catch  (Exception ex)
+            {
+                return new List<ProvaTO>();
+            }
         }
 
         public static ProvaTO GetProvaById(int provaId)
         {
-            Prova prova = ProvaRepository.FirstOrDefault(e => e.Id == provaId);
-            ProvaTO provaTO = ProvaToTO(provaId, prova);
-            prova = null;
-            return provaTO;
+            try
+            {
+                Prova prova = ProvaRepository.Include(e => e.Estudante).FirstOrDefault(e => e.Id == provaId);
+                ProvaTO provaTO = ProvaToTO(provaId, prova);
+                prova = null;
+                return provaTO;
+            }catch  (Exception ex) { return new ProvaTO(); }
+        }
+
+        private static Usuario? GetProvaUsuario(Prova? prova)
+        {
+            if(prova.Estudante is not null)
+            {
+                return UsuarioRepository.FirstOrDefault(e => e.Id == prova.Estudante.Usuario.Id);
+            }
+
+            return null;
         }
 
         private static ProvaTO ProvaToTO(int provaId, Prova prova)
         {
-            IQueryable<Questao> questoesDB = QuestaoRepository.Include(e => e.Prova).Where(questao => questao.Prova.Id == provaId);
-            IQueryable<QuestaoTO> questoes = questoesDB.Select(questao => (QuestaoTO) questao);
-            ProvaTO provaTO = (ProvaTO)prova;
-
-            Estudante? estudante = EstudanteRepository.ToList().FirstOrDefault(e => e.Id == prova.Estudante.Id);
-
-            if(estudante is not null) {
-                IQueryable<ProvaQuestaoResposta> questaoRespondidas = ProvaQuestaoRespostaRepository.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
-                provaTO.Questoes = PreencherOpcoesSelecionadas(questoesDB.ToList(), questaoRespondidas).ToArray();
-            }
-            else
+            try
             {
-                provaTO.Questoes = questoes.ToArray();
-            }
+
+                IQueryable<Questao> questoesDB = QuestaoRepository.Include(e => e.Prova).Where(questao => questao.Prova.Id == provaId);
+                IQueryable<QuestaoTO> questoes = questoesDB.Select(questao => (QuestaoTO) questao);
+                ProvaTO provaTO = (ProvaTO)prova;
+
+                Estudante? estudante = EstudanteRepository.ToList().FirstOrDefault(e => e.Id == prova.Estudante.Id);
+
+                if(estudante is not null) {
+                    IQueryable<ProvaQuestaoResposta> questaoRespondidas = ProvaQuestaoRespostaRepository.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
+                    provaTO.Questoes = PreencherOpcoesSelecionadas(questoesDB.ToList(), questaoRespondidas).ToArray();
+                }
+                else
+                {
+                    provaTO.Questoes = questoes.ToArray();
+                }
             
-            return provaTO;
+                return provaTO;
+            }
+            catch(Exception ex)
+            {
+                return new ProvaTO();
+            }
         }
 
         public static ProvaTO CriarProva(ProvaTO provaTO)
         {
-            Estudante? estudante = EstudanteRepository.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
-            Professor? professor = ProfessorRepository.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
-            Prova prova = new Prova
+            try
             {
-                Estudante = estudante,
-                Professor = professor,
-                Name = provaTO.Name,
-            };
+                Estudante? estudante = EstudanteRepository.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
+                Professor? professor = ProfessorRepository.FirstOrDefault(e => e.Usuario.Id == provaTO.Usuario.Id);
+                Prova prova = new Prova
+                {
+                    Estudante = estudante,
+                    Professor = professor,
+                    Name = provaTO.Name,
+                };
 
-            DBInstance.DB.Prova.Add(prova);
+                DBInstance.DB.Prova.Add(prova);
 
-            SaveChanges();
+                SaveChanges();
+
             ProvaTO provaCriada = (ProvaTO)prova;
             return provaCriada;
+            }catch (Exception ex) { }
+
+            return provaTO;
         }
 
         public static void UpdateQuestaoFromTO(QuestaoTO questaoTO, int provaId)
@@ -245,15 +280,23 @@ namespace BancoProject.ProvaFolder
 
         public static void DeletarProva(ProvaTO provaTO)
         {
-            Questao questaoParaDelete = QuestaoRepository.FirstOrDefault(e => provaTO.QuestaoDelete.Id == e.Id);
-            QuestaoRepository.Remove(questaoParaDelete);
+            try
+            {
+                Questao questaoParaDelete = QuestaoRepository.FirstOrDefault(e => provaTO.QuestaoDelete.Id == e.Id);
+                QuestaoRepository.Remove(questaoParaDelete);
+            }catch  (Exception ex) { }
         }
 
         public static void DeletarQuestao(int id)
         {
-            Questao questaoParaDelete = QuestaoRepository.FirstOrDefault(e => id == e.Id);
-            QuestaoRepository.Remove(questaoParaDelete);
-            SaveChanges();
+
+            try
+            {
+                Questao questaoParaDelete = QuestaoRepository.FirstOrDefault(e => id == e.Id);
+                QuestaoRepository.Remove(questaoParaDelete);
+                SaveChanges();
+            }
+            catch (Exception ex) { }
         }
     }
 }
