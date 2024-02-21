@@ -31,6 +31,10 @@ class EditarQuestao {
         return this.pegarQuestaoId() + 1;
     }
 
+    public pegarNumeroQuestoes(): number {
+        return $(".container-questao").length;
+    }
+
     public removerIdDoNameTextArea(nameDefaultTextArea: string) {
         var indiceAntesDoId = nameDefaultTextArea.lastIndexOf("_");
 
@@ -43,7 +47,7 @@ class EditarQuestao {
 
     public gerarEsqueletoProximaQuestao(questaoClass: QuestaoClass): JQuery {
 
-        var IdDessaQuestao = this.pegarProximaQuestaoId();
+        var IdDessaQuestao = this.pegarNumeroQuestoes()+1;
         var jqueryEsqueleto = $(`
                     <div class="container-questao" style="display: block;">
                         <li>
@@ -182,6 +186,7 @@ class BotoesAdicionarRemover {
 
         var isso = this;
         var containerListaQuestoes = $("#container-lista-questoes");
+        var numeroUltimaQuestao :number = 0;       
         $(".btn-adicionar").click(function () {
             var questaoData = new QuestaoClass();
             var questaoNovaHtml = EditarQuestao.prototype.gerarEsqueletoProximaQuestao(questaoData);
@@ -191,12 +196,14 @@ class BotoesAdicionarRemover {
             Instancia.atualizarPaginaExibida();
         });
     }
-    private atualizarNumeroQuestoes() {
+    private atualizarNumeroQuestoes() : number {
         var valorTextoNumeroQuestoes = Instancia.getElementoNumeroQuestoesAtual().text();
         var quantidadeItens: number = Number(valorTextoNumeroQuestoes);
         var quantidadeAtualizada: number = quantidadeItens + 1;
         Instancia.getElementoNumeroQuestoesAtual().text(quantidadeAtualizada);
         $("#QuantidadeQuestoesAtualizadas").val(quantidadeAtualizada);
+
+        return EditarQuestao.prototype.pegarQuestaoId();
     }
 
     public adicionarEventBotaoRemover() {

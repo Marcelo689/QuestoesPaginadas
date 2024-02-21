@@ -1,6 +1,7 @@
 ﻿using BancoProject.ProvaFolder;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace ProvaApi.Controllers
 {
@@ -31,12 +32,13 @@ namespace ProvaApi.Controllers
         {
             try
             {
-                ProvaTO provaTO = ProvaDB.GetProvaById(provaId);
+                ProvaTO provaTO =  ProvaDB.GetProvaById(provaId);
                 return provaTO;
             }catch (Exception ex) {
                 return new ProvaTO() {  };
             }
         }
+
         [HttpGet("ListProvas")]
         public List<ProvaTO> GetListProva()
         {

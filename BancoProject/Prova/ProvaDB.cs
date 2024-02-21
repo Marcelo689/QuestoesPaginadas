@@ -196,10 +196,8 @@ namespace BancoProject.ProvaFolder
                     IQueryable<ProvaQuestaoResposta> questaoRespondidas = ProvaQuestaoRespostaRepository.Where(e => e.QuestaoOpcao.Opcao != 0 && e.Prova.Id == provaId && e.Estudante.Id == estudante.Id);
                     provaTO.Questoes = PreencherOpcoesSelecionadas(questoesDB.ToList(), questaoRespondidas).ToArray();
                 }
-                else
-                {
-                    provaTO.Questoes = questoes.ToArray();
-                }
+
+                provaTO.Questoes = AjustaQuestoesID(questoes.ToArray());
             
                 return provaTO;
             }
@@ -207,6 +205,18 @@ namespace BancoProject.ProvaFolder
             {
                 return new ProvaTO();
             }
+        }
+
+        private static QuestaoTO[] AjustaQuestoesID(QuestaoTO[] questaoTOs)
+        {
+            var contador = 0;
+            foreach (var questao in questaoTOs)
+            {
+                contador++;
+                questao.Id = contador;
+            }
+
+            return questaoTOs;
         }
 
         public static ProvaTO CriarProva(ProvaTO provaTO)
